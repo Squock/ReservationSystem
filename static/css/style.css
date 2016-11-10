@@ -1,0 +1,47 @@
+header {
+          background-image: url(../image/bord_image.jpg); /* Путь к фоновому изображению */
+          height: 607px;
+          background-size: 100%;
+		  padding: 0px;
+        }
+#register {
+            background-image: url(../image/register_image.jpg);
+            background-size: 100%;
+            height: 607px;
+        }
+#authorization {	
+			background-image: url(../image/bord_image_auth.jpg);
+			background-size: 100%;
+			height: 607px;
+		}
+.formReg {
+			background-color: #ffff;
+			padding: 15px;
+			width: 410px;
+			margin-top: 50px;
+			margin-left: 70px;
+        }
+#loginform {
+			background-color: #ffff;
+			padding: 15px;
+			width: 300px;
+			margin-top: 150px;
+			margin-left: 30px;
+        }
+.dropdown {
+			background-color: #1F93E0;
+			color: #ffff;
+		}
+#drop2 {
+			color: #ffff;
+		}
+#drop_log {
+			background-color: #1F93E0;
+			color: #ffff;
+		}
+#dropdown_auth{
+			background-color: #1F93E0;
+}
+#dropdown_auth_list{
+			background-color: #1F93E0;
+}
