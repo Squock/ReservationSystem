@@ -62,7 +62,7 @@
             <div class="row">
             <div class="col-xs-6 col-md-4"></div>
             <div class="col-xs-6 col-md-4">
-                <form id="loginform" name="formLogin" action="/login" method="post" >
+                <form id="loginform" action="/login" method="post" >
                         <h3>Аутентификация</h3>
                     <div class="form-group">
                         <label for="login">Электронная почта</label>
@@ -72,7 +72,7 @@
                         <label for="password">Пароль</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
                     </div>
-                    <center><button type="submit" class="btn btn-success" onclick="validate()">Вход</button></center>
+                    <button type="submit" class="btn btn-success" onclick="validate()">Вход</button>
                 </form>
                 {%if loginBool%}
                     <p><div class="alert alert-danger" role="alert"><strong>Ошибка!</strong>Неправльно введен электрооная почта или пароль</div>

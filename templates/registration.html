@@ -35,22 +35,26 @@
         <div class="row">
           <div class="col-xs-4 col-md-3"></div>
           <div class="col-xs-10 col-md-6">
-              {% macro render_field(field) %}
-                  <dt>{{ field.label }}
-                  <dd>{{ field(**kwargs)|safe }}
-                  {% if field.errors %}
-                    <ul class=errors>
-                    {% for error in field.errors %}
-                      <li>{{ error }}</li>
-                    {% endfor %}
-                    </ul>
-                  {% endif %}
-                  </dd>
-              {% endmacro %}
-              <form method="post" action="/register">
-
-                  <p><input type=submit value=Register>
-              </form>
+                <form id="loginform" action="/register" method="post" >
+                        <h3>Регистрация</h3>
+                    <div class="form-group">
+                        <label>Электронная почта</label>
+                        <input type="text" class="form-control" id="email" required name="email" placeholder="Электронная почта">
+                    </div>
+                    <div class="form-group">
+                        <label >Имя</label>
+                        <input type="text" class="form-control" id="firstName"  name="firstName" placeholder="Имя">
+                    </div>
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text" class="form-control" id="secondName"  name="secondName" placeholder="Фамилия">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" required id="password" name="password" placeholder="Пароль">
+                    </div>
+                    <button type="submit" class="btn btn-success">Регистрация</button>
+                </form>
           </div>
           <div class="col-xs-4 col-md-3"></div>
         </div>

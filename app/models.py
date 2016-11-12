@@ -20,8 +20,6 @@ class User(db.Model):
     SecondName = db.Column(db.String(100))
     Email = db.Column(db.String(100), unique=True)
     Password = db.Column(db.String(100))
-    roles = db.relationship('Role', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
 
     def __init__(self, FirstName, SecondName, Email, Password):
         self.FirstName = FirstName

@@ -1,28 +1,28 @@
 header {
           background-image: url(../image/bord_image.jpg); /* Путь к фоновому изображению */
-          height: 607px;
           background-size: 100%;
 		  padding: 0px;
+		  height: 586px;
         }
 #register {
             background-image: url(../image/register_image.jpg);
             background-size: 100%;
-            height: 607px;
+            height: 586px;
         }
 #authorization {	
 			background-image: url(../image/bord_image_auth.jpg);
 			background-size: 100%;
-			height: 607px;
+			height: 586px;
 		}
 .formReg {
-			background-color: #ffff;
+			background-color: #ffffff;
 			padding: 15px;
 			width: 410px;
 			margin-top: 50px;
 			margin-left: 70px;
         }
 #loginform {
-			background-color: #ffff;
+			background-color: #ffffff;
 			padding: 15px;
 			width: 300px;
 			margin-top: 150px;
@@ -30,14 +30,14 @@ header {
         }
 .dropdown {
 			background-color: #1F93E0;
-			color: #ffff;
+			color: #ffffff;
 		}
 #drop2 {
-			color: #ffff;
+			color: #ffffff;
 		}
 #drop_log {
 			background-color: #1F93E0;
-			color: #ffff;
+			color: #ffffff;
 		}
 #dropdown_auth{
 			background-color: #1F93E0;
