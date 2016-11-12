@@ -10,6 +10,6 @@ Sqlalchemy - pip install flask_sqlalchemy <br/>
 psycopg2 - pip install psycopg2 <br/>
 
 #Литература
-Flask - http://qoo.by/H8k <br/>
+Flask - документация http://qoo.by/H8k, вики http://qoo.by/H8v <br/>
 SQlAlchemy - http://qoo.by/H8j русский перевод - http://qoo.by/H8g <br/>
 Учебник по Flask - http://qoo.by/H8l<br/>
