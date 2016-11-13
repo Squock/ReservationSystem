@@ -1,14 +1,15 @@
-from flask import Flask, render_template, request, escape, session, redirect, flash
+from flask import render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask_security import Security, SQLAlchemyUserDatastore, \
-    UserMixin, RoleMixin, login_required
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_security import Security, SQLAlchemyUserDatastore
 from app.models import Role, User
+from app import app
+#Сектерный ключ никому не выдавать
+app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
-app = Flask(__name__)
 app.config['SECRET_KEY'] = 'super-secret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost:5432/dataBaseSite'
 db = SQLAlchemy(app)
+
 
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -18,11 +19,13 @@ roles_users = db.Table('roles_users',
 # Setup Flask-Security
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
-
 db.create_all()
 
+
 @app.route("/")
+@app.route("/index")
 def hello():
+    #При открытии страницы проверить авторизован ли пользователь
     if 'username' in session:
         auth = True
         if 'firstName' in session:
@@ -31,7 +34,7 @@ def hello():
             return render_template("index.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
         return render_template("index.html", auth=auth)
     else:
-        auth=False
+        auth = False
         return render_template("index.html", auth=auth)
 
 @app.route("/registration")
@@ -87,6 +90,3 @@ def logout():
     # удалить из сессии имя пользователя, если оно там есть
     session.pop('username', None)
     return redirect('/')
-
-if __name__ == "__main__":
-    app.run("127.0.0.1", 5050)
