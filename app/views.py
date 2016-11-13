@@ -1,15 +1,10 @@
 from flask import render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore
-from app.models import Role, User
+from app.models import Role, User, db
 from app import app
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
-
-app.config['SECRET_KEY'] = 'super-secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost:5432/dataBaseSite'
-db = SQLAlchemy(app)
-
 
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
@@ -37,10 +32,11 @@ def hello():
         auth = False
         return render_template("index.html", auth=auth)
 
+##########################################
+
 @app.route("/registration")
 def registration():
     return render_template("registration.html")
-
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -56,6 +52,8 @@ def register():
         db.session.commit()
         return redirect("/authorization")
     return render_template('registration.html')
+
+###########################################
 
 @app.route("/authorization")
 def authorization():
