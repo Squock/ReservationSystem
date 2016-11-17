@@ -1,5 +1,9 @@
 @echo off
+<<<<<<< HEAD
+set "VIRTUAL_ENV=C:\Users\Student\FIIT-13ResSys\ReservationSystem\myenv"
+=======
 set "VIRTUAL_ENV=C:\python\myenv"
+>>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
 
 if not defined PROMPT (
     set "PROMPT=$P$G"
