@@ -1,21 +1,19 @@
 from flask import render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore
+<<<<<<< HEAD
 from app.models import Role, User, db, ListFilm
+=======
+from app.models import Role, User, db, Session_cinema
+>>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
 from app import app
+from datetime import datetime
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
-roles_users = db.Table('roles_users',
-        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
 # Setup Flask-Security
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-db.create_all()
-
 
 @app.route("/")
 @app.route("/index")
@@ -89,6 +87,7 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+<<<<<<< HEAD
 @app.route('/film', methods=['POST','GET'])
 def get_film():
     if request.method == 'POST':
@@ -104,3 +103,18 @@ def get_film():
 
 
 
+=======
+@app.route('/session', methods=['POST', 'GET'])
+def session_cinema():
+    if request.method == 'POST':
+        time = request.form['time']
+        data = request.form['data']
+        hall = request.form['hall']
+        session_price = request.form['session_price']
+        time = datetime.strptime(time, "%H:%M")
+        sessions = Session_cinema(time, data, hall, session_price)
+        db.session.add(sessions)
+        db.session.commit()
+        return redirect("/")
+    return render_template('session.html')
+>>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
