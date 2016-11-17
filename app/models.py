@@ -42,8 +42,12 @@ class ListFilm(db.Model):
     id = db.Column(db.Integer(), primary_key = True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(255))
+    cast = db.Column(db.String(80))
+    genre = db.Column(db.String(15))
+    length = db.Column(db.Integer())
+    ageRestriction = db.Column(db.Integer())
 
     def __init__(self, name, description):
-        self.Name = name
-        self.Description = description
+        self.name = name
+        self.description = description
 

@@ -92,12 +92,14 @@ def logout():
 @app.route('/film', methods=['POST','GET'])
 def get_film():
     if request.method == 'POST':
-        name = request.form['name']
+        name = request.form['name1']
         description = request.form['description']
+        print(name)
+        print(description)
         movie = ListFilm(name, description)
         db.session.add(movie)
         db.session.commit()
-        return render_template('/')
+        return redirect('/')
     return render_template('listfilm.html')
 
 
