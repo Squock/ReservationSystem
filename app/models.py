@@ -6,6 +6,11 @@ from app import app, db
 
 app.config['SECRET_KEY'] = 'super-secret'
 
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nr812za4@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
+
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nr812za4@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
 
 
@@ -15,7 +20,9 @@ roles_users = db.Table('roles_users',
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
+
 db = SQLAlchemy(app)
+
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
@@ -47,6 +54,7 @@ class User(db.Model):
         return '<id {}>'.format(self.id)
 
 
+
 class Film(db.Model):
     id = db.Column(db.Integer(), primary_key = True)
     name = db.Column(db.String(80))
@@ -67,6 +75,7 @@ class Film(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    film_id = db.Column(db.Integer, db.ForeignKey('Reservation.id'))
     time = db.Column(db.DateTime)
     data = db.Column(db.DateTime)
     hall = db.Column(db.String(100))
@@ -81,6 +90,8 @@ class Session_cinema(db.Model):
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 db.create_all()
+
+
 
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
