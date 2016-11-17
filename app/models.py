@@ -5,12 +5,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 
 app.config['SECRET_KEY'] = 'super-secret'
+<<<<<<< HEAD
 
 
 roles_users = db.Table('roles_users',
         db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
         db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
+=======
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
+db = SQLAlchemy(app)
+>>>>>>> 98091764f9866d4412d9612c77cf313e3c8b4d79
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
@@ -40,6 +45,7 @@ class User(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
+<<<<<<< HEAD
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time = db.Column(db.DateTime)
@@ -56,3 +62,17 @@ class Session_cinema(db.Model):
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security(app, user_datastore)
 db.create_all()
+=======
+class Reservation(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    resID = db.Column(db.String(100), unique=True)
+    priceTotal = db.Column(db.Integer)
+
+    def __init__(self, resID, priceTotal):
+        self.resID = resID
+        self.priceTotal = priceTotal
+
+
+
+
+>>>>>>> 98091764f9866d4412d9612c77cf313e3c8b4d79
