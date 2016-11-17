@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
+    <list default="true" id="09580022-487e-4f62-8db1-396a699ada56" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myvenv" afterPath="$PROJECT_DIR$/myvenv" />
+    </list>
+=======
     <list default="true" id="09580022-487e-4f62-8db1-396a699ada56" name="Default" comment="Changed class" />
+>>>>>>> 585d2783b26cd8dff4b7aa9bc7e3ce8e57823b12
 =======
     <list default="true" id="09580022-487e-4f62-8db1-396a699ada56" name="Default" comment="" />
 >>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
@@ -235,7 +241,11 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SocialSite" />
+=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/myenv/Scripts/python.exe" />
+>>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
