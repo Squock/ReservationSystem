@@ -47,7 +47,11 @@ class ListFilm(db.Model):
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
 
-    def __init__(self, name, description):
+    def __init__(self, name, description,cast, genre, length, ageRestriction):
         self.name = name
         self.description = description
+        self.cast = cast
+        self.genre = genre
+        self.length = length
+        self.ageRestriction = ageRestriction
 
