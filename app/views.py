@@ -1,7 +1,7 @@
 from flask import render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore
-from app.models import Role, User, db
+from app.models import Role, User, db, ListFilm
 from app import app
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
@@ -88,3 +88,18 @@ def logout():
     # удалить из сессии имя пользователя, если оно там есть
     session.pop('username', None)
     return redirect('/')
+
+@app.route('/film', methods=['POST','GET'])
+def get_film():
+    if request.method == 'POST':
+        name = request.form['name']
+        description = request.form['description']
+        movie = ListFilm(name, description)
+        db.session.add(movie)
+        db.session.commit()
+        return render_template('/')
+    return render_template('listfilm.html')
+
+
+
+
