@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'super-secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nr812za4@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
 db = SQLAlchemy(app)
 
 class Role(db.Model, RoleMixin):
@@ -20,6 +20,7 @@ class User(db.Model):
     SecondName = db.Column(db.String(100))
     Email = db.Column(db.String(100), unique=True)
     Password = db.Column(db.String(100))
+
 
     def __init__(self, FirstName, SecondName, Email, Password):
         self.FirstName = FirstName
@@ -36,3 +37,13 @@ class User(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
+
+class ListFilm(db.Model):
+    id = db.Column(db.Integer(), primary_key = True)
+    name = db.Column(db.String(80))
+    description = db.Column(db.String(255))
+
+    def __init__(self, name, description):
+        self.Name = name
+        self.Description = description
+
