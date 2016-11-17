@@ -1,21 +1,15 @@
 from flask import render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore
-from app.models import Role, User, db
+from app.models import Role, User, db, Session_cinema
 from app import app
+from datetime import datetime
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
-roles_users = db.Table('roles_users',
-        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
-        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
 # Setup Flask-Security
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-db.create_all()
-
 
 @app.route("/")
 @app.route("/index")
@@ -88,3 +82,17 @@ def logout():
     # удалить из сессии имя пользователя, если оно там есть
     session.pop('username', None)
     return redirect('/')
+
+@app.route('/session', methods=['POST', 'GET'])
+def session_cinema():
+    if request.method == 'POST':
+        time = request.form['time']
+        data = request.form['data']
+        hall = request.form['hall']
+        session_price = request.form['session_price']
+        time = datetime.strptime(time, "%H:%M")
+        sessions = Session_cinema(time, data, hall, session_price)
+        db.session.add(sessions)
+        db.session.commit()
+        return redirect("/")
+    return render_template('session.html')
