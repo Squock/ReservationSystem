@@ -1,19 +1,10 @@
 from flask import render_template, request, session, redirect
-from flask_sqlalchemy import SQLAlchemy
-from flask_security import Security, SQLAlchemyUserDatastore
-
-from app.models import Role, User, db, ListFilm
-
-from app.models import Role, User, db, Session_cinema
-
+from app.models import User, db, Session_cinema, Film
 from app import app
 from datetime import datetime
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
-
-
-# Setup Flask-Security
 
 @app.route("/")
 @app.route("/index")
@@ -43,12 +34,21 @@ def register():
         secondName = request.form['secondName']
         email = request.form['email']
         password = request.form['password']
-        user = User(firstName, secondName, email, password)
-        #role = Role(email, "user") Добавление ролей в БД (Админ, кассир, user)
-        db.session.add(user)
-        #db.session.add(role)
-        db.session.commit()
-        return redirect("/authorization")
+        cpassword = request.form['cpassword']
+        conditions = request.form['conditions']
+        if (password == cpassword):
+                if conditions == "True":
+                    user = User(firstName, secondName, email, password)
+                    db.session.add(user)
+                    db.session.commit()
+                    return redirect("/authorization")
+                else:
+                    ControlConditions = True
+                    return render_template('registration.html', ControlConditions=ControlConditions)
+        else:
+            ControlPassword = True
+            return render_template('registration.html', ControlPassword=ControlPassword)
+
     return render_template('registration.html')
 
 ###########################################
@@ -57,16 +57,14 @@ def register():
 def authorization():
     return render_template("authorization.html")
 
-@app.route("/login", methods=['POST'])
+@app.route("/login", methods=['POST','GET'])
 def login():
-    login = request.form['login']
+    username = request.form['login']
     password = request.form['password']
-
-
-    loginSite = User.query.filter_by(Email=login).first()
+    loginBool = True
+    loginSite = User.query.filter_by(Email=username).first()
     if (loginSite):
         if loginSite is None:
-            loginBool = True
             return render_template('authorization.html', loginBool=loginBool)
         else:
             if(loginSite.check_password(password)):
@@ -75,10 +73,8 @@ def login():
                 session['secondName'] = loginSite.SecondName
                 return redirect('/')
             else:
-                loginBool = True
                 return render_template('authorization.html', loginBool=loginBool)
     else:
-        loginBool = True
         return render_template('authorization.html', loginBool=loginBool)
 
 @app.route('/logout')
@@ -97,15 +93,11 @@ def get_film():
         length = request.form['length']
         cast = request.form['cast']
         ageRestriction = request.form['ageRestriction']
-        movie = ListFilm(name, description, genre, cast, length, ageRestriction)
+        movie = Film(name, description, genre, cast, length, ageRestriction)
         db.session.add(movie)
         db.session.commit()
         return redirect('/')
     return render_template('listfilm.html')
-
-
-
-
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
