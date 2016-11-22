@@ -2,7 +2,7 @@
 Для того, чтобы установить **PyCharm** надо скачать из http://tinyurl.com/zzshfzj <br/>
 В компьютере должен быть установлен **Python 3.4** <br/>
 Надо  установить **Postgresql** версию 9.4.10 http://tinyurl.com/jdt4xqx при установке надо поставить галочку **pgAdmin III** <br/>
-Для того чтобы установить в себе виртуальную среду (*virtual env*) надо в командной строке написать (*командная строка должна быть в папке ReservationSystem*) **C:/Python34/python.exe -m venv myenv** <br/>
+Для того чтобы установить в себе виртуальную среду (*virtual env*) надо в командной строке написать (*командная строка должна быть в папке ReservationSystem*) **C:/Python34/python.exe -m venv myvenv** <br/>
 ###pip команды
 myenv\Script\pip install flask <br/> 
 myenv\Script\pip install flask_sqlalchemy <br/> 
