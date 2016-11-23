@@ -23,9 +23,6 @@ def hello():
 
 ##########################################
 
-@app.route("/registration")
-def registration():
-    return render_template("registration.html")
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -35,48 +32,50 @@ def register():
         email = request.form['email']
         password = request.form['password']
         cpassword = request.form['cpassword']
-        conditions = request.form['conditions']
-        if (password == cpassword):
-                if conditions == "True":
-                    user = User(firstName, secondName, email, password)
-                    db.session.add(user)
-                    db.session.commit()
-                    return redirect("/authorization")
-                else:
-                    ControlConditions = True
-                    return render_template('registration.html', ControlConditions=ControlConditions)
+        loginSite = User.query.filter_by(Email=email).first()
+        if loginSite is None:
+            if password == cpassword:
+                user = User(firstName, secondName, email, password)
+                db.session.add(user)
+                db.session.commit()
+                return redirect("/login")
+            else:
+                ControlPassword = True
+                return render_template('registration.html', ControlPassword=ControlPassword)
         else:
-            ControlPassword = True
-            return render_template('registration.html', ControlPassword=ControlPassword)
-
+            ControlEmail = True
+            return render_template('registration.html', ControlEmail=ControlEmail)
     return render_template('registration.html')
+
+
 
 ###########################################
 
-@app.route("/authorization")
-def authorization():
-    return render_template("authorization.html")
 
 @app.route("/login", methods=['POST','GET'])
 def login():
-    username = request.form['login']
-    password = request.form['password']
-    loginBool = True
-    loginSite = User.query.filter_by(Email=username).first()
-    if (loginSite):
-        if loginSite is None:
-            return render_template('authorization.html', loginBool=loginBool)
-        else:
-            if(loginSite.check_password(password)):
-                session['username'] = login
-                session['firstName'] = loginSite.FirstName
-                session['secondName'] = loginSite.SecondName
-                return redirect('/')
-            else:
-                return render_template('authorization.html', loginBool=loginBool)
-    else:
-        return render_template('authorization.html', loginBool=loginBool)
-
+	if request.method == "POST":
+		username = request.form['login']
+		password = request.form['password']
+		loginBool = True
+		loginSite = User.query.filter_by(Email=username).first()
+		if loginSite:
+			if loginSite is None:
+				return render_template('authorization.html', loginBool=loginBool)
+			else:
+				if loginSite.check_password(password):
+					session['username'] = login
+					session['firstName'] = loginSite.FirstName
+					session['secondName'] = loginSite.SecondName
+					return redirect('/')
+				else:
+					return render_template('authorization.html', loginBool=loginBool)
+		else:
+			return render_template('authorization.html', loginBool=loginBool)
+	
+	return render_template('authorization.html')
+	
+	
 @app.route('/logout')
 def logout():
     # удалить из сессии имя пользователя, если оно там есть
@@ -99,6 +98,7 @@ def get_film():
         return redirect('/')
     return render_template('listfilm.html')
 
+	
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':

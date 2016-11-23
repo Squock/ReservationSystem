@@ -22,8 +22,7 @@
         </div>
         <div class="navbar-header navbar-right">
             <ul class="nav navbar-nav">
-                <li><a href="/registration">Регистрация</a></li>
-                <li><a href="/authorization">Вход</a></li>
+                <li><a href={{url_for('login')}}>Вход</a></li>
             </ul>
         </div>
       </div><!-- /.container-fluid -->
@@ -63,8 +62,8 @@
               {%if (ControlPassword)%}
                 <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>Пароли не совпадают!</div>
               {%endif%}
-              {% if (ControlConditions) %}
-                <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>Вы не приняли условия!</div>
+              {% if (ControlEmail) %}
+                <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>такая электронная почта уже используется!</div>
               {%endif%}
           </div>
           <div class="col-xs-4 col-md-3"></div>
