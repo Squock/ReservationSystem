@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Bootstrap javascript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="../static/css/style.css" type="text/css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <title>Регистрация</title>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/"><img alt="Brand" src="https://img.artlebedev.ru/yaroslavl/logo/yaroslavl-logo.gif" width="30" height="30"> </a>
+        </div>
+        <div class="navbar-header navbar-right">
+            <ul class="nav navbar-nav">
+                <li><a href={{url_for('login')}}>Вход</a></li>
+            </ul>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+</head>
+<body>
+<section id="register">
+    <div class="container">
+        <div class="row">
+          <div class="col-xs-4 col-md-3"></div>
+          <div class="col-xs-10 col-md-6">
+                <form id="formReg" action="/register" method="post" >
+                    <h3>Регистрация</h3>
+                        <div class="form-group">
+                            <label >Электронная почта</label>
+                            <input type="email" class="form-control"  name="email" required placeholder="Электронная почта">
+                        </div>
+                        <div class="form-group">
+                            <label >Имя</label>
+                            <input type="text" class="form-control"  name="firstName" required placeholder="Имя">
+                        </div>
+                        <div class="form-group">
+                            <label >Фамилия</label>
+                            <input type="text" class="form-control"  name="secondName" required placeholder="Фамилия">
+                        </div>
+                        <div class="form-group">
+                            <label >Пароль</label>
+                            <input type="password" class="form-control" name="password" required placeholder="Пароль">
+                        </div>
+                        <div class="form-group">
+                            <label >Повторно введите пароль</label>
+                            <input type="password" class="form-control" name="cpassword" required placeholder="Повторно введите пароль">
+                        </div>
+                    <input type="checkbox" name="conditions" checked value="true" required>Принимаю условия <p> <p>
+                    <button type="submit" class="btn btn-success"  >Вход</button>
+                </form>
+              {%if (ControlPassword)%}
+                <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>Пароли не совпадают!</div>
+              {%endif%}
+              {% if (ControlEmail) %}
+                <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>такая электронная почта уже используется!</div>
+              {%endif%}
+          </div>
+          <div class="col-xs-4 col-md-3"></div>
+        </div>
+      </div>
+</section>
+</body>
+</html>
