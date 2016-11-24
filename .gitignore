@@ -3,3 +3,4 @@ myenv/*
 .idea/*
 migrations/*
 *.pyc
+__pycache__
