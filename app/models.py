@@ -1,5 +1,3 @@
-#from flask_security import Security, SQLAlchemyUserDatastore, \
-   # UserMixin, RoleMixin, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 
