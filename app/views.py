@@ -98,5 +98,4 @@ def get_film():
         return redirect('/')
     return render_template('listfilm.html')
 
-https://github.com/Squock/ReservationSystem.git
 
