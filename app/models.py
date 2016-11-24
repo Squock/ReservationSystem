@@ -5,8 +5,6 @@ from app import app, db
 
 app.config['SECRET_KEY'] = 'super-secret'
 
-
-class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     FirstName = db.Column(db.String(100))
     SecondName = db.Column(db.String(100))
@@ -29,6 +27,72 @@ class User(db.Model):
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
+class User(db.Model):
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    FirstName = db.Column(db.String(100))
+    SecondName = db.Column(db.String(100))
+    Email = db.Column(db.String(100), unique=True)
+    Password = db.Column(db.String(100))
+
+
+    def __init__(self, FirstName, SecondName, Email, Password):
+        self.FirstName = FirstName
+        self.SecondName = SecondName
+        self.Email = Email
+        self.set_password(Password)
+
+    def set_password(self, Password):
+        self.Password = generate_password_hash(Password)
+
+    def check_password(self, Password):
+        return check_password_hash(self.Password, Password)
+
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
+    cashier = db.Column(db.String(120),default=False)
+    firstName = db.Column(db.String(100))
+    secondName = db.Column(db.String(100))
+    phoneNumber = db.Column(db.String(100))
+    birthDate = db.Column(db.DateTime)
+    password = db.Column(db.String(100))
+
+    def __init__(self, username, password, email, cashier, firstName, secondName, phoneNumber, birthDate):
+        self.username = username
+        self.set_password(password)
+        self.email = email
+        self.cashier = cashier
+        self.firstName = firstName
+        self.secondName = secondName
+        self.phoneNumber = phoneNumber
+        self.birthDate = birthDate
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+"""
+class Person(User):
+    firstName = db.Column(db.String(100))
+    secondName = db.Column(db.String(100))
+    phoneNumber = db.Column(db.String(100))
+
+    def __init__(self, firstName, secondName, phoneNumber, birthDate):
+        User.__init__(self, username, email)
+        self.firstName = firstName
+        self.secondName = secondName
+        self.phoneNumber = phoneNumber
+        self.birthDate = birthDate
+"""
 
 
 
@@ -82,3 +146,5 @@ class Reservation(db.Model):
 #user_datastore = SQLAlchemyUserDatastore(db, User)
 #security = Security(app, user_datastore)
 db.create_all()
+
+
