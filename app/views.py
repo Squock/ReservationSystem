@@ -1,4 +1,8 @@
 from flask import render_template, request, session, redirect
+from flask_sqlalchemy import SQLAlchemy
+from flask_security import Security, SQLAlchemyUserDatastore
+from app.models import Role, User, db, ListFilm
+from app.models import Role, User, db, Session_cinema
 from app.models import User, db, Session_cinema, Film
 from app import app
 from datetime import datetime
@@ -55,6 +59,7 @@ def register():
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+<<<<<<< HEAD
     if request.method == "POST":
         username = request.form['login']
         password = request.form['password']
@@ -75,6 +80,28 @@ def login():
             return render_template('authorization.html', loginBool=loginBool)
 
     return render_template('authorization.html')
+=======
+	if request.method == "POST":
+		username = request.form['login']
+		password = request.form['password']
+		loginBool = True
+		loginSite = User.query.filter_by(Email=username).first()
+		if loginSite:
+			if loginSite is None:
+				return render_template('authorization.html', loginBool=loginBool)
+			else:
+				if loginSite.check_password(password):
+					session['username'] = login
+					session['firstName'] = loginSite.FirstName
+					session['secondName'] = loginSite.SecondName
+					return redirect('/')
+				else:
+					return render_template('authorization.html', loginBool=loginBool)
+		else:
+			return render_template('authorization.html', loginBool=loginBool)
+
+	return render_template('authorization.html')
+>>>>>>> a70e6d3de95c3fef912cd383dcbbbb3e0b437d4f
 
 
 @app.route('/logout')
@@ -89,16 +116,40 @@ def get_film():
     if request.method == 'POST':
         name = request.form['name1']
         description = request.form['description']
+
+        movie = ListFilm(name, description)
         genre = request.form['genre']
         length = request.form['length']
         cast = request.form['cast']
         ageRestriction = request.form['ageRestriction']
         movie = Film(name, description, genre, cast, length, ageRestriction)
+
         db.session.add(movie)
         db.session.commit()
         return redirect('/')
     return render_template('listfilm.html')
 
+
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a70e6d3de95c3fef912cd383dcbbbb3e0b437d4f
+@app.route('/session', methods=['POST', 'GET'])
+def session_cinema():
+    if request.method == 'POST':
+        time = request.form['time']
+        data = request.form['data']
+        hall = request.form['hall']
+        session_price = request.form['session_price']
+        time = datetime.strptime(time, "%H:%M")
+        sessions = Session_cinema(time, data, hall, session_price)
+        db.session.add(sessions)
+        db.session.commit()
+        return redirect("/")
+    return render_template('session.html')
+<<<<<<< HEAD
+=======
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
@@ -113,3 +164,4 @@ def session_cinema():
         db.session.commit()
         return redirect("/")
     return render_template('session.html')
+>>>>>>> a70e6d3de95c3fef912cd383dcbbbb3e0b437d4f

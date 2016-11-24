@@ -6,6 +6,24 @@ from app import app, db
 app.config['SECRET_KEY'] = 'super-secret'
 
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nr812za4@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
+
+
+roles_users = db.Table('roles_users',
+        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
+
+#=======
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost:5432/dataBaseSite' #postgresql://имя:пароль@localhost:порт/база данных
+
+#>>>>>>> 98091764f9866d4412d9612c77cf313e3c8b4d79
+
+class Role(db.Model, RoleMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80))
+    description = db.Column(db.String(255))
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     FirstName = db.Column(db.String(100))
@@ -32,7 +50,12 @@ class User(db.Model):
 
 
 
+
+#class ListFilm(db.Model):
+
+
 class Film(db.Model):
+
     id = db.Column(db.Integer(), primary_key = True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(255))
@@ -52,7 +75,14 @@ class Film(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
+    listfilm_id = db.Column(db.Integer, db.ForeignKey('list_film.id'))
+    #tags = db.Table('tags', db.Column('listfilm_id', db.Integer, db.ForeignKey('listfilm_id')),
+    #db.Column('reservation_id', db.Integer, db.ForeignKey('reservation_id'))
+    #)
+
     film_id = db.Column(db.Integer)
+
     time = db.Column(db.DateTime)
     data = db.Column(db.DateTime)
     hall = db.Column(db.String(100))
@@ -63,6 +93,23 @@ class Session_cinema(db.Model):
         self.data = data
         self.hall = hall
         self.session_price = session_price
+
+
+#=======
+class Reservation(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    resID = db.Column(db.String(100), unique=True)
+    priceTotal = db.Column(db.Integer)
+
+    def __init__(self, resID, priceTotal):
+        self.resID = resID
+        self.priceTotal = priceTotal
+
+
+db.create_all()
+
+
+#>>>>>>> 98091764f9866d4412d9612c77cf313e3c8b4d79
 
 
 
@@ -77,4 +124,12 @@ class Reservation(db.Model):
         self.priceTotal = priceTotal
 
 
+<<<<<<< HEAD
 db.create_all()
+=======
+
+#Вот это на самом конце должно быть
+#user_datastore = SQLAlchemyUserDatastore(db, User)
+#security = Security(app, user_datastore)
+db.create_all()
+>>>>>>> a70e6d3de95c3fef912cd383dcbbbb3e0b437d4f
