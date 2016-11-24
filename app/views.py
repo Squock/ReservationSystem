@@ -2,20 +2,22 @@ from flask import render_template, request, session, redirect
 from app.models import User, db, Session_cinema, Film
 from app import app
 from datetime import datetime
-#Сектерный ключ никому не выдавать
+
+# Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
 
 @app.route("/")
 @app.route("/index")
 def hello():
-    #При открытии страницы проверить авторизован ли пользователь
+    # При открытии страницы проверить авторизован ли пользователь
     if 'username' in session:
         auth = True
         if 'firstName' in session:
             navbar_firstName = session['firstName']
             navbar_secondName = session['secondName']
-            return render_template("index.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
+            return render_template("index.html", auth=auth, navbar_firstName=navbar_firstName,
+                                   navbar_secondName=navbar_secondName)
         return render_template("index.html", auth=auth)
     else:
         auth = False
@@ -48,34 +50,33 @@ def register():
     return render_template('registration.html')
 
 
-
 ###########################################
 
 
-@app.route("/login", methods=['POST','GET'])
+@app.route("/login", methods=['POST', 'GET'])
 def login():
-	if request.method == "POST":
-		username = request.form['login']
-		password = request.form['password']
-		loginBool = True
-		loginSite = User.query.filter_by(Email=username).first()
-		if loginSite:
-			if loginSite is None:
-				return render_template('authorization.html', loginBool=loginBool)
-			else:
-				if loginSite.check_password(password):
-					session['username'] = login
-					session['firstName'] = loginSite.FirstName
-					session['secondName'] = loginSite.SecondName
-					return redirect('/')
-				else:
-					return render_template('authorization.html', loginBool=loginBool)
-		else:
-			return render_template('authorization.html', loginBool=loginBool)
-	
-	return render_template('authorization.html')
-	
-	
+    if request.method == "POST":
+        username = request.form['login']
+        password = request.form['password']
+        loginBool = True
+        loginSite = User.query.filter_by(Email=username).first()
+        if loginSite:
+            if loginSite is None:
+                return render_template('authorization.html', loginBool=loginBool)
+            else:
+                if loginSite.check_password(password):
+                    session['username'] = login
+                    session['firstName'] = loginSite.FirstName
+                    session['secondName'] = loginSite.SecondName
+                    return redirect('/')
+                else:
+                    return render_template('authorization.html', loginBool=loginBool)
+        else:
+            return render_template('authorization.html', loginBool=loginBool)
+
+    return render_template('authorization.html')
+
+
 @app.route('/logout')
 def logout():
     # удалить из сессии имя пользователя, если оно там есть
@@ -83,7 +84,7 @@ def logout():
     return redirect('/')
 
 
-@app.route('/film', methods=['POST','GET'])
+@app.route('/film', methods=['POST', 'GET'])
 def get_film():
     if request.method == 'POST':
         name = request.form['name1']
@@ -98,7 +99,7 @@ def get_film():
         return redirect('/')
     return render_template('listfilm.html')
 
-	
+
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
@@ -112,4 +113,3 @@ def session_cinema():
         db.session.commit()
         return redirect("/")
     return render_template('session.html')
-

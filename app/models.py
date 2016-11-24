@@ -77,8 +77,4 @@ class Reservation(db.Model):
         self.priceTotal = priceTotal
 
 
-
-#Вот это на самом конце должно быть
-#user_datastore = SQLAlchemyUserDatastore(db, User)
-#security = Security(app, user_datastore)
 db.create_all()
