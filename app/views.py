@@ -23,10 +23,6 @@ def hello():
 
 ##########################################
 
-@app.route("/registration")
-def registration():
-    return render_template("registration.html")
-
 @app.route("/register", methods=["POST", "GET"])
 def register():
     if request.method == 'POST':
