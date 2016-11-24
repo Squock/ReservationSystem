@@ -72,7 +72,10 @@ class ListFilm(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    film_id = db.Column(db.Integer, db.ForeignKey('Reservation.id'))
+    listfilm_id = db.Column(db.Integer, db.ForeignKey('list_film.id'))
+    #tags = db.Table('tags', db.Column('listfilm_id', db.Integer, db.ForeignKey('listfilm_id')),
+    #db.Column('reservation_id', db.Integer, db.ForeignKey('reservation_id'))
+    #)
     time = db.Column(db.DateTime)
     data = db.Column(db.DateTime)
     hall = db.Column(db.String(100))
@@ -84,9 +87,6 @@ class Session_cinema(db.Model):
         self.hall = hall
         self.session_price = session_price
 
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
-db.create_all()
 #=======
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -98,7 +98,7 @@ class Reservation(db.Model):
         self.priceTotal = priceTotal
 
 
-
+db.create_all()
 
 
 #>>>>>>> 98091764f9866d4412d9612c77cf313e3c8b4d79

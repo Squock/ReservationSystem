@@ -1,11 +1,8 @@
 from flask import render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_security import Security, SQLAlchemyUserDatastore
-<<<<<<< HEAD
 from app.models import Role, User, db, ListFilm
-=======
 from app.models import Role, User, db, Session_cinema
->>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
 from app import app
 from datetime import datetime
 #Сектерный ключ никому не выдавать
@@ -87,7 +84,6 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
-<<<<<<< HEAD
 @app.route('/film', methods=['POST','GET'])
 def get_film():
     if request.method == 'POST':
@@ -103,7 +99,6 @@ def get_film():
 
 
 
-=======
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
@@ -117,4 +112,3 @@ def session_cinema():
         db.session.commit()
         return redirect("/")
     return render_template('session.html')
->>>>>>> 056147cdfcbc76a3e8dabf98d48ca3da51b0c2e3
