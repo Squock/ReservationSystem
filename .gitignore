@@ -1,0 +1,5 @@
+myvenv/*
+myenv/*
+.idea/*
+migrations/*
+*.pyc

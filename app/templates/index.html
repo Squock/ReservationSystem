@@ -35,9 +35,9 @@
                     Войти
                     <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu" id="dropdown_auth_list">
-                   <li><a href="/authorization" id="drop_log">Вход</a></li>
-                   <li><a href="/registration">Регистрация</a></li>
+                <ul class="dropdown-menu">
+                   <li><a href={{url_for('login')}}>Вход</a></li>
+                   <li><a href={{url_for("register")}}>Регистрация</a></li>
                 </ul>
               </li>
             </ul>
@@ -48,6 +48,7 @@
             <div class="container-fluid">
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
+                  <li><a href={{url_for('session_cinema')}}>Добавить сессию</a></li>
               <li class="dropdown">
                 <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown">
                     {{ navbar_firstName }} {{ navbar_secondName }}
