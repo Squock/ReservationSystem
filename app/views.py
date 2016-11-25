@@ -49,10 +49,6 @@ def register():
 
 ###########################################
 
-@app.route("/authorization")
-def authorization():
-    return render_template("authorization.html")
-
 @app.route("/login", methods=['POST','GET'])
 def login():
     username = request.form['login']
