@@ -31,7 +31,7 @@ def register():
         secondName = request.form['secondName']
         email = request.form['email']
         dateBirth = request.form['dateBirth']
-        date = datetime.strftime(dateBirth, '%Y-%m-%dT%H:%M:%S%z')
+        date = datetime.strftime(dateBirth)
         phoneNumber = request.form['phoneNumber']
         password = request.form['password']
         cpassword = request.form['cpassword']
