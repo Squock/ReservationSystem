@@ -129,6 +129,9 @@ def reservation():
         db.session.add(reservation_session)
         db.session.commit()
         return redirect("/")
+    ses_id = request.args.get('session_id')
+    sessions = Session_cinema.query.filter_by(id = ses_id).first()
+
     return render_template('reservation.html')
 
 
