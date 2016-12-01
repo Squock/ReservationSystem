@@ -1,7 +1,8 @@
 from flask import render_template, request, session, redirect
-from app.models import User, db, Session_cinema, Film
+from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
+
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
@@ -105,3 +106,12 @@ def session_cinema():
         return redirect("/")
     return render_template('session.html')
 
+@app.route('/reservation_check', methods=['POST','GET'])
+def reservation_check():
+    if request.method == 'POST':
+        res_num = request.form['reservation']
+        reserv = Reservation.query.filter_by(resID=res_num).first()
+        if (reserv):
+            res = reserv.resID
+            return render_template("reservation_check.html", res=res)
+    return render_template('reservation_check.html')
