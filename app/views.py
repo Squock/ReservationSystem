@@ -30,13 +30,11 @@ def register():
         firstName = request.form['firstName']
         secondName = request.form['secondName']
         email = request.form['email']
-        dateBirth = request.form['dateBirth']
-        date = datetime.strftime(dateBirth, '%Y-%m-%dT%H:%M:%S%z')
+        date = request.form['date']
         phoneNumber = request.form['phoneNumber']
         password = request.form['password']
         cpassword = request.form['cpassword']
         conditions = request.form['conditions']
-        print(conditions)
         loginSite = User.query.filter_by(username=username).first()
         if loginSite:
             flash("Логин занят")
@@ -44,10 +42,10 @@ def register():
         else:
             if (password == cpassword):
                     if conditions == "on":
-                        user = User(username, email, firstName, secondName, phoneNumber, date, password)
+                        user = User(username, email, None, firstName, secondName, phoneNumber, date, password)
                         db.session.add(user)
                         db.session.commit()
-                        return redirect("/authorization")
+                        return redirect(url_for("login"))
                     else:
                         flash("Вы не приняли условия!")
                         return redirect(url_for('register'))
@@ -71,9 +69,10 @@ def login():
                 return redirect(url_for('login'))
             else:
                 if(loginSite.check_password(password)):
-                    session['username'] = login
-                    session['firstName'] = loginSite.FirstName
-                    session['secondName'] = loginSite.SecondName
+                    session['username'] = loginSite.username
+                    session['firstName'] = loginSite.firstName
+                    session['secondName'] = loginSite.secondName
+                    session['id'] = loginSite.id
                     return redirect('/')
                 else:
                     flash("Неправльно введен пароль")
