@@ -2,6 +2,7 @@ header {
           background-image: url(../image/bord_image.jpg); /* Путь к фоновому изображению */
           background-size: 100%;
 		  padding: 0px;
+	      position: absolute;
 	      height: 586px;
         }
 #register {
