@@ -1,5 +1,5 @@
 from flask import render_template, request, session, redirect, flash, url_for
-from app.models import User, db, Session_cinema, Film
+from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
 #Сектерный ключ никому не выдавать
@@ -118,4 +118,17 @@ def session_cinema():
         db.session.commit()
         return redirect("/")
     return render_template('session.html')
+
+
+@app.route('/reservation', methods=['POST', 'GET'])
+def reservation():
+    if request.method == 'POST':
+        resID = request.form['resID']
+        priceTotal = request.form['priceTotal']
+        reservation_session = Reservation(resID, priceTotal)
+        db.session.add(reservation_session)
+        db.session.commit()
+        return redirect("/")
+    return render_template('reservation.html')
+
 
