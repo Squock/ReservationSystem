@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, flash, url_for
 from app.models import User, db, Session_cinema, Film
 from app import app
 from datetime import datetime
@@ -26,24 +26,34 @@ def hello():
 @app.route("/register", methods=["POST", "GET"])
 def register():
     if request.method == 'POST':
+        username = request.form['username']
         firstName = request.form['firstName']
         secondName = request.form['secondName']
         email = request.form['email']
+        dateBirth = request.form['dateBirth']
+        date = datetime.strftime(dateBirth, '%Y-%m-%dT%H:%M:%S%z')
+        phoneNumber = request.form['phoneNumber']
         password = request.form['password']
         cpassword = request.form['cpassword']
         conditions = request.form['conditions']
-        if (password == cpassword):
-                if conditions == "True":
-                    user = User(firstName, secondName, email, password)
-                    db.session.add(user)
-                    db.session.commit()
-                    return redirect("/authorization")
-                else:
-                    ControlConditions = True
-                    return render_template('registration.html', ControlConditions=ControlConditions)
+        print(conditions)
+        loginSite = User.query.filter_by(username=username).first()
+        if loginSite:
+            flash("Логин занят")
+            return redirect(url_for('register'))
         else:
-            ControlPassword = True
-            return render_template('registration.html', ControlPassword=ControlPassword)
+            if (password == cpassword):
+                    if conditions == "on":
+                        user = User(username, email, firstName, secondName, phoneNumber, date, password)
+                        db.session.add(user)
+                        db.session.commit()
+                        return redirect("/authorization")
+                    else:
+                        flash("Вы не приняли условия!")
+                        return redirect(url_for('register'))
+            else:
+                flash("Пароли не совпадают!")
+                return redirect(url_for('register'))
 
     return render_template('registration.html')
 
@@ -51,23 +61,28 @@ def register():
 
 @app.route("/login", methods=['POST','GET'])
 def login():
-    username = request.form['login']
-    password = request.form['password']
-    loginBool = True
-    loginSite = User.query.filter_by(Email=username).first()
-    if (loginSite):
-        if loginSite is None:
-            return render_template('authorization.html', loginBool=loginBool)
-        else:
-            if(loginSite.check_password(password)):
-                session['username'] = login
-                session['firstName'] = loginSite.FirstName
-                session['secondName'] = loginSite.SecondName
-                return redirect('/')
+    if request.method == 'POST':
+        username = request.form['login']
+        password = request.form['password']
+        loginSite = User.query.filter_by(username=username).first()
+        if (loginSite):
+            if loginSite is None:
+                flash("Неправльно введен электронная почта или пароль")
+                return redirect(url_for('login'))
             else:
-                return render_template('authorization.html', loginBool=loginBool)
-    else:
-        return render_template('authorization.html', loginBool=loginBool)
+                if(loginSite.check_password(password)):
+                    session['username'] = login
+                    session['firstName'] = loginSite.FirstName
+                    session['secondName'] = loginSite.SecondName
+                    return redirect('/')
+                else:
+                    flash("Неправльно введен пароль")
+                    return redirect(url_for('login'))
+        else:
+            flash("Неправльно введен электронная почта")
+            return redirect(url_for('login'))
+    return render_template('authorization.html')
+
 
 @app.route('/logout')
 def logout():

@@ -22,8 +22,7 @@
         </div>
         <div class="navbar-header navbar-right">
             <ul class="nav navbar-nav">
-                <li><a href="/registration">Регистрация</a></li>
-                <li><a href="/authorization">Вход</a></li>
+                <li><a href="/login">Вход</a></li>
             </ul>
         </div>
       </div><!-- /.container-fluid -->
@@ -36,7 +35,18 @@
           <div class="col-xs-4 col-md-3"></div>
           <div class="col-xs-10 col-md-6">
                 <form id="formReg" action="/register" method="post" >
+                    {% with messages = get_flashed_messages() %}
+                         {% if messages %}
+                               {% for message in messages %}
+                                <div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>{{ message }} </div>
+                               {% endfor %}
+                         {% endif %}
+                    {% endwith %}
                     <h3>Регистрация</h3>
+                        <div class="form-group">
+                            <label >Логин</label>
+                            <input type="text" class="form-control"  name="username" required placeholder="Логин">
+                        </div>
                         <div class="form-group">
                             <label >Электронная почта</label>
                             <input type="email" class="form-control"  name="email" required placeholder="Электронная почта">
@@ -50,6 +60,14 @@
                             <input type="text" class="form-control"  name="secondName" required placeholder="Фамилия">
                         </div>
                         <div class="form-group">
+                            <label >Дата рождения</label>
+                            <input type="date" class="form-control"  name="dateBirth" required placeholder="Дата рождения">
+                        </div>
+                        <div class="form-group">
+                            <label >Телефон</label>
+                            <input type="tel" class="form-control"  name="phoneNumber" required placeholder="Телефон">
+                        </div>
+                        <div class="form-group">
                             <label >Пароль</label>
                             <input type="password" class="form-control" name="password" required placeholder="Пароль">
                         </div>
@@ -57,15 +75,9 @@
                             <label >Повторно введите пароль</label>
                             <input type="password" class="form-control" name="cpassword" required placeholder="Повторно введите пароль">
                         </div>
-                    <input type="checkbox" name="conditions" checked value="true" required>Принимаю условия <p> <p>
-                    <button type="submit" class="btn btn-success"  >Вход</button>
+                    <input type="checkbox" name="conditions" required>Принимаю условия <p> <p>
+                    <button type="submit" class="btn btn-success">Вход</button>
                 </form>
-              {%if (ControlPassword)%}
-                <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>Пароли не совпадают!</div>
-              {%endif%}
-              {% if (ControlConditions) %}
-                <p><div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>Вы не приняли условия!</div>
-              {%endif%}
           </div>
           <div class="col-xs-4 col-md-3"></div>
         </div>
