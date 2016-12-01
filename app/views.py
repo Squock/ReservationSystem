@@ -51,23 +51,25 @@ def register():
 
 @app.route("/login", methods=['POST','GET'])
 def login():
-    username = request.form['login']
-    password = request.form['password']
-    loginBool = True
-    loginSite = User.query.filter_by(Email=username).first()
-    if (loginSite):
-        if loginSite is None:
-            return render_template('authorization.html', loginBool=loginBool)
-        else:
-            if(loginSite.check_password(password)):
-                session['username'] = login
-                session['firstName'] = loginSite.FirstName
-                session['secondName'] = loginSite.SecondName
-                return redirect('/')
-            else:
+    if request.method=="POST":
+        username = request.form['login']
+        password = request.form['password']
+        loginBool = True
+        loginSite = User.query.filter_by(Email=username).first()
+        if (loginSite):
+            if loginSite is None:
                 return render_template('authorization.html', loginBool=loginBool)
-    else:
-        return render_template('authorization.html', loginBool=loginBool)
+            else:
+                if(loginSite.check_password(password)):
+                    session['username'] = login
+                    session['firstName'] = loginSite.FirstName
+                    session['secondName'] = loginSite.SecondName
+                    return redirect('/')
+                else:
+                    return render_template('authorization.html', loginBool=loginBool)
+        else:
+            return render_template('authorization.html', loginBool=loginBool)
+    return render_template("authorization.html")
 
 @app.route('/logout')
 def logout():
@@ -91,8 +93,11 @@ def get_film():
         return redirect('/')
     return render_template('listfilm.html')
 
+
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
+    if not session.get('logged_in'):
+        abort(404)     
     if request.method == 'POST':
         time = request.form['time']
         data = request.form['data']
@@ -105,3 +110,10 @@ def session_cinema():
         return redirect("/")
     return render_template('session.html')
 
+@app.route('/session_list', methods=['POST', 'GET'])
+def session_list():
+    if request.method == 'GET':
+        sessionBool = True
+        SessionList = Session_cinema.query.all()
+
+    return render_template('session_list.html')
