@@ -1,5 +1,5 @@
-from flask import render_template, request, session, redirect
-from app.models import User, db, Session_cinema, Film
+from flask import render_template, request, session, redirect, flash, url_for
+from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
 #Сектерный ключ никому не выдавать
@@ -26,24 +26,32 @@ def hello():
 @app.route("/register", methods=["POST", "GET"])
 def register():
     if request.method == 'POST':
+        username = request.form['username']
         firstName = request.form['firstName']
         secondName = request.form['secondName']
         email = request.form['email']
+        date = request.form['date']
+        phoneNumber = request.form['phoneNumber']
         password = request.form['password']
         cpassword = request.form['cpassword']
         conditions = request.form['conditions']
-        if (password == cpassword):
-                if conditions == "True":
-                    user = User(firstName, secondName, email, password)
-                    db.session.add(user)
-                    db.session.commit()
-                    return redirect("/authorization")
-                else:
-                    ControlConditions = True
-                    return render_template('registration.html', ControlConditions=ControlConditions)
+        loginSite = User.query.filter_by(username=username).first()
+        if loginSite:
+            flash("Логин занят")
+            return redirect(url_for('register'))
         else:
-            ControlPassword = True
-            return render_template('registration.html', ControlPassword=ControlPassword)
+            if (password == cpassword):
+                    if conditions == "on":
+                        user = User(username, email, None, firstName, secondName, phoneNumber, date, password)
+                        db.session.add(user)
+                        db.session.commit()
+                        return redirect(url_for("login"))
+                    else:
+                        flash("Вы не приняли условия!")
+                        return redirect(url_for('register'))
+            else:
+                flash("Пароли не совпадают!")
+                return redirect(url_for('register'))
 
     return render_template('registration.html')
 
@@ -51,25 +59,29 @@ def register():
 
 @app.route("/login", methods=['POST','GET'])
 def login():
-    if request.method=="POST":
+    if request.method == 'POST':
         username = request.form['login']
         password = request.form['password']
-        loginBool = True
-        loginSite = User.query.filter_by(Email=username).first()
+        loginSite = User.query.filter_by(username=username).first()
         if (loginSite):
             if loginSite is None:
-                return render_template('authorization.html', loginBool=loginBool)
+                flash("Неправльно введен электронная почта или пароль")
+                return redirect(url_for('login'))
             else:
                 if(loginSite.check_password(password)):
-                    session['username'] = login
-                    session['firstName'] = loginSite.FirstName
-                    session['secondName'] = loginSite.SecondName
+                    session['username'] = loginSite.username
+                    session['firstName'] = loginSite.firstName
+                    session['secondName'] = loginSite.secondName
+                    session['id'] = loginSite.id
                     return redirect('/')
                 else:
-                    return render_template('authorization.html', loginBool=loginBool)
+                    flash("Неправльно введен пароль")
+                    return redirect(url_for('login'))
         else:
-            return render_template('authorization.html', loginBool=loginBool)
-    return render_template("authorization.html")
+            flash("Неправльно введен электронная почта")
+            return redirect(url_for('login'))
+    return render_template('authorization.html')
+
 
 @app.route('/logout')
 def logout():
@@ -93,11 +105,8 @@ def get_film():
         return redirect('/')
     return render_template('listfilm.html')
 
-
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
-    if not session.get('logged_in'):
-        abort(404)     
     if request.method == 'POST':
         time = request.form['time']
         data = request.form['data']
@@ -110,10 +119,19 @@ def session_cinema():
         return redirect("/")
     return render_template('session.html')
 
-@app.route('/session_list', methods=['POST', 'GET'])
-def session_list():
-    if request.method == 'GET':
-        sessionBool = True
-        SessionList = Session_cinema.query.all()
 
-    return render_template('session_list.html')
+@app.route('/reservation', methods=['POST', 'GET'])
+def reservation():
+    if request.method == 'POST':
+        resID = request.form['resID']
+        priceTotal = request.form['priceTotal']
+        reservation_session = Reservation(resID, priceTotal)
+        db.session.add(reservation_session)
+        db.session.commit()
+        return redirect("/")
+    ses_id = request.args.get('session_id')
+    sessions = Session_cinema.query.filter_by(id = ses_id).first()
+
+    return render_template('reservation.html')
+
+
