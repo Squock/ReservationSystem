@@ -4,7 +4,6 @@ from app import app
 from datetime import datetime
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy import Table
-import random
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
@@ -68,7 +67,7 @@ def login():
         loginSite = User.query.filter_by(username=username).first()
         if (loginSite):
             if loginSite is None:
-                flash("Неправильно введен электронная почта или пароль")
+                flash("Неправльно введен электронная почта или пароль")
                 return redirect(url_for('login'))
             else:
                 if(loginSite.check_password(password)):
@@ -78,10 +77,10 @@ def login():
                     session['id'] = loginSite.id
                     return redirect('/')
                 else:
-                    flash("Неправильно введен пароль")
+                    flash("Неправльно введен пароль")
                     return redirect(url_for('login'))
         else:
-            flash("Неправильно введен электронная почта")
+            flash("Неправльно введен электронная почта")
             return redirect(url_for('login'))
     return render_template('authorization.html')
 
@@ -148,16 +147,14 @@ def reservation():
     db.session.commit()
     return render_template('reservation.html', session=session, randomNumber=randomNumber)
 
-
 @app.route('/reservation_check', methods=['POST','GET'])
 def reservation_check():
     if request.method == 'POST':
         res_id = request.form['res_id']
         reserve = Reservation.query.filter_by(resID=res_id).first()
-        if res_id is None:
-                flash("Неправильно введен электронная почта или пароль")
-                return redirect(url_for('login'))
+        if reserve is None:
+            flash("Error. Брони с таким номером не существует.")
+            return redirect(url_for('reservation_check'))
         else:
-            res = reserve.resID
-            return render_template("reservation_check.html", res=res)
+            return render_template('reservation_check.html', items=reserve)
     return render_template('reservation_check.html')

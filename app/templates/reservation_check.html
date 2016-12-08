@@ -30,7 +30,33 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Номер брони</th>
+                            <th>Итоговая стоимость</th>
+                        </tr>
+                        <tr>
+                            {% if items %}
+                            <td>{{ items.id}}</td>
+                            <td>{{ items.resID }}</td>
+                            <td>{{ items.priceTotal }}</td>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            {% with messages = get_flashed_messages() %}
+                     {% if messages %}
+                           {% for message in messages %}
+                           <div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>{{ message }} </div>
+                           {% endfor %}
+                     {% endif %}
+                {% endwith %}
+        </div>
     </div>
 </body>
-
 </html>
