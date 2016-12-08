@@ -53,10 +53,7 @@ class Film(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
-    db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
-    )
-    film_id = db.Column(db.Integer(), default='film.id')
+    film_id = db.Column(db.Integer(), db.ForeignKey('film.id'))
     time = db.Column(db.DateTime)
     data = db.Column(db.DateTime)
     hall = db.Column(db.String(100))
@@ -69,6 +66,10 @@ class Session_cinema(db.Model):
         self.session_price = session_price
 
 
+
+"""tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
+    db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
+    )"""
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     resID = db.Column(db.Integer(), unique=True)

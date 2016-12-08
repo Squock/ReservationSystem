@@ -88,10 +88,16 @@ table .row-title {
 	background: gray;
 	cursor: pointer;
 }
+.zone-standart-leg{
+	background: gray;
+}
 
 .zone-vip {
     background: cornflowerblue;
     cursor: pointer;
+}
+.zone-vip-leg {
+    background: cornflowerblue;
 }
 .status-blocked {
     background: orangered;
@@ -99,7 +105,11 @@ table .row-title {
 .status-reserved {
     background: yellow;
 }
-.status-selected {
+.seat.status-selected {
+    background: orange;
+	cursor: pointer;
+}
+.status-selected-leg {
     background: orange;
 }
 
