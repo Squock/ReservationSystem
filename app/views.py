@@ -4,6 +4,7 @@ from app import app
 from datetime import datetime
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy import Table
+import random
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
@@ -67,7 +68,7 @@ def login():
         loginSite = User.query.filter_by(username=username).first()
         if (loginSite):
             if loginSite is None:
-                flash("Неправльно введен электронная почта или пароль")
+                flash("Неправильно введен электронная почта или пароль")
                 return redirect(url_for('login'))
             else:
                 if(loginSite.check_password(password)):
@@ -77,10 +78,10 @@ def login():
                     session['id'] = loginSite.id
                     return redirect('/')
                 else:
-                    flash("Неправльно введен пароль")
+                    flash("Неправильно введен пароль")
                     return redirect(url_for('login'))
         else:
-            flash("Неправльно введен электронная почта")
+            flash("Неправильно введен электронная почта")
             return redirect(url_for('login'))
     return render_template('authorization.html')
 
@@ -133,14 +134,20 @@ def reservation():
     if request.method == 'POST':
         resID = request.form['resID']
         priceTotal = request.form['priceTotal']
-        reservation_session = Reservation(resID, priceTotal)
+        reservation_session = Reservation(resID,priceTotal)
         db.session.add(reservation_session)
         db.session.commit()
         return redirect("/")
     ses_id = request.args.get('session_id')
-    sessions = Session_cinema.query.filter_by(id = ses_id).first()
+    session = Session_cinema.query.filter_by(id=ses_id).first()
+    if session is None:
+        pass
+    randomNumber = random.randrange(10000)
+    resIDsave = Reservation(None, None, randomNumber)
+    db.session.add(resIDsave)
+    db.session.commit()
+    return render_template('reservation.html', session=session, randomNumber=randomNumber)
 
-    return render_template('reservation.html')
 
 @app.route('/reservation_check', methods=['POST','GET'])
 def reservation_check():
@@ -148,7 +155,7 @@ def reservation_check():
         res_id = request.form['res_id']
         reserve = Reservation.query.filter_by(resID=res_id).first()
         if res_id is None:
-                flash("Неправльно введен электронная почта или пароль")
+                flash("Неправильно введен электронная почта или пароль")
                 return redirect(url_for('login'))
         else:
             res = reserve.resID
