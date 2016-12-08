@@ -17,7 +17,7 @@
 </head>
 
 <body>
-
+  
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -49,17 +49,22 @@
                     </div>
                     <div class="form-group">
                         <label>Дата</label>
-                        <input type="text" class="form-control" id="data" name="data" placeholder="Дата">
+                        <input type="date" class="form-control" id="date" name="date" placeholder="Дата">
                     </div>
                     <div class="form-group">
                         <label>Зал</label>
                         <input type="text" class="form-control" id="hall" name="hall" placeholder="Зал">
                     </div>
                     <div class="form-group">
-                        <label>Цена</label>
-                        <input type="text" class="form-control" required id="session_price" name="session_price" placeholder="Цена">
+                        <label>Цена стандартных билетов</label>
+                        <input type="text" class="form-control" required id="session_price" name="session_price" placeholder="Стандартные цены">
+                    </div>
+                    <div class="form-group">
+                        <label>Цена vip билетов</label>
+                        <input type="text" class="form-control" required id="vip_price" name="vip_price" placeholder="Vip цена">
                     </div>
                     <button type="submit" class="btn btn-success">Сохранить</button>
+
                 </form>
             </div>
         </div>

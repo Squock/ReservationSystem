@@ -1,7 +1,9 @@
 from flask import render_template, request, session, redirect, flash, url_for
-from app.models import User, db, Session_cinema, Film
+from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy import Table
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
@@ -30,13 +32,11 @@ def register():
         firstName = request.form['firstName']
         secondName = request.form['secondName']
         email = request.form['email']
-        dateBirth = request.form['dateBirth']
-        date = datetime.strftime(dateBirth, '%Y-%m-%dT%H:%M:%S%z')
+        date = request.form['date']
         phoneNumber = request.form['phoneNumber']
         password = request.form['password']
         cpassword = request.form['cpassword']
         conditions = request.form['conditions']
-        print(conditions)
         loginSite = User.query.filter_by(username=username).first()
         if loginSite:
             flash("Логин занят")
@@ -44,10 +44,10 @@ def register():
         else:
             if (password == cpassword):
                     if conditions == "on":
-                        user = User(username, email, firstName, secondName, phoneNumber, date, password)
+                        user = User(username, email, None, firstName, secondName, phoneNumber, date, password)
                         db.session.add(user)
                         db.session.commit()
-                        return redirect("/authorization")
+                        return redirect(url_for("login"))
                     else:
                         flash("Вы не приняли условия!")
                         return redirect(url_for('register'))
@@ -71,9 +71,10 @@ def login():
                 return redirect(url_for('login'))
             else:
                 if(loginSite.check_password(password)):
-                    session['username'] = login
-                    session['firstName'] = loginSite.FirstName
-                    session['secondName'] = loginSite.SecondName
+                    session['username'] = loginSite.username
+                    session['firstName'] = loginSite.firstName
+                    session['secondName'] = loginSite.secondName
+                    session['id'] = loginSite.id
                     return redirect('/')
                 else:
                     flash("Неправльно введен пароль")
@@ -109,14 +110,51 @@ def get_film():
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
+        #film_id = request.form['film_id']
         time = request.form['time']
-        data = request.form['data']
+        date = request.form['date']
         hall = request.form['hall']
         session_price = request.form['session_price']
+        vip_price = request.form['vip_price']
         time = datetime.strptime(time, "%H:%M")
-        sessions = Session_cinema(time, data, hall, session_price)
+        sessions = Session_cinema(time, date, hall, session_price, vip_price)
         db.session.add(sessions)
         db.session.commit()
         return redirect("/")
     return render_template('session.html')
 
+@app.route('/session_list', methods=['POST', 'GET'])
+def session_list():
+    #film = Session_cinema.query.get(id)
+    return render_template('session_list.html', items=Session_cinema.query.all(), items1=Film.query.all())
+
+@app.route('/reservation', methods=['POST', 'GET'])
+def reservation():
+    if request.method == 'POST':
+        resID = request.form['resID']
+        priceTotal = request.form['priceTotal']
+        reservation_session = Reservation(resID,priceTotal)
+        db.session.add(reservation_session)
+        db.session.commit()
+        return redirect("/")
+    ses_id = request.args.get('session_id')
+    session = Session_cinema.query.filter_by(id=ses_id).first()
+    if session is None:
+        pass
+    randomNumber = random.randrange(10000)
+    resIDsave = Reservation(None, None, randomNumber)
+    db.session.add(resIDsave)
+    db.session.commit()
+    return render_template('reservation.html', session=session, randomNumber=randomNumber)
+
+@app.route('/reservation_check', methods=['POST','GET'])
+def reservation_check():
+    if request.method == 'POST':
+        res_id = request.form['res_id']
+        reserve = Reservation.query.filter_by(resID=res_id).first()
+        if reserve is None:
+            flash("Ошибка! Строка пуста либо брони с таким номером не существует.")
+            return redirect(url_for('reservation_check'))
+        else:
+            return render_template('reservation_check.html', items=reserve)
+    return render_template('reservation_check.html')
