@@ -137,9 +137,12 @@ def reservation():
 @app.route('/reservation_check', methods=['POST','GET'])
 def reservation_check():
     if request.method == 'POST':
-        res_num = request.form['reservation']
-        reserv = Reservation.query.filter_by(resID=res_num).first()
-        if (reserv):
-            res = reserv.resID
+        res_id = request.form['res_id']
+        reserve = Reservation.query.filter_by(resID=res_id).first()
+        if res_id is None:
+                flash("Неправльно введен электронная почта или пароль")
+                return redirect(url_for('login'))
+        else:
+            res = reserve.resID
             return render_template("reservation_check.html", res=res)
     return render_template('reservation_check.html')
