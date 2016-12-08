@@ -148,7 +148,7 @@ def reservation_check():
         res_id = request.form['res_id']
         reserve = Reservation.query.filter_by(resID=res_id).first()
         if reserve is None:
-            flash("Error. Брони с таким номером не существует.")
+            flash("Ошибка! Строка пуста либо брони с таким номером не существует.")
             return redirect(url_for('reservation_check'))
         else:
             return render_template('reservation_check.html', items=reserve)
