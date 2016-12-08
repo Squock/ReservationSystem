@@ -1,12 +1,12 @@
 header {
-          background-image: url(../image/bord_image.jpg); /* Путь к фоновому изображению */
+          background-image: url(../img/bord_image.jpg); /* Путь к фоновому изображению */
           background-size: 100%;
 		  padding: 0px;
 	      position: absolute;
 	      height: 586px;
         }
 #register {
-            background-image: url(../image/register_image.jpg);
+            background-image: url(../img/register_image.jpg);
             background-size: 100%;
             position: absolute;
   			top: 0;
@@ -15,7 +15,7 @@ header {
   			height: 100%;
         }
 #authorization {
-			background-image: url(../image/bord_image_auth.jpg);
+			background-image: url(../img/bord_image_auth.jpg);
 			background-size: 100%;
 			position: fixed;
   			top: 0;
@@ -55,3 +55,63 @@ header {
 #dropdown_auth{
 			background-color: #1F93E0;
 }
+
+table {
+    margin-top: 2em;
+}
+table tr td {
+    text-align: center;
+    padding: 2px;
+	height: 1.5em;
+}
+
+.seat {
+    color: #000;
+    display: block;
+    font-size: 0.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    border: 1px solid #555555;
+	text-align: center;
+    width: 1.8em;
+}
+table tr td a.hover {
+    background: orange;
+	color: #000;
+}
+
+table .row-title {
+    padding: 0 0.5em;
+}
+
+.zone-standart{
+	background: gray;
+	cursor: pointer;
+}
+
+.zone-vip {
+    background: cornflowerblue;
+    cursor: pointer;
+}
+.status-blocked {
+    background: orangered;
+}
+.status-reserved {
+    background: yellow;
+}
+.status-selected {
+    background: orange;
+}
+
+.legend {
+	padding: 0 1.5em;
+}
+.legend li {
+	display: inline-block;
+	width: 11em;
+}
+.legend .seat {
+	display: inline-block;
+}
+
+

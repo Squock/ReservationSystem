@@ -37,14 +37,18 @@
                             <th>Зал</th>
                             <th>Цена билета</th>
                         </tr>
-
-                    </thead>
+                        </thead>
                     <tbody>
-                      <h1>SessionList.id - {{SessionList}}</h1>
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.time }}</td>
+                            <td>{{ item.data }}</td>
+                            <td>{{ item.hall }}</td>
+                            <td>{{ item.session_price }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
-
                 </table>
-                </form>
             </div>
         </div>
     </div>

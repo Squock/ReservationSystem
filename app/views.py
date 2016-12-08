@@ -5,7 +5,6 @@ from datetime import datetime
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
-
 @app.route("/")
 @app.route("/index")
 def hello():
@@ -80,7 +79,7 @@ def login():
         else:
             flash("Неправльно введен электронная почта")
             return redirect(url_for('login'))
-    return render_template('authorization.html')
+    return render_template('login.html')
 
 
 @app.route('/logout')
@@ -88,6 +87,11 @@ def logout():
     # удалить из сессии имя пользователя, если оно там есть
     session.pop('username', None)
     return redirect('/')
+
+
+@app.route('/room', methods=['POST','GET'])
+def view_room():
+    return render_template('room.html')
 
 
 @app.route('/film', methods=['POST','GET'])
@@ -105,6 +109,7 @@ def get_film():
         return redirect('/')
     return render_template('listfilm.html')
 
+
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
@@ -119,6 +124,10 @@ def session_cinema():
         return redirect("/")
     return render_template('session.html')
 
+
+@app.route('/session/list', methods=['POST', 'GET'])
+def session_list():
+    return render_template('session_list.html', items=Session_cinema.query.all())
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
