@@ -2,11 +2,10 @@ from flask import render_template, request, session, redirect, flash, url_for
 from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy import Table
+import random
+
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
-
 
 @app.route("/")
 @app.route("/index")
@@ -92,6 +91,14 @@ def logout():
     return redirect('/')
 
 
+@app.route('/room', methods=['POST', 'GET'])
+def view_room():
+    if request.method == "POST":
+        print(request.form['event-seats-selected'])
+        return redirect(url_for('view_room'))
+    return render_template('room.html')
+
+
 @app.route('/film', methods=['POST','GET'])
 def get_film():
     if request.method == 'POST':
@@ -106,6 +113,7 @@ def get_film():
         db.session.commit()
         return redirect('/')
     return render_template('listfilm.html')
+
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
@@ -123,10 +131,9 @@ def session_cinema():
         return redirect("/")
     return render_template('session.html')
 
-@app.route('/session_list', methods=['POST', 'GET'])
+@app.route('/session/list', methods=['POST', 'GET'])
 def session_list():
-    #film = Session_cinema.query.get(id)
-    return render_template('session_list.html', items=Session_cinema.query.all(), items1=Film.query.all())
+    return render_template('session_list.html', items=Session_cinema.query.all())
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():

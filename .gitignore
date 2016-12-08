@@ -5,3 +5,4 @@ migrations/*
 *.pyc
 __pycache__/*
 __init__.py
+__pycache__
