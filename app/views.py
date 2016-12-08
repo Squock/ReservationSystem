@@ -147,10 +147,9 @@ def reservation_check():
     if request.method == 'POST':
         res_id = request.form['res_id']
         reserve = Reservation.query.filter_by(resID=res_id).first()
-        if res_id is None:
-                flash("Неправльно введен электронная почта или пароль")
-                return redirect(url_for('login'))
+        if reserve is None:
+            flash("Error. Брони с таким номером не существует.")
+            return redirect(url_for('reservation_check'))
         else:
-            res = reserve.resID
-            return render_template("reservation_check.html", res=res)
+            return render_template('reservation_check.html', items=reserve)
     return render_template('reservation_check.html')
