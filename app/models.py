@@ -53,31 +53,39 @@ class Film(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    film_id = db.Column(db.Integer(), db.ForeignKey('film.id'))
+    #listfilm_id = db.Column(db.Integer, db.ForeignKey('list_film.id'))
+    #reservation_id = db.Column(db.Integer, db.ForeignKey('reservation.id'))
+    #tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
+    #db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
+    #)
+    #film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
+    film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     time = db.Column(db.DateTime)
-    data = db.Column(db.DateTime)
+    date = db.Column(db.DateTime)
     hall = db.Column(db.String(100))
     session_price = db.Column(db.Integer())
+    vip_price = db.Column(db.Integer())
 
-    def __init__(self, time, data, hall, session_price):
+    def __init__(self, time, date, hall, session_price, vip_price):
+        #self.name = name
+        #self.film_id = film_id
         self.time = time
-        self.data = data
+        self.date = date
         self.hall = hall
         self.session_price = session_price
+        self.vip_price = vip_price
 
 
-
-"""tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
-    db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
-    )"""
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    resID = db.Column(db.Integer(), unique=True)
+    resID = db.Column(db.Integer(),unique=True)
     priceTotal = db.Column(db.Integer())
+    random = db.Column(db.String(20))
 
-    def __init__(self, resID, priceTotal):
+    def __init__(self, resID, priceTotal, random):
         self.resID = resID
         self.priceTotal = priceTotal
+        self.random = random
 
 
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Bootstrap javascript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="../static/css/style.css" type="text/css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Проверка брони</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <form id="reservation_check" action="/reservation_check" method="post">
+                    <h1>Проверка брони</h1>
+                    <div class="form-group">
+                        <h3>Номер брони</h3>
+                        <input type="text" class="form-control" name="res_id" placeholder="Номер брони">
+                    </div>
+                    <button type="submit" class="btn btn-success">Check</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Номер брони</th>
+                            <th>Итоговая стоимость</th>
+                        </tr>
+                        <tr>
+                            {% if items %}
+                            <td>{{ items.id}}</td>
+                            <td>{{ items.resID }}</td>
+                            <td>{{ items.priceTotal }}</td>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                     {% for message in messages %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+</html>

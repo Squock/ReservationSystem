@@ -13,10 +13,26 @@
     <link href="../static/css/style.css" type="text/css" rel="stylesheet">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <title>Афиша</title>
+    <title>Афиша </title>
+
 </head>
 
 <body>
+
+    <div class="navbar-header navbar-right">
+        <ul class="nav navbar-nav">
+            <li class="dropdown" id="dropdown_auth">
+                <a href="#" id="drop2" class="dropdown-toggle" data-toggle="dropdown">
+            Войти
+            <span class="caret"></span>
+        </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/login">Вход</a></li>
+                    <li><a href="/register">Регистрация</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -32,23 +48,37 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Название фильм</th>
+                            <th> </th>
                             <th>Время</th>
                             <th>Дата</th>
                             <th>Зал</th>
-                            <th>Цена билета</th>
+                            <th>Цена стандартного билета</th>
+                            <th>Цена vip билета</th>
+
                         </tr>
-                        </thead>
-                    <tbody>
+
                         {% for item in items %}
                         <tr>
+                            <td>{{item1.name}}</td>
+                            <td>{{ item.name }}</td>
                             <td>{{ item.time }}</td>
-                            <td>{{ item.data }}</td>
+                            <td>{{ item.date }}</td>
                             <td>{{ item.hall }}</td>
-                            <td>{{ item.session_price }}</td>
+                            <td>{{ item.session_price}}</td>
+                            <td>{{ item.vip_price}}</td>
                         </tr>
                         {% endfor %}
-                    </tbody>
+
+
+
+
+
+                    </thead>
                 </table>
+
+
+                </form>
             </div>
         </div>
     </div>
