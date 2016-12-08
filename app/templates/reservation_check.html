@@ -13,42 +13,25 @@
     <link href="../static/css/style.css" type="text/css" rel="stylesheet">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <title>Афиша </title>
+    <title>Проверка брони</title>
 </head>
 
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="page-header">
-                    <h1> <em>Афиша </em> </h1>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Время</th>
-                            <th>Дата</th>
-                            <th>Зал</th>
-                            <th>Цена билета</th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                      <h1>SessionList.id - {{SessionList}}</h1>
-                    </tbody>
-
-                </table>
+                <form id="reservation_check" action="/reservation_check" method="post">
+                    <h3>Проверка брони</h3>
+                    <div class="form-group">
+                        <label>Номер брони</label>
+                        <input type="text" class="form-control" id="reservation" required name="reservationes" placeholder="Номер брони">
+                    </div>
+                    <button type="submit" class="btn btn-success">Check</button>
                 </form>
+                {% reserv %}
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

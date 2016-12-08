@@ -14,15 +14,15 @@ class User(db.Model):
     birthDate = db.Column(db.DateTime)
     password = db.Column(db.String(100))
 
-    def __init__(self, username, password, email, cashier, firstName, secondName, phoneNumber, birthDate):
+    def __init__(self, username, email, cashier, firstName, secondName, phoneNumber, birthDate, password,):
         self.username = username
-        self.set_password(password)
         self.email = email
         self.cashier = cashier
         self.firstName = firstName
         self.secondName = secondName
         self.phoneNumber = phoneNumber
         self.birthDate = birthDate
+        self.set_password(password)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -32,7 +32,7 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
-		
+
 class Film(db.Model):
     id = db.Column(db.Integer(), primary_key = True)
     name = db.Column(db.String(80))
@@ -53,6 +53,11 @@ class Film(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    #listfilm_id = db.Column(db.Integer, db.ForeignKey('list_film.id'))
+    #reservation_id = db.Column(db.Integer, db.ForeignKey('reservation.id'))
+    tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
+    db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
+    )
     film_id = db.Column(db.Integer)
     time = db.Column(db.DateTime)
     data = db.Column(db.DateTime)
@@ -66,12 +71,10 @@ class Session_cinema(db.Model):
         self.session_price = session_price
 
 
-
-
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    resID = db.Column(db.String(100), unique=True)
-    priceTotal = db.Column(db.Integer)
+    resID = db.Column(db.Integer(), unique=True)
+    priceTotal = db.Column(db.Integer())
 
     def __init__(self, resID, priceTotal):
         self.resID = resID
