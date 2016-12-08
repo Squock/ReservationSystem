@@ -1,736 +1,770 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- Bootstrap javascript -->
-    <script src="../static/js/bootstrap.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Theme CSS -->
-    <link href="../static/css/style.css" type="text/css" rel="stylesheet">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}Бронирование мест{% endblock %}
+{% block body %}
+<section id="room">
 <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
-            <section>
-
-            <h3>Какие места хотите забронировать?</h3>
-            <p>
-                <div class="event-seats-sum">
-                <div class="event-seats-cost-text">Стоимость: </div>
-                <div class="event-seats-cost-number" id="event-seats-cost"><strong>0 руб. </strong></div>
-                </div>
-                </p>
-
-            <table>
-                <tbody>
-                        <tr>
-                        <td class="row-title">1</td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="1 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="1 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 3" data-x="3" class="seat zone-standart" title="Свободно 180 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="180" data-title="1 ряд, место 4" data-x="4" class="seat zone-standart" title="Свободно 180 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="180" data-title="1 ряд, место 5" data-x="5" class="seat zone-standart" title="Свободно 180 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="180" data-title="1 ряд, место 6" data-x="6" class="seat zone-standart" title="Свободно 180 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="180" data-title="1 ряд, место 7" data-x="7" class="seat zone-standart" title="Свободно 180 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="180" data-title="1 ряд, место 8" data-x="8" class="seat zone-standart" title="Свободно 180 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="180" data-title="1 ряд, место 9" data-x="9" class="seat zone-standart" title="Свободно 180 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 10" data-x="10" class="seat zone-standart" title="Свободно 180 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 11" data-x="11" class="seat zone-standart" title="Свободно 180 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 12" data-x="12" class="seat zone-standart" title="Свободно 180 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                    <td class="row-title">1</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">2</td>
-                                       <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="2 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="2 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="180" data-title="2 ряд, место 3" data-x="3" class="seat zone-standart" title="Свободно 180 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="180" data-title="2 ряд, место 4" data-x="4" class="seat zone-standart" title="Свободно 180 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="180" data-title="2 ряд, место 5" data-x="5" class="seat zone-standart" title="Свободно 180 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="180" data-title="2 ряд, место 6" data-x="6" class="seat zone-standart" title="Свободно 180 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="180" data-title="2 ряд, место 7" data-x="7" class="seat zone-standart" title="Свободно 180 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="180" data-title="2 ряд, место 8" data-x="8" class="seat zone-standart" title="Свободно 180 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="180" data-title="2 ряд, место 9" data-x="9" class="seat zone-standart" title="Свободно 180 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="180" data-title="2 ряд, место 10" data-x="10" class="seat zone-standart" title="Свободно 180 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="180" data-title="2 ряд, место 11" data-x="11" class="seat zone-standart" title="Свободно 180 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="180" data-title="2 ряд, место 12" data-x="12" class="seat zone-standart" title="Свободно 180 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="180" data-title="2 ряд, место 13" data-x="13" class="seat zone-standart" title="Свободно 180 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="180" data-title="2 ряд, место 14" data-x="14" class="seat zone-standart" title="Свободно 180 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                    <td class="row-title">2</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">3</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="3 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="3 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="180" data-title="3 ряд, место 3" data-x="3" class="seat zone-standart" title="Свободно 180 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="3 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="3 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="3 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="3 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="3 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="3 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="3 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="3 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="3 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="3 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="180" data-title="3 ряд, место 14" data-x="14" class="seat zone-standart" title="Свободно 180 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="3 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="3 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">3</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">4</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="4 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="4 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="200" data-title="4 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="4 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="4 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="4 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="4 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="4 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="4 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="4 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="4 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="4 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="4 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="200" data-title="4 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="4 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="4 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">4</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">5</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="5 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="5 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="200" data-title="5 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="5 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="5 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="5 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="5 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="5 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="5 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="5 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="5 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="5 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="5 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="200" data-title="5 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="5 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="5 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">5</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">6</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="6 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="6 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="200" data-title="6 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="6 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="6 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="6 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="6 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="6 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="6 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="6 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="6 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="6 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="6 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="200" data-title="6 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="4 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="6 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">6</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">7</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="7 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="7 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="200" data-title="7 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="7 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="7 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="7 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="7 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="7 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="7 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="7 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="7 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="7 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="7 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="200" data-title="7 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="7 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="7 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">7</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">8</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="8 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="8 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="200" data-title="8 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="8 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="8 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="8 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="8 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="8 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="8 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="8 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="8 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="8 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="8 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="200" data-title="8 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="8 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="8 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">8</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title">9</td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181312" data-price="180" data-title="9 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
-                                                   1                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181321" data-price="180" data-title="9 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
-                                                   2                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181330" data-price="200" data-title="9 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
-                                                   3                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181339" data-price="200" data-title="9 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
-                                                   4                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181348" data-price="200" data-title="9 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
-                                                   5                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181357" data-price="200" data-title="9 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
-                                                   6                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181366" data-price="200" data-title="9 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
-                                                   7                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181375" data-price="200" data-title="9 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
-                                                   8                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181384" data-price="200" data-title="9 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
-                                                   9                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181393" data-price="200" data-title="9 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
-                                            10                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181402" data-price="200" data-title="9 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
-                                            11                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181411" data-price="200" data-title="9 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
-                                            12                                      </span>
-                                                                        </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181420" data-price="200" data-title="9 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
-                                                   13                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181429" data-price="200" data-title="9 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
-                                                   14                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181438" data-price="180" data-title="9 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
-                                                   15                                </span>
-                                                                                                    </td>
-                                        <td class="">
-                                                                                                                    <span seance="6752825" seats="4181447" data-price="180" data-title="9 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
-                                                   16                                </span>
-                                                                                                    </td>
-                                    <td class="row-title">9</td>
-                    </tr>
-                        <tr>
-                        <td class="row-title"></td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                        <td class="">
-                                                        <i></i>
-                                                </td>
-                                    <td class="row-title"></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <ul class="legend">
+          <div class="col-md-1"></div>
+          <div class="col-md-8">
+              <div id="hall">
+                <div class="screen">Экран</div>
+                    <table>
+                        <tbody>
+                                <tr>
+                                <td class="row-title"></td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                            <td class="row-title"></td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">1</td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="1 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="1 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 3" data-x="3" class="seat zone-standart" title="Свободно 180 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="180" data-title="1 ряд, место 4" data-x="4" class="seat zone-standart" title="Свободно 180 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="180" data-title="1 ряд, место 5" data-x="5" class="seat zone-standart" title="Свободно 180 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="180" data-title="1 ряд, место 6" data-x="6" class="seat zone-standart" title="Свободно 180 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="180" data-title="1 ряд, место 7" data-x="7" class="seat zone-standart" title="Свободно 180 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="180" data-title="1 ряд, место 8" data-x="8" class="seat zone-standart" title="Свободно 180 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="180" data-title="1 ряд, место 9" data-x="9" class="seat zone-standart" title="Свободно 180 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 10" data-x="10" class="seat zone-standart" title="Свободно 180 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 11" data-x="11" class="seat zone-standart" title="Свободно 180 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="180" data-title="1 ряд, место 12" data-x="12" class="seat zone-standart" title="Свободно 180 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                            <td class="row-title">1</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">2</td>
+                                               <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="2 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="2 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="180" data-title="2 ряд, место 3" data-x="3" class="seat zone-standart" title="Свободно 180 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="180" data-title="2 ряд, место 4" data-x="4" class="seat zone-standart" title="Свободно 180 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="180" data-title="2 ряд, место 5" data-x="5" class="seat zone-standart" title="Свободно 180 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="180" data-title="2 ряд, место 6" data-x="6" class="seat zone-standart" title="Свободно 180 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="180" data-title="2 ряд, место 7" data-x="7" class="seat zone-standart" title="Свободно 180 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="180" data-title="2 ряд, место 8" data-x="8" class="seat zone-standart" title="Свободно 180 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="180" data-title="2 ряд, место 9" data-x="9" class="seat zone-standart" title="Свободно 180 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="180" data-title="2 ряд, место 10" data-x="10" class="seat zone-standart" title="Свободно 180 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="180" data-title="2 ряд, место 11" data-x="11" class="seat zone-standart" title="Свободно 180 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="180" data-title="2 ряд, место 12" data-x="12" class="seat zone-standart" title="Свободно 180 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="180" data-title="2 ряд, место 13" data-x="13" class="seat zone-standart" title="Свободно 180 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="180" data-title="2 ряд, место 14" data-x="14" class="seat zone-standart" title="Свободно 180 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                            <td class="row-title">2</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">3</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="3 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="3 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="180" data-title="3 ряд, место 3" data-x="3" class="seat zone-standart" title="Свободно 180 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="3 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="3 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="3 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="3 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="3 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="3 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="3 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="3 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="3 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="3 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="180" data-title="3 ряд, место 14" data-x="14" class="seat zone-standart" title="Свободно 180 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="3 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="3 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">3</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">4</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="4 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="4 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="200" data-title="4 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="4 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="4 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="4 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="4 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="4 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="4 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="4 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="4 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="4 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="4 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="200" data-title="4 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="4 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="4 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">4</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">5</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="5 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="5 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="200" data-title="5 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="5 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="5 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="5 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="5 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="5 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="5 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="5 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="5 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="5 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="5 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="200" data-title="5 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="5 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="5 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">5</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">6</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="6 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="6 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="200" data-title="6 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="6 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="6 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="6 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="6 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="6 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="6 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="6 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="6 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="6 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="6 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="200" data-title="6 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="4 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="6 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">6</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">7</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="7 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="7 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="200" data-title="7 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="7 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="7 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="7 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="7 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="7 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="7 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="7 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="7 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="7 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="7 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="200" data-title="7 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="7 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="7 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">7</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">8</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="8 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="8 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="200" data-title="8 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="8 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="8 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="8 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="8 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="8 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="8 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="8 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="8 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="8 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="8 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="200" data-title="8 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="8 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="8 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">8</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title">9</td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181312" data-price="180" data-title="9 ряд, место 1" data-x="1" class="seat zone-standart" title="Свободно 180 р." >
+                                                           1                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181321" data-price="180" data-title="9 ряд, место 2" data-x="2" class="seat zone-standart" title="Свободно 180 р." >
+                                                           2                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181330" data-price="200" data-title="9 ряд, место 3" data-x="3" class="seat zone-vip" title="Свободно 200 р." >
+                                                           3                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181339" data-price="200" data-title="9 ряд, место 4" data-x="4" class="seat zone-vip" title="Свободно 200 р." >
+                                                           4                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181348" data-price="200" data-title="9 ряд, место 5" data-x="5" class="seat zone-vip" title="Свободно 200 р.">
+                                                           5                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181357" data-price="200" data-title="9 ряд, место 6" data-x="6" class="seat zone-vip" title="Свободно 200 р.">
+                                                           6                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181366" data-price="200" data-title="9 ряд, место 7" data-x="7" class="seat zone-vip" title="Свободно 200 р.">
+                                                           7                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181375" data-price="200" data-title="9 ряд, место 8" data-x="8" class="seat zone-vip" title="Свободно 200 р.">
+                                                           8                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181384" data-price="200" data-title="9 ряд, место 9" data-x="9" class="seat zone-vip" title="Свободно 200 р." >
+                                                           9                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181393" data-price="200" data-title="9 ряд, место 10" data-x="10" class="seat zone-vip" title="Свободно 200 р." >
+                                                    10                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181402" data-price="200" data-title="9 ряд, место 11" data-x="11" class="seat zone-vip" title="Свободно 200 р." >
+                                                    11                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181411" data-price="200" data-title="9 ряд, место 12" data-x="12" class="seat zone-vip" title="Свободно 200 р." >
+                                                    12                                      </span>
+                                                                                </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181420" data-price="200" data-title="9 ряд, место 13" data-x="13" class="seat zone-vip" title="Свободно 200 р." >
+                                                           13                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181429" data-price="200" data-title="9 ряд, место 14" data-x="14" class="seat zone-vip" title="Свободно 200 р." >
+                                                           14                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181438" data-price="180" data-title="9 ряд, место 15" data-x="15" class="seat zone-standart" title="Свободно 180 р." >
+                                                           15                                </span>
+                                                                                                            </td>
+                                                <td class="">
+                                                                                                                            <span seance="6752825" seats="4181447" data-price="180" data-title="9 ряд, место 16" data-x="16" class="seat zone-standart" title="Свободно 180 р." >
+                                                           16                                </span>
+                                                                                                            </td>
+                                            <td class="row-title">9</td>
+                            </tr>
+                                <tr>
+                                <td class="row-title"></td>
+                                               <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                                <td class="">
+                                                                <i></i>
+                                                        </td>
+                                            <td class="row-title"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <ul class="legend">
                 <li><b class="seat zone-standart-leg">1</b> Обычные места – 180 руб.</li>
                 <li><b class="seat zone-vip-leg">2</b> VIP места – 200 руб</li>
                 <li><b class="seat status-selected-leg">3</b> – выбрано</li>
                 <li><b class="seat status-reserved">4</b> – бронь</li>
                 <li><b class="seat status-blocked">5</b> – занято</li>
             </ul>
-            </section>
+              </div>
           </div>
-     <div class="col-md-3"></div>
+          <div class="col-md-3">
+             <div class="event-info">
+                <dl>
+                    <dt>Место:</dt>
+                    <dd>Лена</dd>
+                </dl>
+                <dl>
+                    <dt>Событие:</dt>
+                    <dd><b>Моана</b></dd>
+                </dl>
+                <dl>
+                    <dt>Сеанс:</dt>
+                    <dd>11 декабря 09:30, воскресенье</dd>
+                </dl>
+                <dl>
+                    <dt>Зал:</dt>
+                    <dd>1</dd>
+                </dl>
+            </div>
+             <form method="post">
+                            <div class="event-seats-selected">
+                                <dl>
+                                    <dt>Места:</dt>
+                                    <dd id="event-seats-selected"></dd>
+                                </dl>
+                            </div>
+                            <div class="event-seats-sum">
+                            <div class="event-seats-cost-text"> <strong>Стоимость: </strong> </div>
+                            <strong><div class="event-seats-cost-number" id="event-seats-cost">0 руб. </div></strong>
+                            </div>
+                            <div class="event-action">
+                                <button type="submit" id="next-hall-btn" class="btn btn-success disabled" disabled="disabled">Продолжить</button>
+                            </div>
+             </form>
+          </div>
 </div>
 
 <script type="text/javascript">
@@ -783,40 +817,16 @@
         $('#event-buy-selected-string').html('');
         $('.seat.status-selected').each(function (i, obj) {
             selectedSeats.push($(obj).attr('seats'));
-            console.log(selectedSeats)
             $('#event-seats-selected').append(getItem($(obj))).append(getInputItem($(obj)));
             $("#event-buy-selected-string").append($(obj).attr("data-title") + '\r\n');
             sum = sum + parseInt($(obj).attr('data-price'));
-            console.log(i)
-            console.log(obj)
         });
         //$("#event-seats-sum").html(sum + ' руб.');
         $("#event-seats-cost").html(sum + ' руб.');
-
-});
-
-    $(".row-seats_seat.can-book").on('click touchstart', function (e) {
-        e.preventDefault();
-        selectedSeats = [];
-        sum = 0;
-        comission = 0;
-        fullcost = 0;
-        toggleSeatSelect($(this));
-        $('#event-seats-selected').html('');
-        $('#event-buy-selected-string').html('');
-        $('.row-seats_seat.can-book.selected').each(function (ind, obj) {
-            selectedSeats.push($(obj).attr('data-id'));
-            $('#event-seats-selected').append(getItem($(obj))).append(getInputItem($(obj)));
-            $("#event-buy-selected-string").append($(obj).attr("data-title") + '\r\n');
-            sum += parseInt($(obj).attr('price'));
-        });
-        $("#event-seats-sum").html(sum + ' руб.');
-
-        $("input[name=sum]").val(sum);
         if (selectedSeats.length > 0) {
             $("#next-hall-btn").attr("disabled", false).removeClass('disabled');
             $("#next-hall-btn").bind("click", function () {
-                renderLoader($(".yui-modal-body"));
+                renderLoader($(".btn-success"));
                 renderStep(3, $(this));
                 return false;
             });
@@ -824,9 +834,7 @@
             $("#next-hall-btn").attr("disabled", true).addClass('disabled');
             $("#next-hall-btn").unbind("click touchstart");
         }
-    });
-
+});
 </script>
 </section>
-</body>
-</html>
+{% endblock %}
