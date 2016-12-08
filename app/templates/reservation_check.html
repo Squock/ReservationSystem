@@ -21,15 +21,16 @@
         <div class="row">
             <div class="col-xs-12">
                 <form id="reservation_check" action="/reservation_check" method="post">
-                    <h3>Проверка брони</h3>
+                    <h1>Проверка брони</h1>
                     <div class="form-group">
-                        <label>Номер брони</label>
+                        <h3>Номер брони</h3>
                         <input type="text" class="form-control" name="res_id" placeholder="Номер брони">
                     </div>
                     <button type="submit" class="btn btn-success">Check</button>
                 </form>
             </div>
         </div>
+        <br>
         <div class="row">
             <div class="col-xs-12">
                 <table class="table table-hover">
@@ -50,12 +51,12 @@
                 </table>
             </div>
             {% with messages = get_flashed_messages() %}
-                     {% if messages %}
-                           {% for message in messages %}
-                           <div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>{{ message }} </div>
-                           {% endfor %}
-                     {% endif %}
-                {% endwith %}
+                {% if messages %}
+                     {% for message in messages %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 </body>
