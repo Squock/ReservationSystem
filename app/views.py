@@ -2,6 +2,7 @@ from flask import render_template, request, session, redirect, flash, url_for
 from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
+from sqlalchemy import update
 import random
 
 #Сектерный ключ никому не выдавать
@@ -16,7 +17,7 @@ def hello():
         if 'firstName' in session:
             navbar_firstName = session['firstName']
             navbar_secondName = session['secondName']
-            return render_template("index.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
+            return render_template("layout.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
         return render_template("index.html", auth=auth)
     else:
         auth = False
@@ -83,6 +84,38 @@ def login():
             return redirect(url_for('login'))
     return render_template('authorization.html')
 
+@app.route('/settings', methods=["POST", "GET"])
+def settings():
+    if 'username' in session:
+        if request.method == "POST":
+            password = request.form['password']
+            new_password = request.form['new_password']
+            new_password2 = request.form['new_password2']
+            username = session['username']
+            c = User.query.filter_by(username=username).first()
+            if c:
+                if c.check_password(password):
+                    if new_password == new_password2:
+                        """user = update(User).values(set_password=new_password)
+                        db.session.execute(user)
+                        db.session.commit()"""
+                        flash('Пароли изменены')
+                        return redirect(url_for('settings'))
+                    else:
+                        flash('Новые пароли не совпадают')
+                        return redirect(url_for('settings'))
+                else:
+                    flash('Такого пароля нету')
+                    return redirect(url_for('settings'))
+            else:
+                flash('Такого пароля нету')
+                return redirect(url_for('settings'))
+        else:
+            return render_template('setting.html')
+    else:
+        return redirect(url_for('hello'))
+
+
 
 @app.route('/logout')
 def logout():
@@ -118,7 +151,6 @@ def get_film():
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
-        #film_id = request.form['film_id']
         time = request.form['time']
         date = request.form['date']
         hall = request.form['hall']
