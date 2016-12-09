@@ -4,9 +4,11 @@ from app import app
 from datetime import datetime
 from sqlalchemy import update
 import random
+from flask_gravatar import Gravatar
 
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
+
 
 @app.route("/")
 @app.route("/index")
@@ -24,6 +26,7 @@ def hello():
         return render_template("index.html", auth=auth)
 
 ##########################################
+
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -59,6 +62,7 @@ def register():
 
 ###########################################
 
+
 @app.route("/login", methods=['POST','GET'])
 def login():
     if request.method == 'POST':
@@ -83,6 +87,7 @@ def login():
             flash("Неправльно введен электронная почта")
             return redirect(url_for('login'))
     return render_template('authorization.html')
+
 
 @app.route('/settings', methods=["POST", "GET"])
 def settings():
@@ -116,6 +121,20 @@ def settings():
         return redirect(url_for('hello'))
 
 
+@app.route('/profile')
+def profile():
+    username = session['username']
+    user = User.query.filter_by(username=username).first()
+    gravatar = Gravatar(app,
+                        size=128,
+                        rating='g',
+                        default='mm',
+                        force_default=False,
+                        force_lower=False,
+                        use_ssl=False,
+                        base_url=None)
+    return render_template('profile.html',user=user, gravatar=gravatar)
+
 
 @app.route('/logout')
 def logout():
@@ -144,7 +163,7 @@ def get_film():
         movie = Film(name, description, genre, cast, length, ageRestriction)
         db.session.add(movie)
         db.session.commit()
-        return redirect('/')
+        return redirect(url_for("session_list"))
     return render_template('listfilm.html')
 
 
@@ -160,12 +179,14 @@ def session_cinema():
         sessions = Session_cinema(time, date, hall, session_price, vip_price)
         db.session.add(sessions)
         db.session.commit()
-        return redirect("/")
+        return redirect(url_for("session_list"))
     return render_template('session.html')
+
 
 @app.route('/session/list', methods=['POST', 'GET'])
 def session_list():
     return render_template('session_list.html', items=Session_cinema.query.all())
+
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
@@ -185,6 +206,7 @@ def reservation():
     db.session.add(resIDsave)
     db.session.commit()
     return render_template('reservation.html', session=session, randomNumber=randomNumber)
+
 
 @app.route('/reservation_check', methods=['POST','GET'])
 def reservation_check():
