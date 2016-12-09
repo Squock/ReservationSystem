@@ -4,5 +4,5 @@ myenv/*
 migrations/*
 *.pyc
 __pycache__/*
-__init__.py
-__pycache__
+/app/__pycache__/*
+/app/__init__.py
