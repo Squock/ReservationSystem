@@ -1,34 +1,68 @@
-{% extends "layout.html" %}
-{% block title %}Добавление сеанса{% endblock %}
-{% block body %}
-    <div class="container">
+{% extends "layout.html" %} {% block title %}Добавление сеанса{% endblock %} {% block body %}
+<div class="container">
 
-                <form id="session" action="/session" method="post">
-                    <h3>Список сеансов</h3>
-                    <div class="form-group">
-                        <label>Время</label>
-                        <input type="text" class="form-control" id="time" required name="time" placeholder="Время">
-                    </div>
-                    <div class="form-group">
-                        <label>Дата</label>
-                        <input type="date" class="form-control" id="date" name="date" placeholder="Дата">
-                    </div>
-                    <div class="form-group">
-                        <label>Зал</label>
-                        <input type="text" class="form-control" id="hall" name="hall" placeholder="Зал">
-                    </div>
-                    <div class="form-group">
-                        <label>Цена стандартных билетов</label>
-                        <input type="text" class="form-control" required id="session_price" name="session_price" placeholder="Стандартные цены">
-                    </div>
-                    <div class="form-group">
-                        <label>Цена vip билетов</label>
-                        <input type="text" class="form-control" required id="vip_price" name="vip_price" placeholder="Vip цена">
-                    </div>
-                    <button type="submit" class="btn btn-success">Сохранить</button>
-
-                </form>
-            </div>
+    <form id="session" action="/session" method="post">
+        <h3>Список сеансов</h3>
+        <div class="form-group">
+            <label>Время</label>
+            <input type="text" class="form-control" id="time" required name="time" placeholder="Время">
         </div>
+        <div class="form-group">
+            <label>Дата</label>
+            <input type="date" class="form-control" id="date" name="date" placeholder="Дата">
+        </div>
+        <div class="form-group">
+            <label>Зал</label>
+            <input type="text" class="form-control" id="hall" name="hall" placeholder="Зал">
+        </div>
+        <div class="form-group">
+            <label>Цена стандартных билетов</label>
+            <input type="text" class="form-control" required id="session_price" name="session_price" placeholder="Стандартные цены">
+        </div>
+        <div class="form-group">
+            <label>Цена vip билетов</label>
+            <input type="text" class="form-control" required id="vip_price" name="vip_price" placeholder="Vip цена">
+        </div>
+
+        <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for item in items %}
+            <a href="#">
+                <li>
+                    <tr>
+                        <td name="film_name"> {{item.name}} </td>
+                    </tr>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+      </div>
+       <input type="text" class="form-control" id=vl aria-label="...">
     </div>
+  </div>
+</div>
+
+
+        <button type="submit" class="btn btn-success">Сохранить</button>
+
+    </form>
+</div>
+</div>
+</div>
 {% endblock %}
+<script type="text/javascript">
+
+$(".dropdown-menu").on('click', 'li a', function(){
+  var selText = $(this).children("h4").html();
+
+
+ $(this).parent('li').siblings().removeClass('active');
+    $('#vl').val($(this));
+  $(this).parents('.btn-group').find('.selection').html(selText);
+  $(this).parents('li').addClass("active");
+});
+</script>

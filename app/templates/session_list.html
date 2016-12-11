@@ -16,7 +16,6 @@
                     <thead>
                         <tr>
                             <th>Название фильм</th>
-                            <th> </th>
                             <th>Время</th>
                             <th>Дата</th>
                             <th>Зал</th>
@@ -27,8 +26,7 @@
 
                         {% for item in items %}
                         <tr>
-                            <td>{{item1.name}}</td>
-                            <td>{{ item.name }}</td>
+                            <td>{{item.film.name}}</td>
                             <td>{{ item.time }}</td>
                             <td>{{ item.date }}</td>
                             <td>{{ item.hall }}</td>

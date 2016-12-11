@@ -118,22 +118,28 @@ def get_film():
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
-        #film_id = request.form['film_id']
-        time = request.form['time']
-        date = request.form['date']
-        hall = request.form['hall']
-        session_price = request.form['session_price']
-        vip_price = request.form['vip_price']
-        time = datetime.strptime(time, "%H:%M")
-        sessions = Session_cinema(time, date, hall, session_price, vip_price)
-        db.session.add(sessions)
-        db.session.commit()
-        return redirect("/")
-    return render_template('session.html')
+        film_name = request.form['film_name']#This is test git
+        film_name1 = Film.query.filter_by(name=film_name).first()
+        if(film_name1):
+            if film_name1 is None:
+                flash("Данного фильма нету")
+                return redirect(url_for('session_cinema'))
+            else:
+                time = request.form['time']
+                date = request.form['date']
+                hall = request.form['hall']
+                session_price = request.form['session_price']
+                vip_price = request.form['vip_price']
+                time1 = datetime.strptime(time, "%H:%M")
+                sessions = Session_cinema(film_name1.id,time1, date, hall, session_price, vip_price)
+                db.session.add(sessions)
+                db.session.commit()
+                return redirect("/")
+    return render_template('session.html', items=Film.query.all())
 
 @app.route('/session/list', methods=['POST', 'GET'])
 def session_list():
-    return render_template('session_list.html', items=Session_cinema.query.all())
+    return render_template('session_list.html', items=Session_cinema.query.all(), items1=Film.query.all())
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():

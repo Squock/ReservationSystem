@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
-
+from sqlalchemy.orm import relationship
 app.config['SECRET_KEY'] = 'super-secret'
 
 class User(db.Model):
@@ -42,6 +42,7 @@ class Film(db.Model):
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
 
+
     def __init__(self, name, description,cast, genre, length, ageRestriction):
         self.name = name
         self.description = description
@@ -65,6 +66,7 @@ class Session_cinema(db.Model):
     hall = db.Column(db.String(100))
     session_price = db.Column(db.Integer())
     vip_price = db.Column(db.Integer())
+    film = relationship('Film')
 
     def __init__(self, time, date, hall, session_price, vip_price):
         #self.name = name
