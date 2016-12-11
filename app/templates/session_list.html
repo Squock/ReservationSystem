@@ -49,7 +49,6 @@
                     <thead>
                         <tr>
                             <th>Название фильм</th>
-                            <th> </th>
                             <th>Время</th>
                             <th>Дата</th>
                             <th>Зал</th>
@@ -58,20 +57,19 @@
 
                         </tr>
 
+                        <div>
                         {% for item in items %}
-                        {% for item1 in items1 %}
                         <tr>
-                            <td>{{item1.name}}</td>
-                            <td>{{ item.name }}</td>
+                            <td> {{ items1.name}}</td>
                             <td>{{ item.time }}</td>
                             <td>{{ item.date }}</td>
                             <td>{{ item.hall }}</td>
                             <td>{{ item.session_price}}</td>
                             <td>{{ item.vip_price}}</td>
+
                         </tr>
                         {% endfor %}
-                        {% endfor %}
-
+                      </div>
 
 
 

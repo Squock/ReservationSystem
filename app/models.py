@@ -42,6 +42,7 @@ class Film(db.Model):
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
 
+
     def __init__(self, name, description,cast, genre, length, ageRestriction):
         self.name = name
         self.description = description
@@ -65,9 +66,8 @@ class Session_cinema(db.Model):
     hall = db.Column(db.String(100))
     session_price = db.Column(db.Integer())
     vip_price = db.Column(db.Integer())
-
+    #sessions = db.relationship('Session_cinema', backref='film', lazy='dynamic')
     def __init__(self, time, date, hall, session_price, vip_price):
-        #self.name = name
         #self.film_id = film_id
         self.time = time
         self.date = date

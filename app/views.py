@@ -110,7 +110,7 @@ def get_film():
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
-        #film_id = request.form['film_id']
+        #film_id = request.method['sessions']
         time = request.form['time']
         date = request.form['date']
         hall = request.form['hall']
@@ -126,6 +126,7 @@ def session_cinema():
 @app.route('/session_list', methods=['POST', 'GET'])
 def session_list():
     #film = Session_cinema.query.get(id)
+    
     return render_template('session_list.html', items=Session_cinema.query.all(), items1=Film.query.all())
 
 @app.route('/reservation', methods=['POST', 'GET'])
@@ -141,16 +142,3 @@ def reservation():
     sessions = Session_cinema.query.filter_by(id = ses_id).first()
 
     return render_template('reservation.html')
-
-@app.route('/reservation_check', methods=['POST','GET'])
-def reservation_check():
-    if request.method == 'POST':
-        res_id = request.form['res_id']
-        reserve = Reservation.query.filter_by(resID=res_id).first()
-        if res_id is None:
-                flash("Неправльно введен электронная почта или пароль")
-                return redirect(url_for('login'))
-        else:
-            res = reserve.resID
-            return render_template("reservation_check.html", res=res)
-    return render_template('reservation_check.html')
