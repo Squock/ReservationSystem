@@ -1,3 +1,4 @@
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 from sqlalchemy.orm import relationship
@@ -59,7 +60,6 @@ class Session_cinema(db.Model):
     #tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
     #db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
     #)
-    #film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     time = db.Column(db.DateTime)
     date = db.Column(db.DateTime)
@@ -69,8 +69,6 @@ class Session_cinema(db.Model):
     film = relationship('Film')
 
     def __init__(self, time, date, hall, session_price, vip_price):
-        #self.name = name
-        #self.film_id = film_id
         self.time = time
         self.date = date
         self.hall = hall

@@ -2,10 +2,13 @@ from flask import render_template, request, session, redirect, flash, url_for
 from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
+from sqlalchemy import update
 import random
+from flask_gravatar import Gravatar
 
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
+
 
 @app.route("/")
 @app.route("/index")
@@ -16,13 +19,14 @@ def hello():
         if 'firstName' in session:
             navbar_firstName = session['firstName']
             navbar_secondName = session['secondName']
-            return render_template("index.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
+            return render_template("layout.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
         return render_template("index.html", auth=auth)
     else:
         auth = False
         return render_template("index.html", auth=auth)
 
 ##########################################
+
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
@@ -58,6 +62,7 @@ def register():
 
 ###########################################
 
+
 @app.route("/login", methods=['POST','GET'])
 def login():
     if request.method == 'POST':
@@ -82,6 +87,53 @@ def login():
             flash("Неправльно введен электронная почта")
             return redirect(url_for('login'))
     return render_template('authorization.html')
+
+
+@app.route('/settings', methods=["POST", "GET"])
+def settings():
+    if 'username' in session:
+        if request.method == "POST":
+            password = request.form['password']
+            new_password = request.form['new_password']
+            new_password2 = request.form['new_password2']
+            username = session['username']
+            c = User.query.filter_by(username=username).first()
+            if c:
+                if c.check_password(password):
+                    if new_password == new_password2:
+                        """user = update(User).values(set_password=new_password)
+                        db.session.execute(user)
+                        db.session.commit()"""
+                        flash('Пароли изменены')
+                        return redirect(url_for('settings'))
+                    else:
+                        flash('Новые пароли не совпадают')
+                        return redirect(url_for('settings'))
+                else:
+                    flash('Такого пароля нету')
+                    return redirect(url_for('settings'))
+            else:
+                flash('Такого пароля нету')
+                return redirect(url_for('settings'))
+        else:
+            return render_template('setting.html')
+    else:
+        return redirect(url_for('hello'))
+
+
+@app.route('/profile')
+def profile():
+    username = session['username']
+    user = User.query.filter_by(username=username).first()
+    gravatar = Gravatar(app,
+                        size=128,
+                        rating='g',
+                        default='mm',
+                        force_default=False,
+                        force_lower=False,
+                        use_ssl=False,
+                        base_url=None)
+    return render_template('profile.html',user=user, gravatar=gravatar)
 
 
 @app.route('/logout')
@@ -111,35 +163,30 @@ def get_film():
         movie = Film(name, description, genre, cast, length, ageRestriction)
         db.session.add(movie)
         db.session.commit()
-        return redirect('/')
+        return redirect(url_for("session_list"))
     return render_template('listfilm.html')
 
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
-        film_name = request.form['film_name']#This is test git
-        film_name1 = Film.query.filter_by(name=film_name).first()
-        if(film_name1):
-            if film_name1 is None:
-                flash("Данного фильма нету")
-                return redirect(url_for('session_cinema'))
-            else:
-                time = request.form['time']
-                date = request.form['date']
-                hall = request.form['hall']
-                session_price = request.form['session_price']
-                vip_price = request.form['vip_price']
-                time1 = datetime.strptime(time, "%H:%M")
-                sessions = Session_cinema(film_name1.id,time1, date, hall, session_price, vip_price)
-                db.session.add(sessions)
-                db.session.commit()
-                return redirect("/")
-    return render_template('session.html', items=Film.query.all())
+        time = request.form['time']
+        date = request.form['date']
+        hall = request.form['hall']
+        session_price = request.form['session_price']
+        vip_price = request.form['vip_price']
+        time = datetime.strptime(time, "%H:%M")
+        sessions = Session_cinema(time, date, hall, session_price, vip_price)
+        db.session.add(sessions)
+        db.session.commit()
+        return redirect(url_for("session_list"))
+    return render_template('session.html')
+
 
 @app.route('/session/list', methods=['POST', 'GET'])
 def session_list():
-    return render_template('session_list.html', items=Session_cinema.query.all(), items1=Film.query.all())
+    return render_template('session_list.html', items=Session_cinema.query.all())
+
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
@@ -159,6 +206,7 @@ def reservation():
     db.session.add(resIDsave)
     db.session.commit()
     return render_template('reservation.html', session=session, randomNumber=randomNumber)
+
 
 @app.route('/reservation_check', methods=['POST','GET'])
 def reservation_check():

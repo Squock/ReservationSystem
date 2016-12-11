@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Профиль{% endblock %}
+{% block body %}
+<table>
+    <tr valign="top">
+        <td><img src="{{user.email | gravatar(default='http://what-messenger.com/uploads/posts/2015-10/1443914169_6f7f6554.jpg') }}"></td>
+        <td><h1>Пользователь: {{ session['firstName'] }} {{ session['secondName'] }}</h1></td>
+    </tr>
+</table>
+{% endblock %}
