@@ -1,3 +1,4 @@
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 
@@ -42,7 +43,6 @@ class Film(db.Model):
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
 
-
     def __init__(self, name, description,cast, genre, length, ageRestriction):
         self.name = name
         self.description = description
@@ -59,16 +59,15 @@ class Session_cinema(db.Model):
     #tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
     #db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
     #)
-    #film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     time = db.Column(db.DateTime)
     date = db.Column(db.DateTime)
     hall = db.Column(db.String(100))
     session_price = db.Column(db.Integer())
     vip_price = db.Column(db.Integer())
-    #sessions = db.relationship('Session_cinema', backref='film', lazy='dynamic')
+    film = relationship('Film')
+
     def __init__(self, time, date, hall, session_price, vip_price):
-        #self.film_id = film_id
         self.time = time
         self.date = date
         self.hall = hall
@@ -78,12 +77,14 @@ class Session_cinema(db.Model):
 
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    resID = db.Column(db.Integer(), unique=True)
+    resID = db.Column(db.Integer(),unique=True)
     priceTotal = db.Column(db.Integer())
+    random = db.Column(db.String(20))
 
-    def __init__(self, resID, priceTotal):
+    def __init__(self, resID, priceTotal, random):
         self.resID = resID
         self.priceTotal = priceTotal
+        self.random = random
 
 
 

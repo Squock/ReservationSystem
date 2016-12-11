@@ -1,46 +1,8 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- Bootstrap javascript -->
-    <script src="../static/js/bootstrap.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Theme CSS -->
-    <link href="../static/css/style.css" type="text/css" rel="stylesheet">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <title>Афиша </title>
-</head>
-
-<body>
-  
+{% extends "layout.html" %}
+{% block title %}Добавление сеанса{% endblock %}
+{% block body %}
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="page-header">
-                    <h1> <em>Афиша </em> </h1>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Время</th>
-                            <th>Дата</th>
-                            <th>Зал</th>
-                            <th>Цена билета</th>
-                        </tr>
-
-                    </thead>
-
-                </table>
                 <form id="session" action="/session" method="post">
                     <h3>Список сеансов</h3>
                     <div class="form-group">
@@ -69,7 +31,4 @@
             </div>
         </div>
     </div>
-
-</body>
-
-</html>
+{% endblock %}
