@@ -34,7 +34,7 @@ class User(db.Model):
         return '<User %r>' % self.username
 
 class Film(db.Model):
-    id = db.Column(db.Integer(), primary_key = True)
+    id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80))
     description = db.Column(db.String(255))
     cast = db.Column(db.String(80))
@@ -67,7 +67,8 @@ class Session_cinema(db.Model):
     vip_price = db.Column(db.Integer())
     film = relationship('Film')
 
-    def __init__(self, time, date, hall, session_price, vip_price):
+    def __init__(self, film_id, time, date, hall, session_price, vip_price):
+        self.film_id = film_id
         self.time = time
         self.date = date
         self.hall = hall

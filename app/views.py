@@ -71,7 +71,7 @@ def login():
         loginSite = User.query.filter_by(username=username).first()
         if (loginSite):
             if loginSite is None:
-                flash("Неправльно введен электронная почта или пароль")
+                flash("Неправильно введен логин")
                 return redirect(url_for('login'))
             else:
                 if(loginSite.check_password(password)):
@@ -81,10 +81,10 @@ def login():
                     session['id'] = loginSite.id
                     return redirect('/')
                 else:
-                    flash("Неправльно введен пароль")
+                    flash("Неправильно введен пароль")
                     return redirect(url_for('login'))
         else:
-            flash("Неправльно введен электронная почта")
+            flash("Неправильно введен логин")
             return redirect(url_for('login'))
     return render_template('authorization.html')
 
@@ -163,7 +163,7 @@ def get_film():
         movie = Film(name, description, genre, cast, length, ageRestriction)
         db.session.add(movie)
         db.session.commit()
-        return redirect(url_for("session_list"))
+        return redirect(url_for("session_cinema"))
     return render_template('listfilm.html')
 
 
@@ -172,22 +172,23 @@ def session_cinema():
     if request.method == 'POST':
         film_name = request.form['film_name']
         print(film_name)
-        film_name1 = Film.query.filter_by(name=film_name).first()
-        if(film_name1):
-            if film_name1 is None:
-                flash("Данного фильма нету")
-                return redirect(url_for('session_cinema'))
-            else:
-                time = request.form['time']
-                date = request.form['date']
-                hall = request.form['hall']
-                session_price = request.form['session_price']
-                vip_price = request.form['vip_price']
-                time1 = datetime.strptime(time, "%H:%M")
-                sessions = Session_cinema(film_name1.id,time1, date, hall, session_price, vip_price)
-                db.session.add(sessions)
-                db.session.commit()
-                return redirect("/")
+        filmId = Film.query.filter_by(name=film_name).first()
+        print(filmId)
+        if filmId is None:
+            flash("Данного фильма нету")
+            return redirect(url_for('session_cinema'))
+        else:
+            time = request.form['time']
+            date = request.form['date']
+            hall = request.form['hall']
+            session_price = request.form['session_price']
+            vip_price = request.form['vip_price']
+            time1 = datetime.strptime(time, "%H:%M")
+            sessions = Session_cinema(filmId.id, time1, date, hall, session_price, vip_price)
+            db.session.add(sessions)
+            db.session.commit()
+            return redirect(url_for("session_list"))
+
     return render_template('session.html', items=Film.query.all())
 
 
