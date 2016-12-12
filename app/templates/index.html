@@ -2,4 +2,33 @@
 {% block title %}Главная{% endblock %}
 {% block body %}
 <h1>Бронирование билета</h1>
+
+<!--<div class="slider-box">
+    <div class="slider">
+        <img src="static/img/film/1.jpg" alt="">
+        <img src="static/img/film/2.jpg" alt="">
+        <img src="static/img/film/3.jpg" alt="">
+        <img src="static/img/film/4.jpg" alt="">
+        <img src="static/img/film/5.jpg" alt="">
+     </div>
+     <ul class="bullets"></ul>
+    <div class="prev"></div>
+    <div class="next"></div>
+</div>-->
+<script type="text/javascript">
+			$(window).load(function() {
+				$('#featured').orbit({
+					'bullets': true,
+					'timer' : true,
+					'animation' : 'horizontal-slide'
+				});
+			});
+</script>
+<div id="featured">
+			<img src="static/img/film/4.jpg" />
+			<a href="http://www.zurb.com/playground" target="_blank">
+            <img src="static/img/film/1.jpg"  /></a>
+			<img src="static/img/film/2.jpg"  />
+			<img src="static/img/film/3.jpg"  />
+		</div>
 {% endblock %}

@@ -143,3 +143,53 @@ table .row-title {
 }
 
 
+.slider-box{
+  position:relative;
+  width:800px;
+  height:1200px;
+  overflow:hidden;
+}
+.slider{
+  position:relative;
+  width:10000px;
+  height:420px;
+}
+.slider img{
+  float:left;
+}
+.slider-box .prev, .slider-box .next{
+  position:absolute;
+  top:100px;
+  display:block;
+  width:29px;
+  height:29px;
+  cursor:pointer;
+}
+.slider-box .prev{
+  left:10px;
+  background:url(../img/left-arrow.png) no-repeat 0 0;
+}
+.slider-box .next{
+  right:10px;
+  background:url(../img/right-arrow.png) no-repeat 0 0;
+}
+.bullets{
+  position:absolute;
+  bottom:10px;
+  left:130px;
+  height:11px;
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+.bullets li{
+  width:11px;
+  height:110px;
+  margin:0 1px 0 0;
+  padding:0;
+  float:left;
+  background:url(../img/bullets.png) no-repeat 0 0;
+}
+.bullets li.active{
+  background-position:0 -42px;
+}

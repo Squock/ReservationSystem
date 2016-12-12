@@ -36,18 +36,22 @@ class User(db.Model):
 class Film(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80))
-    description = db.Column(db.String(255))
+    description = db.Column(db.String(1000))
     cast = db.Column(db.String(80))
-    genre = db.Column(db.String(15))
+    genre = db.Column(db.String(50))
+    year = db.Column(db.Integer())
+    country = db.Column(db.String(100))
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
 
 
-    def __init__(self, name, description,cast, genre, length, ageRestriction):
+    def __init__(self, name, description,cast, genre, year, country, length, ageRestriction):
         self.name = name
         self.description = description
         self.cast = cast
         self.genre = genre
+        self.year = year
+        self.country = country
         self.length = length
         self.ageRestriction = ageRestriction
 
@@ -86,7 +90,6 @@ class Reservation(db.Model):
         self.resID = resID
         self.priceTotal = priceTotal
         self.random = random
-
 
 
 #Вот это на самом конце должно быть

@@ -31,14 +31,14 @@
         </div>
         <label>Список фильмов</label>
           <div class="input-group">
-            <input type="TextBox" ID="datebox" name="film_name" Class="form-control">
+            <input type="TextBox" ID="datebox" name="film_name_result" Class="form-control">
             <div class="input-group-btn">
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul id="demolist" class="dropdown-menu">
                     {% for item in items %}
-                 <li><a href="#">{{item.name}} </a></li>
+                 <li><a href="#"> {{item.name}} </a></li>
                  {% endfor %}
                 </ul>
             </div>

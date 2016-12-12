@@ -5,6 +5,7 @@ from datetime import datetime
 from sqlalchemy import update
 import random
 from flask_gravatar import Gravatar
+import re
 
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
@@ -13,17 +14,7 @@ app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 @app.route("/")
 @app.route("/index")
 def hello():
-    #При открытии страницы проверить авторизован ли пользователь
-    if 'username' in session:
-        auth = True
-        if 'firstName' in session:
-            navbar_firstName = session['firstName']
-            navbar_secondName = session['secondName']
-            return render_template("layout.html", auth=auth, navbar_firstName=navbar_firstName, navbar_secondName=navbar_secondName)
-        return render_template("index.html", auth=auth)
-    else:
-        auth = False
-        return render_template("index.html", auth=auth)
+    return render_template("index.html")
 
 ##########################################
 
@@ -152,7 +143,7 @@ def view_room():
 
 
 @app.route('/film', methods=['POST','GET'])
-def get_film():
+def add_film():
     if request.method == 'POST':
         name = request.form['name1']
         description = request.form['description']
@@ -164,16 +155,24 @@ def get_film():
         db.session.add(movie)
         db.session.commit()
         return redirect(url_for("session_cinema"))
-    return render_template('listfilm.html')
+    return render_template('addfilms.html')
+
+
+@app.route('/page/', methods=['POST','GET'])
+def page_film():
+    if request.method == 'POST':
+        return request(url_for('page_film'))
+    if request.method == 'GET':
+        return request(url_for('page_film'))
+    return render_template('')
 
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
     if request.method == 'POST':
-        film_name = request.form['film_name']
-        print(film_name)
-        filmId = Film.query.filter_by(name=film_name).first()
-        print(filmId)
+        film_name = request.form['film_name_result']
+        s = re.sub(r'\s', '', film_name)#удаляет лишние пробелы
+        filmId = Film.query.filter_by(name=s).first()
         if filmId is None:
             flash("Данного фильма нету")
             return redirect(url_for('session_cinema'))
