@@ -30,26 +30,25 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def __repr__(self):
-        return '<User %r>' % self.username
 
 class Film(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(80))
-    description = db.Column(db.String(1000))
-    cast = db.Column(db.String(80))
-    genre = db.Column(db.String(50))
+    name = db.Column(db.String(150))
+    description = db.Column(db.String(5000))
+    cast = db.Column(db.String(800))
+    genre = db.Column(db.String(200))
+    producer = db.Column(db.String(200))
     year = db.Column(db.Integer())
     country = db.Column(db.String(100))
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
 
-
-    def __init__(self, name, description,cast, genre, year, country, length, ageRestriction):
+    def __init__(self, name, description,cast, genre, producer, year, country, length, ageRestriction):
         self.name = name
         self.description = description
         self.cast = cast
         self.genre = genre
+        self.producer = producer
         self.year = year
         self.country = country
         self.length = length

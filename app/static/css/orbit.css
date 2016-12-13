@@ -1,5 +1,5 @@
 /* CONTAINER */
-div.orbit { width: 1px; height: 1px; position: relative; -moz-box-shadow: 0 0 10px rgba(0,0,0,.25); -webkit-box-shadow: 0 0 10px rgba(0,0,0,.25);  overflow: hidden; }
+div.orbit { width: 1px; height: 1px; position: relative; z-index: 1; -moz-box-shadow: 0 0 10px rgba(0,0,0,.25); -webkit-box-shadow: 0 0 10px rgba(0,0,0,.25);  overflow: hidden; }
 div.orbit img { position: absolute; top: 0; left: 0; }
 div.orbit a img { border: none; }
 

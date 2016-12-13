@@ -14,6 +14,7 @@ app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 @app.route("/")
 @app.route("/index")
 def hello():
+    #searchword = request.args.get('key', '')
     return render_template("index.html")
 
 ##########################################
@@ -148,23 +149,34 @@ def add_film():
         name = request.form['name1']
         description = request.form['description']
         genre = request.form['genre']
+        producer = request.form['producer']
+        year = request.form['year']
+        country = request.form['country']
         length = request.form['length']
         cast = request.form['cast']
         ageRestriction = request.form['ageRestriction']
-        movie = Film(name, description, genre, cast, length, ageRestriction)
+        movie = Film(name, description, cast, genre, producer, year, country, length, ageRestriction)
         db.session.add(movie)
         db.session.commit()
         return redirect(url_for("session_cinema"))
     return render_template('addfilms.html')
 
 
-@app.route('/page/', methods=['POST','GET'])
+@app.route('/page', methods=['POST','GET'])
 def page_film():
+    #<int:id>
     if request.method == 'POST':
         return request(url_for('page_film'))
     if request.method == 'GET':
-        return request(url_for('page_film'))
-    return render_template('')
+        id = request.args.get('id')
+        film = Film.query.filter_by(id=id).first()
+        if film is None:
+            return render_template('index.html')
+        else:
+            hour = film.length//60
+            minute = film.length - 60*hour
+            return render_template('films.html', film=film, hour=hour, minute=minute)
+    return render_template('films.html')
 
 
 @app.route('/session', methods=['POST', 'GET'])

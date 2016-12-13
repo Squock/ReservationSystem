@@ -7,28 +7,40 @@
                 <form action="/film" method="post">
                     <h3>Аутентификация</h3>
                                 <div class="form-group">
-                                    <label>Описание</label>
-                                    <input type="text" class="form-control"  name="description" placeholder="...">
+                                    <label >Название</label>
+                                    <input type="text" class="form-control" name="name1" placeholder="Название" >
                                 </div>
                                 <div class="form-group">
-                                    <label >Название</label>
-                                    <input type="text" class="form-control" name="name1" placeholder="..." >
+                                    <label>Описание</label>
+                                    <input type="text" class="form-control"  name="description" placeholder="Описание">
                                 </div>
-                    <div class="form-group">
-                                    <label >Длительность</label>
-                                    <input type="number" class="form-control" name="length" placeholder="..." >
+                                <div class="form-group">
+                                    <label >Год</label>
+                                    <input type="text" class="form-control" name="year" placeholder="Год" >
                                 </div>
-                    <div class="form-group">
+                                <div class="form-group">
+                                    <label >Страна</label>
+                                    <input type="text" class="form-control" name="country" placeholder="Страна" >
+                                </div>
+                                <div class="form-group">
+                                    <label >Длительность (в минутах)</label>
+                                    <input type="number" class="form-control" name="length" placeholder="Длительность" >
+                                </div>
+                                <div class="form-group">
+                                    <label >Режиссер</label>
+                                    <input type="text" class="form-control" name="producer" placeholder="Актеры" >
+                                </div>
+                                <div class="form-group">
                                     <label >Актеры</label>
-                                    <input type="text" class="form-control" name="cast" placeholder="..." >
+                                    <input type="text" class="form-control" name="cast" placeholder="Актеры" >
                                 </div>
-                    <div class="form-group">
+                                <div class="form-group">
                                     <label >Жанр</label>
-                                    <input type="text" class="form-control" name="genre" placeholder="..." >
+                                    <input type="text" class="form-control" name="genre" placeholder="Жанр" >
                                 </div>
-                    <div class="form-group">
+                                <div class="form-group">
                                     <label >Возрастное ограничение</label>
-                                    <input type="number" class="form-control" name="ageRestriction" placeholder="..." >
+                                    <input type="number" class="form-control" name="ageRestriction" placeholder="Возрастное ограничение" >
                                 </div>
                                 <button type="submit" class="btn btn-success">Получить</button>
                 </form>

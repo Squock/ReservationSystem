@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Сеанс{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-4">
+    </div>
+  <div class="col-md-8">
+<h1>{{film.name}}</h1>
+      <h4>{{film.genre}}</h4>
+      <ul>
+         <li><strong>Год:</strong> {{film.year}}</li>
+         <li><strong>Страна:</strong> {{film.country}}</li>
+         <li><strong>Режиссер:</strong> {{film.producer}}</li>
+         <li><strong>В ролях:</strong> {{film.cast}}</li>
+         <li><strong>Возраст:</strong> {{film.ageRestriction}}+</li>
+         <li><strong>Продолжительность:</strong> {{film.length}} мин. / {{hour}} ч. {{minute}} мин.</li>
+      </ul>
+      </div>
+</div>
+{% endblock %}
