@@ -28,8 +28,8 @@
                         {% for item in items %}
                         <tr>
                             <td>{{ item.film.name}}</td>
-                            <td>{{ item.time }}</td>
-                            <td>{{ item.date }}</td>
+                            <td>{{ item.time.strftime("%H:%M") }}</td>
+                            <td>{{ item.date.strftime('%Y-%m-%d') }}</td>
                             <td>{{ item.hall }}</td>
                             <td>{{ item.session_price}}</td>
                             <td>{{ item.vip_price}}</td>

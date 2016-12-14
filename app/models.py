@@ -42,8 +42,9 @@ class Film(db.Model):
     country = db.Column(db.String(100))
     length = db.Column(db.Integer())
     ageRestriction = db.Column(db.Integer())
+    foto = db.Column(db.String(200))
 
-    def __init__(self, name, description,cast, genre, producer, year, country, length, ageRestriction):
+    def __init__(self, name, description,cast, genre, producer, year, country, length, ageRestriction, foto):
         self.name = name
         self.description = description
         self.cast = cast
@@ -53,6 +54,7 @@ class Film(db.Model):
         self.country = country
         self.length = length
         self.ageRestriction = ageRestriction
+        self.foto = foto
 
 
 class Session_cinema(db.Model):

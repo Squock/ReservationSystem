@@ -3,10 +3,12 @@
 {% block body %}
 <div class="row">
     <div class="col-md-4">
+        <img class="imagePoster" width="330" src= {{ film.foto }} >
     </div>
   <div class="col-md-8">
-<h1>{{film.name}}</h1>
+    <h1>{{film.name}}</h1>
       <h4>{{film.genre}}</h4>
+      <span>{{film.description}}</span><p>
       <ul>
          <li><strong>Год:</strong> {{film.year}}</li>
          <li><strong>Страна:</strong> {{film.country}}</li>
@@ -15,6 +17,7 @@
          <li><strong>Возраст:</strong> {{film.ageRestriction}}+</li>
          <li><strong>Продолжительность:</strong> {{film.length}} мин. / {{hour}} ч. {{minute}} мин.</li>
       </ul>
-      </div>
+      <a href="{{ url_for('view_room') }}"><button type="button" class="btn btn-success" >Бронировать билет</button></a>
+  </div>
 </div>
 {% endblock %}

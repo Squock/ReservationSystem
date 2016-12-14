@@ -148,3 +148,6 @@ ul {
 li {
     list-style-type: none; /* Убираем маркеры */
    }
+.imagePoster{
+	margin: 20px;
+}

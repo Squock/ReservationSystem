@@ -1,4 +1,9 @@
+import os
+
 from flask import render_template, request, session, redirect, flash, url_for
+from flask import send_from_directory
+from werkzeug.utils import secure_filename
+
 from app.models import User, db, Session_cinema, Film, Reservation
 from app import app
 from datetime import datetime
@@ -10,6 +15,8 @@ import re
 #Сектерный ключ никому не выдавать
 app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 
+UPLOAD_FOLDER = app.root_path+'\static\img\kino\posters'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 @app.route("/index")
@@ -143,7 +150,7 @@ def view_room():
     return render_template('room.html')
 
 
-@app.route('/film', methods=['POST','GET'])
+@app.route('/film', methods=['POST', 'GET'])
 def add_film():
     if request.method == 'POST':
         name = request.form['name1']
@@ -155,16 +162,28 @@ def add_film():
         length = request.form['length']
         cast = request.form['cast']
         ageRestriction = request.form['ageRestriction']
-        movie = Film(name, description, cast, genre, producer, year, country, length, ageRestriction)
-        db.session.add(movie)
-        db.session.commit()
-        return redirect(url_for("session_cinema"))
+        if 'file' not in request.files:
+            flash('Нету файла')
+            return redirect(url_for('add_film'))
+        file = request.files['file']
+        if file.filename == '':
+            flash('Файл не выбран')
+            return redirect(request.url)
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            foto = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            index = str(foto).find("static")
+            pathPhoto = str(foto[index:])
+            movie = Film(name, description, cast, genre, producer, year, country, length, ageRestriction, pathPhoto)
+            db.session.add(movie)
+            db.session.commit()
+            return redirect(url_for("session_cinema"))
     return render_template('addfilms.html')
 
 
 @app.route('/page', methods=['POST','GET'])
 def page_film():
-    #<int:id>
     if request.method == 'POST':
         return request(url_for('page_film'))
     if request.method == 'GET':
@@ -183,8 +202,7 @@ def page_film():
 def session_cinema():
     if request.method == 'POST':
         film_name = request.form['film_name_result']
-        s = re.sub(r'\s', '', film_name)#удаляет лишние пробелы
-        filmId = Film.query.filter_by(name=s).first()
+        filmId = Film.query.filter_by(name=film_name).first()
         if filmId is None:
             flash("Данного фильма нету")
             return redirect(url_for('session_cinema'))
