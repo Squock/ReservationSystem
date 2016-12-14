@@ -17,7 +17,24 @@
          <li><strong>Возраст:</strong> {{film.ageRestriction}}+</li>
          <li><strong>Продолжительность:</strong> {{film.length}} мин. / {{hour}} ч. {{minute}} мин.</li>
       </ul>
-      <a href="{{ url_for('view_room') }}"><button type="button" class="btn btn-success" >Бронировать билет</button></a>
+      <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Время</th>
+                            <th>Зал</th>
+                            <th>CLS</th>
+                            <th>VIP</th>
+                        </tr>
+                        <div>
+                        <tr>
+                            <td><a href="/room?id={{ses.id}}">{{ ses.time.strftime("%H:%M") }}</a></td>
+                            <td>{{ ses.hall }}</td>
+                            <td>{{ ses.session_price}}</td>
+                            <td>{{ ses.vip_price}}</td>
+                        </tr>
+                      </div>
+                    </thead>
+                </table>
   </div>
 </div>
 {% endblock %}

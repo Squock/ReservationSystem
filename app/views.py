@@ -20,7 +20,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 @app.route("/index")
-def hello():
+def index():
     #searchword = request.args.get('key', '')
     return render_template("index.html")
 
@@ -145,9 +145,16 @@ def logout():
 @app.route('/room', methods=['POST', 'GET'])
 def view_room():
     if request.method == "POST":
-        print(request.form['event-seats-selected'])
-        return redirect(url_for('view_room'))
-    return render_template('room.html')
+        seats = request.form['selectedSeats']
+        print(seats)
+        return redirect('/room?id=1')
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    ses = Session_cinema.query.filter_by(id=id).first()
+    return render_template('room.html', ses=ses)
+
+
 
 
 @app.route('/film', methods=['POST', 'GET'])
@@ -189,14 +196,21 @@ def page_film():
     if request.method == 'GET':
         id = request.args.get('id')
         film = Film.query.filter_by(id=id).first()
+        ses = Session_cinema.query.filter_by(film_id=id).first()
         if film is None:
             return render_template('index.html')
         else:
             hour = film.length//60
             minute = film.length - 60*hour
-            return render_template('films.html', film=film, hour=hour, minute=minute)
+            return render_template('films.html', film=film, ses=ses, hour=hour, minute=minute)
     return render_template('films.html')
 
+
+@app.route('/upload', methods=['GET','POST'])
+def upload_file():
+    if request.method == 'POST':
+        return redirect(url_for('upload_file'))
+    return render_template('upload_slide_poster.html',items=Film.query.all())
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():

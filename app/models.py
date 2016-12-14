@@ -93,5 +93,10 @@ class Reservation(db.Model):
         self.random = random
 
 
+class ResSeats(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    res_id = db.Column(db.Integer)
+    seats = db.Column(db.ARRAY(db.Integer))
+
 #Вот это на самом конце должно быть
 db.create_all()
