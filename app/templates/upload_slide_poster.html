@@ -9,6 +9,13 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-6">
+        {% with messages = get_flashed_messages() %}
+                         {% if messages %}
+                               {% for message in messages %}
+                                <div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>{{ message }} </div>
+                               {% endfor %}
+                         {% endif %}
+                    {% endwith %}
         <form action="" method=post enctype=multipart/form-data>
           <div class="input-group">
             <input type="TextBox" ID="datebox" name="film_name_result" Class="form-control">
@@ -23,9 +30,9 @@
                 </ul>
             </div>
           </div>
-
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
+        <span>Выберите файл для загрузки</span>
+      <p><input type=file name=file multiple accept="image/*,image/jpeg">
+         <button type="submit" class="btn btn-success">Добавить</button>
     </form>
     </div>
     <div class="col-md-2"></div>

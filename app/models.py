@@ -96,7 +96,24 @@ class Reservation(db.Model):
 class ResSeats(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     res_id = db.Column(db.Integer)
-    seats = db.Column(db.ARRAY(db.Integer))
+    seats = db.Column(db.ARRAY(db.String))
+
+    def __init__(self, res_id, seats):
+        self.res_id = res_id
+        self.seats = seats
+
+
+class Slide_photo(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    film_id = db.Column(db.Integer)
+    film_name = db.Column(db.String(200))
+    pathPhoto = db.Column(db.String(200))
+
+    def __init__(self, film_id, film_name, pathPhoto):
+        self.film_id = film_id
+        self.film_name = film_name
+        self.pathPhoto = pathPhoto
+
 
 #Вот это на самом конце должно быть
 db.create_all()

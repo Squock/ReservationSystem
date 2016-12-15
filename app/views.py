@@ -4,7 +4,7 @@ from flask import render_template, request, session, redirect, flash, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
-from app.models import User, db, Session_cinema, Film, Reservation
+from app.models import User, db, Session_cinema, Film, Reservation, Slide_photo, ResSeats
 from app import app
 from datetime import datetime
 from sqlalchemy import update
@@ -18,11 +18,13 @@ app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 UPLOAD_FOLDER = app.root_path+'\static\img\kino\posters'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+
 @app.route("/")
 @app.route("/index")
 def index():
     #searchword = request.args.get('key', '')
-    return render_template('index.html', items=Session_cinema.query.all(), items1=Film.query.all())
+    return render_template("index.html", items=Slide_photo.query.all())
 
 ##########################################
 
@@ -78,6 +80,7 @@ def login():
                     session['firstName'] = loginSite.firstName
                     session['secondName'] = loginSite.secondName
                     session['id'] = loginSite.id
+                    session['cashier'] = loginSite.cashier
                     return redirect('/')
                 else:
                     flash("Неправильно введен пароль")
@@ -145,16 +148,18 @@ def logout():
 @app.route('/room', methods=['POST', 'GET'])
 def view_room():
     if request.method == "POST":
-        seats = request.form['selectedSeats']
+        seats = request.form.getlist('selectedSeats')
         print(seats)
-        return redirect('/room?id=1')
+        print(type(seats))
+        s = ResSeats(None, seats)
+        db.session.add(s)
+        db.session.commit()
+        return redirect('/reservation?session_id=1')
     id = request.args.get('id')
     if id is None:
         return '', 404
     ses = Session_cinema.query.filter_by(id=id).first()
     return render_template('room.html', ses=ses)
-
-
 
 
 @app.route('/film', methods=['POST', 'GET'])
@@ -189,7 +194,7 @@ def add_film():
     return render_template('addfilms.html')
 
 
-@app.route('/page', methods=['POST','GET'])
+@app.route('/page', methods=['POST', 'GET'])
 def page_film():
     if request.method == 'POST':
         return request(url_for('page_film'))
@@ -206,11 +211,38 @@ def page_film():
     return render_template('films.html')
 
 
-@app.route('/upload', methods=['GET','POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        return redirect(url_for('upload_file'))
+        name = request.form['film_name_result']
+        c = Film.query.filter_by(name=name).first()
+        if c:
+            UPLOAD_FOLDER = app.root_path + '\static\img\kino\slide'
+            app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+            if 'file' not in request.files:
+                flash('Нету файла')
+                return redirect(url_for('upload_file'))
+            file = request.files['file']
+            if file.filename == '':
+                flash('Файл не выбран')
+                return redirect(request.url)
+            if file:
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                foto = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                index = str(foto).find("static")
+                pathPhoto = str(foto[index:])
+                save = Slide_photo(c.id, name, pathPhoto)
+                db.session.add(save)
+                db.session.commit()
+                flash("Загрузка успешно завершена")
+                return redirect(url_for('upload_file'))
+        else:
+            flash('Такого фильма нет')
+            return redirect(url_for('upload_file'))
+
     return render_template('upload_slide_poster.html',items=Film.query.all())
+
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
@@ -231,42 +263,13 @@ def session_cinema():
             db.session.add(sessions)
             db.session.commit()
             return redirect(url_for("session_list"))
-    return render_template('session.html', items=Film.query.all())
 
-@app.route('/session/delete', methods=['POST', 'GET'])
-def session_delete():
-    ses = Session_cinema.query.filter_by(id=id).delete()
-    ses1 = Film.query.filter_by(id=id).delete()
-    return render_template('session_list.html', items=Session_cinema.query.all())
+    return render_template('session.html', items=Film.query.all())
 
 
 @app.route('/session/list', methods=['POST', 'GET'])
 def session_list():
     return render_template('session_list.html', items=Session_cinema.query.all())
-
-
-@app.route('/session/change', methods=['POST', 'GET'])
-def session_change():
-    #id = request.args.get('id')
-    #if id is None:
-    #    return '', 404
-    #id = session['id']
-    id = request.args.get('id')
-    if id is None:
-        return '', 404
-    ses = Session_cinema.query.filter_by(id=id).first()
-    return render_template('session_change.html', ses=ses, ses1=Film.query.all())
-    #if ses:
-
-    #data = {}
-    #if request.method == 'POST':
-    #    for i in request.form.keys():
-
-    #        if ses:
-    #            ses.value = request.form[id]
-    #            data[id] = request.form[id]
-    #db.session.commit()
-
 
 
 @app.route('/reservation', methods=['POST', 'GET'])
@@ -279,14 +282,16 @@ def reservation():
         db.session.commit()
         return redirect("/")
     ses_id = request.args.get('session_id')
-    session = Session_cinema.query.filter_by(id=ses_id).first()
-    if session is None:
+    if ses_id is None:
+        return '', 404
+    sessio = Session_cinema.query.filter_by(id=ses_id).first()
+    if sessio is None:
         pass
     randomNumber = random.randrange(10000)
     resIDsave = Reservation(None, None, randomNumber)
     db.session.add(resIDsave)
     db.session.commit()
-    return render_template('reservation.html', session=session, randomNumber=randomNumber)
+    return render_template('reservation.html', sessio=sessio, randomNumber=randomNumber)
 
 
 @app.route('/reservation_check', methods=['POST','GET'])
