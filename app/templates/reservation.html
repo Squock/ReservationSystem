@@ -20,7 +20,7 @@
                 </table>
                 <form id="reservation" action="/reservation" method="post">
                     <div class="form-group">
-                        <label> Поздравляем, места на сеанс "название фильма связаться с Радиком" забронированы!
+                        <label> Поздравляем, места на сеанс {{ sessio.film.name }}   забронированы!
 За 15 минут до начала сеанса бронь снимается и выставляется на продажу
 </label>
 
@@ -29,7 +29,7 @@
                         <label>date = {{ session.date }}</label>
                     </div> -->
                     <div class="form-group">
-                        <label> Сеанс начинается {{ session.date }} с {{ session.time }} </label>
+                        <label> Сеанс начинается {{ sessio.date.strftime('%Y-%m-%d') }} с {{ sessio.time.strftime("%H:%M") }} </label>
                     </div>
 
                      <div class="form-group">

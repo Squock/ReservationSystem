@@ -320,7 +320,7 @@ def reservation():
 def reservation_check():
     if request.method == 'POST':
         res_id = request.form['res_id']
-        reserve = Reservation.query.filter_by(resID=res_id).first()
+        reserve = Reservation.query.filter_by(random=res_id).first()
         if reserve is None:
             flash("Ошибка! Строка пуста либо брони с таким номером не существует.")
             return redirect(url_for('reservation_check'))
