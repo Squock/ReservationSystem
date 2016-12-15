@@ -22,7 +22,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/index")
 def index():
     #searchword = request.args.get('key', '')
-    return render_template("index.html")
+    return render_template('index.html', items=Session_cinema.query.all(), items1=Film.query.all())
 
 ##########################################
 
@@ -231,13 +231,42 @@ def session_cinema():
             db.session.add(sessions)
             db.session.commit()
             return redirect(url_for("session_list"))
-
     return render_template('session.html', items=Film.query.all())
+
+@app.route('/session/delete', methods=['POST', 'GET'])
+def session_delete():
+    ses = Session_cinema.query.filter_by(id=id).delete()
+    ses1 = Film.query.filter_by(id=id).delete()
+    return render_template('session_list.html', items=Session_cinema.query.all())
 
 
 @app.route('/session/list', methods=['POST', 'GET'])
 def session_list():
     return render_template('session_list.html', items=Session_cinema.query.all())
+
+
+@app.route('/session/change', methods=['POST', 'GET'])
+def session_change():
+    #id = request.args.get('id')
+    #if id is None:
+    #    return '', 404
+    #id = session['id']
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    ses = Session_cinema.query.filter_by(id=id).first()
+    return render_template('session_change.html', ses=ses, ses1=Film.query.all())
+    #if ses:
+
+    #data = {}
+    #if request.method == 'POST':
+    #    for i in request.form.keys():
+
+    #        if ses:
+    #            ses.value = request.form[id]
+    #            data[id] = request.form[id]
+    #db.session.commit()
+
 
 
 @app.route('/reservation', methods=['POST', 'GET'])
