@@ -278,6 +278,28 @@ def session_list():
     return render_template('session_list.html', items=Session_cinema.query.all())
 
 
+@app.route('/session/change', methods=['POST', 'GET'])
+def session_change():
+    #id = request.args.get('id')
+    #if id is None:
+    #    return '', 404
+    #id = session['id']
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    ses = Session_cinema.query.filter_by(id=id).first()
+    return render_template('session_change.html', ses=ses, ses1=Film.query.all())
+    #if ses:
+
+    #data = {}
+    #if request.method == 'POST':
+    #    for i in request.form.keys():
+
+    #        if ses:
+    #            ses.value = request.form[id]
+    #            data[id] = request.form[id]
+    #db.session.commit()
+
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
     if request.method == 'POST':
@@ -305,7 +327,7 @@ def reservation():
 def reservation_check():
     if request.method == 'POST':
         res_id = request.form['res_id']
-        reserve = Reservation.query.filter_by(resID=res_id).first()
+        reserve = Reservation.query.filter_by(random=res_id).first()
         if reserve is None:
             flash("Ошибка! Строка пуста либо брони с таким номером не существует.")
             return redirect(url_for('reservation_check'))

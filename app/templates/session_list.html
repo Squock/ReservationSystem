@@ -33,7 +33,8 @@
                             <td>{{ item.hall }}</td>
                             <td>{{ item.session_price}}</td>
                             <td>{{ item.vip_price}}</td>
-
+                            <td><a href="/session/change?id={{item.film.id}}"><button type="button" class="btn btn-success">Изменить</button></a></td>
+                            <td><button type="submit" class="btn btn-success">Удалить</button></td>
                         </tr>
                         {% endfor %}
                       </div>

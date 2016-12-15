@@ -4,8 +4,57 @@
 <h1>Бронирование билета</h1>
 <div class="row">
     <div class="col-md-4"></div>
-  <div class="col-md-8"></div>
+  <div class="col-md-8">
+    <div id="featured">
+      {% for item in items %}
+        <a href="/page?id={{item.film_id}}">
+        <img src={{item.pathPhoto}}  /></a>
+      {% endfor %}
+  </div>
+  </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Название фильм</th>
+                        <th>Время</th>
+                        <th>Дата</th>
+                        <th>Зал</th>
+                        <th>Цена стандартного билета</th>
+                        <th>Цена vip билета</th>
+
+                    </tr>
+
+                    <div>
+                        {% for item in items %}
+                        <tr>
+                            <td><p align="center">{{ item.film.name}}</p></td>
+                            <td><a href="/room?id={{item.film_id}}" ><p align="left">{{ item.time.strftime("%H:%M") }} </p></a></td>
+                            <td><p align="left">{{ item.date.strftime('%Y-%m-%d') }} </p></td>
+                            <td><p align="left">{{ item.hall }}</p></td>
+                            <td><p align="left">{{ item.session_price}}</p></td>
+                            <td><p align="left">{{ item.vip_price}}</p></td>
+
+                        </tr>
+                        {% endfor %}
+                    </div>
+
+                </thead>
+            </table>
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
 <div class="row">
     <div class="col-md-4"></div>
   <div class="col-md-8">
