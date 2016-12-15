@@ -9,45 +9,42 @@
                 </div>
             </div>
         </div>
+        <form id="session_list" method="post">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Название фильм</th>
+                                <th>Время</th>
+                                <th>Дата</th>
+                                <th>Зал</th>
+                                <th>Цена стандартного билета</th>
+                                <th>Цена vip билета</th>
 
-        <div class="row">
-            <div class="col-xs-12">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Название фильм</th>
-                            <th>Время</th>
-                            <th>Дата</th>
-                            <th>Зал</th>
-                            <th>Цена стандартного билета</th>
-                            <th>Цена vip билета</th>
+                            </tr>
 
-                        </tr>
-
-                        <div>
-                        {% for item in items %}
-                        <tr>
-                            <td>{{ item.film.name}}</td>
-                            <td><a href="/page?id={{item.film_id}}">{{ item.time.strftime("%H:%M") }}</a></td>
-                            <td>{{ item.date.strftime('%Y-%m-%d') }}</td>
-                            <td>{{ item.hall }}</td>
-                            <td>{{ item.session_price}}</td>
-                            <td>{{ item.vip_price}}</td>
-                            <td><a href="/session/change?id={{item.film.id}}"><button type="button" class="btn btn-success">Изменить</button></a></td>
-                            <td><button type="submit" class="btn btn-success">Удалить</button></td>
-                        </tr>
-                        {% endfor %}
-                      </div>
-
-
-
-
-                    </thead>
-                </table>
+                            <div>
+                            {% for item in items %}
+                            <tr>
+                                <select name="comp_select" class="selectpicker form-control">
+                                    <td>{{ item.film.name}}</td>
+                                    <td><a href="/page?id={{item.film_id}}">{{ item.time.strftime("%H:%M") }}</a></td>
+                                    <td>{{ item.date.strftime('%Y-%m-%d') }}</td>
+                                    <td>{{ item.hall }}</td>
+                                    <td>{{ item.session_price}}</td>
+                                    <td>{{ item.vip_price}}</td>
+                                    <td><a href="/session/change?id={{item.film.id}}"><button type="button" class="btn btn-success">Изменить</button></a></td>
+                                    <td><button type="submit" class="btn btn-success" name="submit" value="delete">Удалить</button></td>
+                                </select>
+                            </tr>
+                            {% endfor %}
+                          </div>
+                        </thead>
+                    </table>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-
 {% endblock %}
-
 </html>

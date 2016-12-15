@@ -122,7 +122,6 @@ def settings():
     else:
         return redirect(url_for('hello'))
 
-
 @app.route('/profile')
 def profile():
     username = session['username']
@@ -268,9 +267,14 @@ def session_cinema():
 
 
 @app.route('/session/list', methods=['POST', 'GET'])
-def session_list():
+def session_list(film_id):
+    if request.method == 'POST':
+        if request.form['submit'] == 'delete':
+            pass
     return render_template('session_list.html', items=Session_cinema.query.all())
 
+def session_delete():
+    filmId = Film.query.filter_by(name=film_name).first()
 
 @app.route('/session/change', methods=['POST', 'GET'])
 def session_change():
