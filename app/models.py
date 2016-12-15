@@ -97,10 +97,14 @@ class ResSeats(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     res_id = db.Column(db.Integer)
     seats = db.Column(db.ARRAY(db.String))
+    summa = db.Column(db.Integer())
+    seatsMesto = db.Column(db.String(500))
 
-    def __init__(self, res_id, seats):
+    def __init__(self, res_id, seats, summa, seatsMesto ):
         self.res_id = res_id
         self.seats = seats
+        self.summa = summa
+        self.seatsMesto = seatsMesto
 
 
 class Slide_photo(db.Model):

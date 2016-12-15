@@ -13,38 +13,17 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
-                <table class="table table-hover">
-
-
-                </table>
-                <form id="reservation" action="/reservation" method="post">
-                    <div class="form-group">
-                        <label> Поздравляем, места на сеанс {{ sessio.film.name }}   забронированы!
-За 15 минут до начала сеанса бронь снимается и выставляется на продажу
-</label>
-
-                    </div>
-                 <!--   <div class="form-group">
-                        <label>date = {{ session.date }}</label>
-                    </div> -->
-                    <div class="form-group">
-                        <label> Сеанс начинается {{ sessio.date.strftime('%Y-%m-%d') }} с {{ sessio.time.strftime("%H:%M") }} </label>
-                    </div>
-
-                     <div class="form-group">
-                        <label> Общая стоимость "priceTotal" руб. </label>
-                    </div>
-
-                        <div class="form-group">
-                        <label> Места:
-                            ★ ряд "иван", место "иван" </label>
-                    </div>
-
-                     <div class="form-group">
-                        <label> Бронь записана под номером: {{ randomNumber}} </label>
-                    </div>
-                </form>
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                         Поздравляем, места на сеанс {{sessio.film.name}} забронированы!
+За 15 минут до начала сеанса бронь снимается и выставляется на продажу <p>
+                         <p><label>Сеанс начинается</label> {{ sessio.date.strftime('%Y-%m-%d') }} с {{ sessio.time.strftime("%H:%M") }} <p>
+                        <label> Общая стоимость: </label> {{res.summa}} руб.<p>
+                        <label> Места: </label>
+                            <tr>
+                            <td>{{res.seatsMesto}}</td>
+                            </tr><p>
+                        <label> Бронь записана под номером: </label> {{ randomNumber}}
             </div>
         </div>
     </div>

@@ -125,7 +125,6 @@
                                                         </td>
                                             <td class="row-title">1</td>
                             </tr>
-
                                 <tr>
                                 <td class="row-title">2</td>
                                                <td class="">
@@ -760,7 +759,9 @@
                             <div class="event-action">
                                 <button type="submit" id="next-hall-btn" class="btn btn-success disabled" disabled="disabled">Продолжить</button>
                             </div>
-
+                            <textarea name="selectedSeatsString" id="event-buy-selected-string" style="visibility:hidden;height:0"></textarea>
+                            <input type="hidden" name="sum" value="0">
+                            <input type="hidden" name="nameFilm" value={{ses.film.name}}>
              </form>
           </div>
 </div>
@@ -771,7 +772,7 @@
     var SELECTED_LIMIT = 4;
 
     function getItem(obj) {
-        var span = document.createElement('span');
+        var span = document.createElement('div');
         span.textContent = obj.attr('data-title');
         return span;
     }
@@ -783,6 +784,7 @@
         input.value = obj.attr("seats");
         return input;
     }
+
 
     function toggleSeatSelect(obj) {
         if ($('.seat.status-selected').length > SELECTED_LIMIT) {
@@ -816,10 +818,11 @@
         $('.seat.status-selected').each(function (i, obj) {
             selectedSeats.push($(obj).attr('seats'));
             $('#event-seats-selected').append(getItem($(obj))).append(getInputItem($(obj)));
-            $("#event-buy-selected-string").append($(obj).attr("data-title") + '\r\n');
+            $("#event-buy-selected-string").append($(obj).attr("data-title") + '\r\n ');
             sum = sum + parseInt($(obj).attr('data-price'));
         });
         $("#event-seats-cost").html(sum + ' руб.');
+        $("input[name=sum]").val(sum);
         if (selectedSeats.length > 0) {
             $("#next-hall-btn").attr("disabled", false).removeClass('disabled');
             $("#next-hall-btn").bind("click", function () {
