@@ -4,7 +4,7 @@ from flask import render_template, request, session, redirect, flash, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
-from app.models import User, db, Session_cinema, Film, Reservation
+from app.models import User, db, Session_cinema, Film, Reservation, Slide_photo
 from app import app
 from datetime import datetime
 from sqlalchemy import update
@@ -18,11 +18,13 @@ app.secret_key = '_\x1ea\xc2>DK\x13\xd0O\xbe1\x13\x1b\x93h2*\x9a+!?\xcb\x8f'
 UPLOAD_FOLDER = app.root_path+'\static\img\kino\posters'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+
 @app.route("/")
 @app.route("/index")
 def index():
     #searchword = request.args.get('key', '')
-    return render_template("index.html")
+    return render_template("index.html", items=Slide_photo.query.all())
 
 ##########################################
 
@@ -155,8 +157,6 @@ def view_room():
     return render_template('room.html', ses=ses)
 
 
-
-
 @app.route('/film', methods=['POST', 'GET'])
 def add_film():
     if request.method == 'POST':
@@ -189,7 +189,7 @@ def add_film():
     return render_template('addfilms.html')
 
 
-@app.route('/page', methods=['POST','GET'])
+@app.route('/page', methods=['POST', 'GET'])
 def page_film():
     if request.method == 'POST':
         return request(url_for('page_film'))
@@ -206,11 +206,38 @@ def page_film():
     return render_template('films.html')
 
 
-@app.route('/upload', methods=['GET','POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        return redirect(url_for('upload_file'))
+        name = request.form['film_name_result']
+        c = Film.query.filter_by(name=name).first()
+        if c:
+            UPLOAD_FOLDER = app.root_path + '\static\img\kino\slide'
+            app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+            if 'file' not in request.files:
+                flash('Нету файла')
+                return redirect(url_for('upload_file'))
+            file = request.files['file']
+            if file.filename == '':
+                flash('Файл не выбран')
+                return redirect(request.url)
+            if file:
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                foto = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                index = str(foto).find("static")
+                pathPhoto = str(foto[index:])
+                save = Slide_photo(c.id, name, pathPhoto)
+                db.session.add(save)
+                db.session.commit()
+                flash("Загрузка успешно завершена")
+                return redirect(url_for('upload_file'))
+        else:
+            flash('Такого фильма нет')
+            return redirect(url_for('upload_file'))
+
     return render_template('upload_slide_poster.html',items=Film.query.all())
+
 
 @app.route('/session', methods=['POST', 'GET'])
 def session_cinema():
