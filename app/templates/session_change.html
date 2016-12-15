@@ -1,0 +1,54 @@
+{% extends "layout.html" %} {% block title %}Добавление сеанса{% endblock %} {% block body %}
+<div class="container">
+                    {% with messages = get_flashed_messages() %}
+                         {% if messages %}
+                               {% for message in messages %}
+                                <div class="alert alert-danger" name="AlertForm" role="alert"><strong>Ошибка!</strong>{{ message }} </div>
+                               {% endfor %}
+                         {% endif %}
+                    {% endwith %}
+    <form id="session" action="/session" method="post">
+        <h3>Список сеансов</h3>
+        <div class="form-group">
+            <label>Время</label>
+            <input type="text" class="form-control" required name="time" value="{{ses.time.strftime("%H:%M")}}">
+        </div>
+        <div class="form-group">
+            <label>Дата</label>
+            <input type="date" class="form-control" name="date" value="{{ ses.date.strftime('%Y-%m-%d')}}">
+        </div>
+        <div class="form-group">
+            <label>Зал</label>
+            <input type="text" class="form-control" name="hall" value="{{ses.hall}}">
+        </div>
+        <div class="form-group">
+            <label>Цена стандартных билетов</label>
+            <input type="text" class="form-control" required name="session_price" value="{{ses.session_price}}">
+        </div>
+        <div class="form-group">
+            <label>Цена vip билетов</label>
+            <input type="text" class="form-control" required name="vip_price" value="{{ses.vip_price}}">
+        </div>
+        <label>Список фильмов</label>
+          <div class="input-group">
+            <input type="TextBox" ID="datebox" name="film_name_result" Class="form-control">
+            <div class="input-group-btn">
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul id="demolist" class="dropdown-menu">
+                    {% for ses1 in ses1 %}
+                 <li><a href="#">{{ses.name}}</a></li>
+                 {% endfor %}
+                </ul>
+            </div>
+          </div>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+</div>
+<script type="text/javascript">
+$('#demolist li').on('click', function(){
+    $('#datebox').val($(this).text());
+});
+</script>
+{% endblock %}
