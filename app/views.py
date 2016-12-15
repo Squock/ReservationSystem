@@ -24,7 +24,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/index")
 def index():
     #searchword = request.args.get('key', '')
-    return render_template("index.html", items=Slide_photo.query.all())
+    return render_template("index.html", items=Slide_photo.query.all(), films=Session_cinema.query.all())
 
 ##########################################
 

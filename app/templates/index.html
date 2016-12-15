@@ -3,18 +3,8 @@
 {% block body %}
 <h1>Бронирование билета</h1>
 <div class="row">
-    <div class="col-md-4"></div>
-  <div class="col-md-8">
-    <div id="featured">
-      {% for item in items %}
-        <a href="/page?id={{item.film_id}}">
-        <img src={{item.pathPhoto}}  /></a>
-      {% endfor %}
-  </div>
-  </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="col-md-1"></div>
+        <div class="col-md-10">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -26,45 +16,37 @@
                         <th>Цена vip билета</th>
 
                     </tr>
-
+                </thead>
+                <tbody>
                     <div>
-                        {% for item in items %}
+                        {% for film in films %}
                         <tr>
-                            <td><p align="center">{{ item.film.name}}</p></td>
-                            <td><a href="/room?id={{item.film_id}}" ><p align="left">{{ item.time.strftime("%H:%M") }} </p></a></td>
-                            <td><p align="left">{{ item.date.strftime('%Y-%m-%d') }} </p></td>
-                            <td><p align="left">{{ item.hall }}</p></td>
-                            <td><p align="left">{{ item.session_price}}</p></td>
-                            <td><p align="left">{{ item.vip_price}}</p></td>
+                            <td><p align="center">{{ film.film.name}}</p></td>
+                            <td><a href="/room?id={{film.film_id}}" ><p align="left">{{ film.time.strftime("%H:%M") }} </p></a></td>
+                            <td><p align="left">{{ film.date.strftime('%Y-%m-%d') }} </p></td>
+                            <td><p align="left">{{ film.hall }}</p></td>
+                            <td><p align="left">{{ film.session_price}}</p></td>
+                            <td><p align="left">{{ film.vip_price}}</p></td>
 
                         </tr>
                         {% endfor %}
                     </div>
-
-                </thead>
+                </tbody>
             </table>
-
-
-            </form>
-        </div>
     </div>
-
-
-
-
-
-
+    <div class="col-md-1"></div>
+</div>
 
 <div class="row">
     <div class="col-md-4"></div>
-  <div class="col-md-8">
-      <div id="featured">
-          {% for item in items %}
-            <a href="/page?id={{item.film_id}}">
-            <img src={{item.pathPhoto}}  /></a>
-          {% endfor %}
-      </div>
-  </div>
+    <div class="col-md-8">
+          <div id="featured">
+              {% for item in items %}
+                <a href="/page?id={{item.film_id}}">
+                <img src={{item.pathPhoto}}  /></a>
+              {% endfor %}
+          </div>
+    </div>
 
 </div>
 <script type="text/javascript">
