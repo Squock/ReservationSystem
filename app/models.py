@@ -96,7 +96,7 @@ class Reservation(db.Model):
 class ResSeats(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     res_id = db.Column(db.Integer)
-    seats = db.Column(db.ARRAY(db.Integer))
+    seats = db.Column(db.ARRAY(db.String))
 
     def __init__(self, res_id, seats):
         self.res_id = res_id

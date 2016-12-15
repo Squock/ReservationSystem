@@ -4,7 +4,7 @@ from flask import render_template, request, session, redirect, flash, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
-from app.models import User, db, Session_cinema, Film, Reservation, Slide_photo
+from app.models import User, db, Session_cinema, Film, Reservation, Slide_photo, ResSeats
 from app import app
 from datetime import datetime
 from sqlalchemy import update
@@ -80,6 +80,7 @@ def login():
                     session['firstName'] = loginSite.firstName
                     session['secondName'] = loginSite.secondName
                     session['id'] = loginSite.id
+                    session['cashier'] = loginSite.cashier
                     return redirect('/')
                 else:
                     flash("Неправильно введен пароль")
@@ -147,9 +148,13 @@ def logout():
 @app.route('/room', methods=['POST', 'GET'])
 def view_room():
     if request.method == "POST":
-        seats = request.form['selectedSeats']
+        seats = request.form.getlist('selectedSeats')
         print(seats)
-        return redirect('/room?id=1')
+        print(type(seats))
+        s = ResSeats(None, seats)
+        db.session.add(s)
+        db.session.commit()
+        return redirect('/reservation?session_id=1')
     id = request.args.get('id')
     if id is None:
         return '', 404
@@ -277,14 +282,16 @@ def reservation():
         db.session.commit()
         return redirect("/")
     ses_id = request.args.get('session_id')
-    session = Session_cinema.query.filter_by(id=ses_id).first()
-    if session is None:
+    if ses_id is None:
+        return '', 404
+    sessio = Session_cinema.query.filter_by(id=ses_id).first()
+    if sessio is None:
         pass
     randomNumber = random.randrange(10000)
     resIDsave = Reservation(None, None, randomNumber)
     db.session.add(resIDsave)
     db.session.commit()
-    return render_template('reservation.html', session=session, randomNumber=randomNumber)
+    return render_template('reservation.html', sessio=sessio, randomNumber=randomNumber)
 
 
 @app.route('/reservation_check', methods=['POST','GET'])
