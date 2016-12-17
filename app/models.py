@@ -83,7 +83,7 @@ class Session_cinema(db.Model):
 
 class Reservation(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    resID = db.Column(db.Integer(),unique=True)
+    resID = db.Column(db.Integer())
     priceTotal = db.Column(db.Integer())
     random = db.Column(db.String(20))
 
@@ -99,6 +99,7 @@ class ResSeats(db.Model):
     seats = db.Column(db.ARRAY(db.String))
     summa = db.Column(db.Integer())
     seatsMesto = db.Column(db.String(500))
+
 
     def __init__(self, res_id, seats, summa, seatsMesto ):
         self.res_id = res_id

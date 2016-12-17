@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-11">
-                         Поздравляем, места на сеанс {{sessio.film.name}} забронированы!
+                         Поздравляем, места на сеанс <label>{{sessio.film.name}}</label> забронированы!
 За 15 минут до начала сеанса бронь снимается и выставляется на продажу <p>
                          <p><label>Сеанс начинается</label> {{ sessio.date.strftime('%Y-%m-%d') }} с {{ sessio.time.strftime("%H:%M") }} <p>
                         <label> Общая стоимость: </label> {{res.summa}} руб.<p>

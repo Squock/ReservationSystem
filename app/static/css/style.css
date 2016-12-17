@@ -120,9 +120,6 @@ table .row-title {
 .status-blocked {
     background: orangered;
 }
-.status-reserved {
-    background: yellow;
-}
 .seat.status-selected {
     background: orange;
 	cursor: pointer;

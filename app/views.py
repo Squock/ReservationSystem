@@ -1,5 +1,6 @@
 import os
 
+from flask import json
 from flask import render_template, request, session, redirect, flash, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
@@ -23,7 +24,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/")
 @app.route("/index")
 def index():
-    #searchword = request.args.get('key', '')
     return render_template("index.html", items=Slide_photo.query.all(), films=Session_cinema.query.all())
 
 ##########################################
@@ -153,19 +153,21 @@ def view_room():
         seatsMesto = request.form['selectedSeatsString']
         nameFilm = request.form['nameFilm']
         n = Film.query.filter_by(name=nameFilm).first()
-        if n:
-            s = ResSeats(n.id, seats, summa, seatsMesto)
+        d = Session_cinema.query.filter_by(film_id=n.id).first()
+        if d:
+            s = ResSeats(d.id, seats, summa, seatsMesto)
             db.session.add(s)
             db.session.commit()
-            url = '/reservation?session_id='+str(n.id)
-            print(url)
+            url = '/reservation?session_id='+str(d.id)
             return redirect(url)
     id = request.args.get('id')
     if id is None:
         return '', 404
     ses = Session_cinema.query.filter_by(id=id).first()
-    res = ResSeats.query.filter_by(res_id=id).first()
-    return render_template('room.html', ses=ses, res=res)
+    #if [x.seats for x in ResSeats.query.filter_by(res_id=id).all()] is not None:
+    data = ['foo', [x.seats for x in ResSeats.query.filter_by(res_id=id).all()]]
+    return render_template('room.html', ses=ses, data=json.dumps(data))
+    #return render_template('room.html', ses=ses)
 
 
 @app.route('/film', methods=['POST', 'GET'])
@@ -302,24 +304,21 @@ def session_change():
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
-    if request.method == 'POST':
-        resID = request.form['resID']
-        priceTotal = request.form['priceTotal']
-        reservation_session = Reservation(resID,priceTotal)
-        db.session.add(reservation_session)
-        db.session.commit()
-        return redirect("/")
     ses_id = request.args.get('session_id')
     if ses_id is None:
         return '', 404
     sessio = Session_cinema.query.filter_by(film_id=ses_id).first()
     if sessio is None:
         pass
-    randomNumber = random.randrange(10000)
-    res = ResSeats.query.filter_by(res_id=sessio.film_id).first()
-    resIDsave = Reservation(None, None, randomNumber)
+    randomNumber = random.randrange(1000, 10000)
+    res1 = ResSeats.query.order_by(ResSeats.id.desc()).filter_by(res_id=sessio.film_id).limit(1).first()
+    resIDsave = Reservation(res1.res_id, res1.summa, randomNumber)
     db.session.add(resIDsave)
     db.session.commit()
+    print(randomNumber)
+
+    res = ResSeats.query.order_by(ResSeats.id.desc()).filter_by(res_id=sessio.film_id).limit(1).first() #выбрал последнее
+    print(res.seats)
     return render_template('reservation.html', sessio=sessio, res=res, randomNumber=randomNumber)
 
 
