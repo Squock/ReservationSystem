@@ -33,7 +33,7 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    {% if 'cashier' in session%}
+                    {% if session['role'] != 3 %}
                    <li><a href={{url_for('session_cinema')}}>Добавление сеанса</a></li>
                     <li><a href={{url_for('add_film')}}>Добавление фильмов</a></li>
                     {% endif %}
@@ -47,7 +47,6 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                   <li><a href={{url_for('reservation')}}>Бронирование</a></li>
                    <li><a href={{url_for('reservation_check')}}>Проверка брони</a></li>
                 </ul>
               </li>

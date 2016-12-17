@@ -7,21 +7,22 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
-    cashier = db.Column(db.String(120),default=False)
     firstName = db.Column(db.String(100))
     secondName = db.Column(db.String(100))
     phoneNumber = db.Column(db.String(100))
     birthDate = db.Column(db.DateTime)
+    role_id = db.Column(db.Integer, db.ForeignKey('role.role_id'), default=3)
     password = db.Column(db.String(100))
 
-    def __init__(self, username, email, cashier, firstName, secondName, phoneNumber, birthDate, password,):
+
+    def __init__(self, username, email, firstName, secondName, phoneNumber, birthDate, role_id, password):
         self.username = username
         self.email = email
-        self.cashier = cashier
         self.firstName = firstName
         self.secondName = secondName
         self.phoneNumber = phoneNumber
         self.birthDate = birthDate
+        self.role_id = role_id
         self.set_password(password)
 
     def set_password(self, password):
@@ -29,6 +30,12 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+
+class Role(db.Model):
+    role_id = db.Column(db.Integer, primary_key=True)
+    role_name = db.Column(db.String(64), unique=True)
+    users = db.relationship('User', backref='role')
 
 
 class Film(db.Model):
@@ -101,7 +108,7 @@ class ResSeats(db.Model):
     seatsMesto = db.Column(db.String(500))
 
 
-    def __init__(self, res_id, seats, summa, seatsMesto ):
+    def __init__(self, res_id, seats, summa, seatsMesto):
         self.res_id = res_id
         self.seats = seats
         self.summa = summa

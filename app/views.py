@@ -48,7 +48,7 @@ def register():
         else:
             if (password == cpassword):
                     if conditions == "on":
-                        user = User(username, email, None, firstName, secondName, phoneNumber, date, password)
+                        user = User(username, email, firstName, secondName, phoneNumber, date, None, password)
                         db.session.add(user)
                         db.session.commit()
                         return redirect(url_for("login"))
@@ -80,7 +80,7 @@ def login():
                     session['firstName'] = loginSite.firstName
                     session['secondName'] = loginSite.secondName
                     session['id'] = loginSite.id
-                    session['cashier'] = loginSite.cashier
+                    session['role'] = loginSite.role_id
                     return redirect('/')
                 else:
                     flash("Неправильно введен пароль")
@@ -166,7 +166,6 @@ def view_room():
     #if [x.seats for x in ResSeats.query.filter_by(res_id=id).all()] is not None:
     data = [x.seats for x in ResSeats.query.filter_by(res_id=id).all()]
     return render_template('room.html', ses=ses, data=json.dumps(data))
-    #return render_template('room.html', ses=ses)
 
 
 @app.route('/film', methods=['POST', 'GET'])
