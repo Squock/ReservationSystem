@@ -722,11 +722,32 @@
                         </tbody>
                     </table>
                 <ul class="legend">
-                <li><b class="seat zone-standart-leg">1</b> Обычные места – {{ses.session_price}} руб.</li>
-                <li><b class="seat zone-vip-leg">2</b> VIP места – {{ses.vip_price}} руб</li>
-                <li><b class="seat status-selected-leg">3</b> – выбрано</li>
-                <li><b class="seat status-blocked">5</b> – занято</li>
-            </ul>
+                <li><b class="seat-leg zone-standart-leg" style="color: #000;
+    display: block;
+    font-size: 0.8em;
+    height: 2.0em;
+    line-height: 1.8em;
+    border: 1px solid #555555;
+	text-align: center;
+    width: 2.0em;">1</b> Обычные места – {{ses.session_price}} руб.</li>
+                <li><b class="seat-leg zone-vip-leg" style="color: #000;
+    display: block;
+    font-size: 0.8em;
+    height: 2.0em;
+    line-height: 1.8em;
+    border: 1px solid #555555;
+	text-align: center;
+    width: 2.0em;">2</b> VIP места – {{ses.vip_price}} руб</li>
+                <li><b class="seat-leg status-selected-leg" style="color: #000;
+    display: block;
+    font-size: 0.8em;
+    height: 2.0em;
+    line-height: 1.8em;
+    border: 1px solid #555555;
+	text-align: center;
+    width: 2.0em;">3</b> – выбрано</li>
+                <li><b class="seat-leg status-blocked" style="color: #000;display: block;font-size: 0.8em;height: 2.0em;line-height: 1.8em;border: 1px solid #555555;text-align: center;width: 2.0em;">4</b> – занято</li>
+                </ul>
               </div>
           </div>
 
@@ -774,15 +795,18 @@
     //$('#my-data').data(); <meta id="my-data" data-name=>
 
    $('.seat').each(function(){
-        var data = {{ data|safe }}
+       var data = {{ data|safe }}
+       console.log(data)
        console.log($(this).attr("seats"))
-        for (var i = 0; i < 2; i++) {
-            for (var j = 0; j < 2; j++) {
-                if ($(this).attr("seats") == data[1][i][j]) {
-                    $(this).addClass('status-blocked')
-                }
-            }
-        }
+       for (var i = 0; i < data.length; i++) {
+           for (var j = 0; j < data.length; j++) {
+               if ($(this).attr("seats") == data[i][j]) {
+                   console.log('yes')
+                   console.log('yes' + $(this).attr("seats"))
+                   $(this).addClass('status-blocked')
+               }
+           }
+           }
     })
 
 

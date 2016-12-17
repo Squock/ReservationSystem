@@ -74,6 +74,17 @@ table tr td {
 	text-align: center;
     width: 2.8em;
 }
+
+.legend.seat-leg {
+    color: #000;
+    display: block;
+    font-size: 0.8em;
+    height: 2.8em;
+    line-height: 1.8em;
+    border: 1px solid #555555;
+	text-align: center;
+    width: 2.8em;
+}
 .screen{
 	width: 60%;
     height: 27px;

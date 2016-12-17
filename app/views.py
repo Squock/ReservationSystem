@@ -164,7 +164,7 @@ def view_room():
         return '', 404
     ses = Session_cinema.query.filter_by(id=id).first()
     #if [x.seats for x in ResSeats.query.filter_by(res_id=id).all()] is not None:
-    data = ['foo', [x.seats for x in ResSeats.query.filter_by(res_id=id).all()]]
+    data = [x.seats for x in ResSeats.query.filter_by(res_id=id).all()]
     return render_template('room.html', ses=ses, data=json.dumps(data))
     #return render_template('room.html', ses=ses)
 
