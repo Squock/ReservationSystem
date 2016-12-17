@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-1"></div>
         <div class="col-md-10">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered table-condensed">
                 <thead>
                     <tr>
                         <th>Название фильм</th>
@@ -21,12 +21,12 @@
                     <div>
                         {% for film in films %}
                         <tr>
-                            <td><p align="center">{{ film.film.name}}</p></td>
-                            <td><a href="/room?id={{film.film_id}}" ><p align="left">{{ film.time.strftime("%H:%M") }} </p></a></td>
-                            <td><p align="left">{{ film.date.strftime('%Y-%m-%d') }} </p></td>
-                            <td><p align="left">{{ film.hall }}</p></td>
-                            <td><p align="left">{{ film.session_price}}</p></td>
-                            <td><p align="left">{{ film.vip_price}}</p></td>
+                            <td><a href="/page?id={{film.film_id}}"><p align="left">{{ film.film.name}}</p></a></td>
+                            <td><a href="/room?id={{film.film_id}}" ><p align="center">{{ film.time.strftime("%H:%M") }} </p></a></td>
+                            <td><p align="center">{{ film.date.strftime('%Y-%m-%d') }} </p></td>
+                            <td><p align="center">{{ film.hall }}</p></td>
+                            <td><p align="center">{{ film.session_price}}</p></td>
+                            <td><p align="center">{{ film.vip_price}}</p></td>
 
                         </tr>
                         {% endfor %}

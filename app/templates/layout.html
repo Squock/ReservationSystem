@@ -36,6 +36,7 @@
                     {% if session['role'] != 3 %}
                    <li><a href={{url_for('session_cinema')}}>Добавление сеанса</a></li>
                     <li><a href={{url_for('add_film')}}>Добавление фильмов</a></li>
+                    <li><a href={{url_for('upload_file')}}>Добавление картинки в слайдшоу</a></li>
                     {% endif %}
                    <li><a href={{url_for('session_list')}}>Список фильмов</a></li>
                 </ul>

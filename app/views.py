@@ -151,21 +151,21 @@ def view_room():
         summa = request.form['sum']
         seatsMesto = request.form['selectedSeatsString']
         nameFilm = request.form['nameFilm']
-        n = Film.query.filter_by(name=nameFilm).first()
-        d = Session_cinema.query.filter_by(film_id=n.id).first()
-        if d:
-            s = ResSeats(d.id, seats, summa, seatsMesto)
+        filmQuery = Film.query.filter_by(name=nameFilm).first()
+        session_film = Session_cinema.query.filter_by(film_id=filmQuery.id).first()
+        if session_film:
+            s = ResSeats(session_film.id, seats, summa, seatsMesto)
             db.session.add(s)
             db.session.commit()
-            url = '/reservation?session_id='+str(d.id)
+            url = '/reservation?session_id='+str(session_film.id)
             return redirect(url)
     id = request.args.get('id')
     if id is None:
         return '', 404
     ses = Session_cinema.query.filter_by(id=id).first()
-    #if [x.seats for x in ResSeats.query.filter_by(res_id=id).all()] is not None:
+    film_name = ses.film.name
     data = [x.seats for x in ResSeats.query.filter_by(res_id=id).all()]
-    return render_template('room.html', ses=ses, data=json.dumps(data))
+    return render_template('room.html', ses=ses, film_name=film_name, data=json.dumps(data))
 
 
 @app.route('/film', methods=['POST', 'GET'])
@@ -274,21 +274,12 @@ def session_cinema():
 
 
 @app.route('/session/list', methods=['POST', 'GET'])
-def session_list(film_id):
-    if request.method == 'POST':
-        if request.form['submit'] == 'delete':
-            pass
+def session_list():
     return render_template('session_list.html', items=Session_cinema.query.all())
 
-def session_delete():
-    filmId = Film.query.filter_by(name=film_name).first()
 
 @app.route('/session/change', methods=['POST', 'GET'])
 def session_change():
-    #id = request.args.get('id')
-    #if id is None:
-    #    return '', 404
-    #id = session['id']
     id = request.args.get('id')
     if id is None:
         return '', 404
@@ -304,6 +295,7 @@ def session_change():
     #            ses.value = request.form[id]
     #            data[id] = request.form[id]
     #db.session.commit()
+
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():

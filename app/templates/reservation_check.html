@@ -24,6 +24,8 @@
                             <th>Номер брони</th>
                             <th>Итоговая стоимость</th>
                         </tr>
+                        </thead>
+                    <tbody>
                         <tr>
                             {% if items %}
                             <td>{{ items.id}}</td>
@@ -31,7 +33,7 @@
                             <td>{{ items.priceTotal }}</td>
                             {% endif %}
                         </tr>
-                    </thead>
+                    </tbody>
                 </table>
             </div>
             {% with messages = get_flashed_messages() %}

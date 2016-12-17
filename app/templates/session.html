@@ -30,7 +30,7 @@
             <input type="text" class="form-control" required name="vip_price" placeholder="Vip цена">
         </div>
         <label>Список фильмов</label>
-          <div class="input-group">
+          <!--<div class="input-group">
             <input type="TextBox" ID="datebox" name="film_name_result" Class="form-control">
             <div class="input-group-btn">
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
@@ -42,7 +42,13 @@
                  {% endfor %}
                 </ul>
             </div>
-          </div>
+          </div>-->
+        <select class="form-control select2" name="film_name_result">
+          <option></option>
+            {% for item in items %}
+              <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
         <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
 </div>
@@ -50,5 +56,8 @@
 $('#demolist li').on('click', function(){
     $('#datebox').val($(this).text());
 });
+    $(document).ready(function(){
+        $( ".select2" ).select2( { placeholder: "Select a State"} );
+    });
 </script>
 {% endblock %}
