@@ -29,7 +29,7 @@
                         {% for item in items %}
                         <tr>
                             <td><a href="/page?id={{item.film_id}}">{{ item.film.name}}</a></td>
-                            <td><a href="/room?id={{item.film_id}}" >{{ item.time.strftime("%H:%M") }}</a></td>
+                            <td><a href="/room?id={{item.film_id}}&time={{item.time}}&date={{item.date}}" >{{ item.time.strftime("%H:%M") }}</a></td>
                             <td>{{ item.date.strftime('%Y-%m-%d') }}</td>
                             <td>{{ item.hall }}</td>
                             <td>{{ item.session_price}}</td>
