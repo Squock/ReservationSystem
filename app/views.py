@@ -151,7 +151,7 @@ def view_room():
         summa = request.form['sum']
         seatsMesto = request.form['selectedSeatsString']
         nameFilm = request.form['nameFilm']
-        filmQuery = Film.query.filter_by(name=nameFilm).first()
+        filmQuery = Film.query.order_by(Film.id.desc()).filter_by(name=nameFilm).limit(1).first()
         session_film = Session_cinema.query.filter_by(film_id=filmQuery.id).first()
         if session_film:
             s = ResSeats(session_film.id, seats, summa, seatsMesto)
@@ -202,19 +202,18 @@ def add_film():
 
 @app.route('/page', methods=['POST', 'GET'])
 def page_film():
-    if request.method == 'POST':
-        return request(url_for('page_film'))
-    if request.method == 'GET':
-        id = request.args.get('id')
-        film = Film.query.filter_by(id=id).first()
-        ses = Session_cinema.query.filter_by(film_id=id).first()
-        if film is None:
-            return render_template('index.html')
-        else:
-            hour = film.length//60
-            minute = film.length - 60*hour
-            return render_template('films.html', film=film, ses=ses, hour=hour, minute=minute)
-    return render_template('films.html')
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    film = Film.query.filter_by(id=id).first()
+    ses = Session_cinema.query.filter_by(film_id=id).all()  #[x.time for x in Session_cinema.query.filter_by(film_id=id).all()]
+    #ses = Session_cinema.query.filter_by(film_id=id).first()
+    if film is None:
+        return render_template('index.html')
+    else:
+        hour = film.length//60
+        minute = film.length - 60*hour
+        return render_template('films.html', film=film, ses=ses, hour=hour, minute=minute)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -241,8 +240,8 @@ def upload_file():
                 save = Slide_photo(c.id, name, pathPhoto)
                 db.session.add(save)
                 db.session.commit()
-                flash("Загрузка успешно завершена")
-                return redirect(url_for('upload_file'))
+                good = True
+                return render_template('upload_slide_poster.html', good=good)
         else:
             flash('Такого фильма нет')
             return redirect(url_for('upload_file'))

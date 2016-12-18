@@ -16,20 +16,17 @@
                                {% endfor %}
                          {% endif %}
                     {% endwith %}
+                        {% if good %}
+                                <div class="alert alert-success" name="AlertForm" role="alert"><strong>Вжух!</strong> и загрузка успешно завершена </div>
+                               {% endif %}
         <form action="" method=post enctype=multipart/form-data>
-          <div class="input-group">
-            <input type="TextBox" ID="datebox" name="film_name_result" Class="form-control">
-            <div class="input-group-btn">
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul id="demolist" class="dropdown-menu">
-                    {% for item in items %}
-                 <li><a href="#">{{item.name}}</a></li>
-                 {% endfor %}
-                </ul>
-            </div>
-          </div>
+            <label>Выберите название фильма</label>
+        <select class="form-control select2" name="film_name_result">
+          <option></option>
+            {% for item in items %}
+              <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
         <span>Выберите файл для загрузки</span>
       <p><input type=file name=file multiple accept="image/*,image/jpeg">
          <button type="submit" class="btn btn-success">Добавить</button>
@@ -38,8 +35,8 @@
     <div class="col-md-2"></div>
 </div>
 <script type="text/javascript">
-$('#demolist li').on('click', function(){
-    $('#datebox').val($(this).text());
-});
+    $(document).ready(function(){
+        $( ".select2" ).select2( { placeholder: "Выберите фильм"} );
+    });
 </script>
 {% endblock %}

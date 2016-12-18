@@ -26,12 +26,14 @@
                             <th>VIP</th>
                         </tr>
                         <div>
+                            {% for r in ses %}
                         <tr>
-                            <td><a href="/room?id={{ses.id}}">{{ ses.time.strftime("%H:%M") }}</a></td>
-                            <td>{{ ses.hall }}</td>
-                            <td>{{ ses.session_price}}</td>
-                            <td>{{ ses.vip_price}}</td>
+                            <td><a href="/room?id={{r.id}}">{{ r.time.strftime("%H:%M") }}</a></td>
+                            <td>{{ r.hall }}</td>
+                            <td>{{ r.session_price}}</td>
+                            <td>{{ r.vip_price}}</td>
                         </tr>
+                            {% endfor %}
                       </div>
                     </thead>
                 </table>

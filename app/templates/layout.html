@@ -10,12 +10,14 @@
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Bootstrap javascript -->
     <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/select2.js"></script>
     <script src="../static/js/jquery.orbit.js"></script>
     <link href="../static/css/orbit.css" type="text/css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme CSS -->
     <link href="../static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="../static/css/select2.css" rel="stylesheet">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <nav class="navbar navbar-default">
@@ -33,10 +35,12 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
+                    {% if 'username' in session: %}
                     {% if session['role'] != 3 %}
                    <li><a href={{url_for('session_cinema')}}>Добавление сеанса</a></li>
                     <li><a href={{url_for('add_film')}}>Добавление фильмов</a></li>
                     <li><a href={{url_for('upload_file')}}>Добавление картинки в слайдшоу</a></li>
+                    {% endif %}
                     {% endif %}
                    <li><a href={{url_for('session_list')}}>Список фильмов</a></li>
                 </ul>
