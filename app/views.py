@@ -172,7 +172,6 @@ def view_room():
         for se1 in sesDate:
             ses = Session_cinema.query.filter_by(time=time).first()
             film_name = ses.film.name
-            print(ses.id)
             data = [x.seats for x in ResSeats.query.filter_by(res_id=ses.id).all()]
             return render_template('room.html', ses=ses, film_name=film_name, data=json.dumps(data))
 
@@ -207,6 +206,49 @@ def add_film():
             db.session.commit()
             return redirect(url_for("session_cinema"))
     return render_template('addfilms.html')
+
+
+@app.route('/film/change', methods=['POST', 'GET'])
+def change_film():
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    if request.method == 'POST':
+        name = request.form['name1']
+        description = request.form['description']
+        genre = request.form['genre']
+        producer = request.form['producer']
+        year = request.form['year']
+        country = request.form['country']
+        length = request.form['length']
+        cast = request.form['cast']
+        ageRestriction = request.form['ageRestriction']
+        ses = update(Film).where(Film.id == id).values(name=name, description=description,
+                                                                                      genre=genre, producer=producer,
+                                                                                      year=year,
+                                                                                      country=country,length=length,cast=cast,ageRestriction=ageRestriction)
+        db.session.execute(ses)
+        db.session.commit()
+        url = '/page?id=' + id
+        return redirect(url)
+    film = Film.query.filter_by(id=id).first()
+    return render_template('films_change.html', film=film)
+
+
+@app.route('/film/delete', methods=['POST', 'GET'])
+def del_film():
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    ses1 = Session_cinema.query.filter_by(film_id=id).all()
+    for s in ses1:
+        db.session.delete(s)
+        db.session.commit()
+    film = Film.query.filter_by(id=id).first()
+    db.session.delete(film)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 
 
 @app.route('/page', methods=['POST', 'GET'])
@@ -294,22 +336,20 @@ def session_change():
 
     if request.method == 'POST':
         film_name = request.form['film_name']
-        time = request.form['time']
+        time123 = request.form['time']
         date = request.form['date']
         hall = request.form['hall']
         session_price = request.form['session_price']
         vip_price = request.form['vip_price']
-        time1 = datetime.strptime(time, "%H:%M")
+        time1 = datetime.strptime(time123, "%H:%M")
         filmId = Film.query.filter_by(name=film_name).first()
         ses3 = Session_cinema.query.filter_by(film_id=filmId.id).all()
         for se in ses3:
-            print("123")
-            sesDate = Session_cinema.query.filter_by(date=ses3.date).all()
+            sesDate = Session_cinema.query.filter_by(date=se.date).all()
             for se1 in sesDate:
-                ses123 = Session_cinema.query.filter_by(time=ses.time).first()
-                print("yes")
+                ses123 = Session_cinema.query.filter_by(time=time).first()
                 if ses123:
-                    ses = update(Session_cinema).values(time=time1, date=date, hall=hall, session_price=session_price, vip_price=vip_price)
+                    ses = update(Session_cinema).where(Session_cinema.time == ses123.time).values(time=time1, date=date, hall=hall, session_price=session_price, vip_price=vip_price)
                     db.session.execute(ses)
                     db.session.commit()
                     return redirect(url_for('session_list'))
@@ -326,11 +366,22 @@ def session_change():
 @app.route('/session/delete', methods=['POST', 'GET'])
 def session_delete():
     id = request.args.get('id')
+    time = request.args.get('time')
+    date = request.args.get('date')
     if id is None:
         return '', 404
-    ses = Session_cinema.query.filter_by(id=id).delete(synchronize_session=False)
+    ses1 = Session_cinema.query.filter_by(film_id=id).all()
+    for se in ses1:
+        sesDate = Session_cinema.query.filter_by(date=date).all()
+        for se1 in sesDate:
+            ses = Session_cinema.query.filter_by(time=time).first()
+            if ses:
+                ses_del = Session_cinema.query.filter_by(id=ses.id).first()
+                db.session.delete(ses_del)
+                db.session.commit()
+                flash('Успешно удалено')
+                return redirect(url_for('session_list'))
 
-    return render_template('session_change.html')
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():

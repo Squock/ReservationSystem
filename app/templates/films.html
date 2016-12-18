@@ -9,7 +9,7 @@
     <h1>{{film.name}}</h1>
       {% if 'username' in session: %}
                             {% if session['role'] != 3 %}
-      <button class="btn btn-info">Изменить</button> <button class="btn btn-danger">Удалить</button>
+      <a href="/film/change?id={{film.id}}"><button class="btn btn-info">Изменить</button></a> <a href="/film/delete?id={{film.id}}"><button class="btn btn-danger">Удалить</button></a>
       {% endif %}
                             {% endif %}
       <h4>{{film.genre}}</h4>
@@ -25,12 +25,13 @@
       <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Время</th>
-                            <th>Зал</th>
-                            <th>CLS</th>
-                            <th>VIP</th>
+                            <th><p align="center">Время</p></th>
+                            <th><p align="center">Зал</p></th>
+                            <th><p align="center">CLS</p></th>
+                            <th><p align="center">VIP</p></th>
                         </tr>
-                        <div>
+                    </thead>
+                   <tbody>
                             {% for r in ses %}
                         <tr>
                             <td><a href="/room?id={{r.film_id}}&time={{r.time}}&date={{r.date}}">{{ r.time.strftime("%H:%M") }}</a></td>
@@ -39,8 +40,7 @@
                             <td>{{ r.vip_price}}</td>
                         </tr>
                             {% endfor %}
-                      </div>
-                    </thead>
+                    </tbody>
                 </table>
   </div>
 </div>

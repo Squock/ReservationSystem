@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% block title %}Добавление сеанса{% endblock %}
+{% block title %}Изменение сеанса{% endblock %}
 {% block body %}
 <div class="container">
                     {% with messages = get_flashed_messages() %}
@@ -32,7 +32,6 @@
             <input type="text" class="form-control" required name="vip_price" value="{{ses.vip_price}}">
         </div>
             <input type="hidden" name="film_name" value="{{ses.film.name}}">
-
         <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
 </div>

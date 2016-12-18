@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
-{% block title %}Добавление фильма{% endblock %}
+{% block title %}Изменение фильма{% endblock %}
 {% block body %}
-        <div class="row">
+<div class="row">
             <div class="col-xs-6 col-md-4"></div>
             <div class="col-xs-6 col-md-4">
                 {% with messages = get_flashed_messages() %}
@@ -11,48 +11,44 @@
                                {% endfor %}
                          {% endif %}
                     {% endwith %}
-                <form action="/film" method="post" enctype="multipart/form-data">
-                    <h3>Аутентификация</h3>
+                <form method="post">
                                 <div class="form-group">
                                     <label >Название</label>
-                                    <input type="text" class="form-control" name="name1" placeholder="Название" >
+                                    <input type="text" class="form-control" name="name1" placeholder="Название" value="{{film.name}}">
                                 </div>
                                 <div class="form-group">
                                     <label>Описание</label>
-                                    <input type="text" class="form-control"  name="description" placeholder="Описание">
+                                    <input type="text" class="form-control"  name="description" placeholder="Описание" value="{{film.description}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Год</label>
-                                    <input type="text" class="form-control" name="year" placeholder="Год" >
+                                    <input type="text" class="form-control" name="year" placeholder="Год" value="{{film.year}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Страна</label>
-                                    <input type="text" class="form-control" name="country" placeholder="Страна" >
+                                    <input type="text" class="form-control" name="country" placeholder="Страна" value="{{film.country}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Длительность (в минутах)</label>
-                                    <input type="number" class="form-control" name="length" placeholder="Длительность" >
+                                    <input type="number" class="form-control" name="length" placeholder="Длительность" value="{{film.length}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Режиссер</label>
-                                    <input type="text" class="form-control" name="producer" placeholder="Режиссер" >
+                                    <input type="text" class="form-control" name="producer" placeholder="Режиссер" value="{{film.producer}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Актеры</label>
-                                    <input type="text" class="form-control" name="cast" placeholder="Актеры" >
+                                    <input type="text" class="form-control" name="cast" placeholder="Актеры" value="{{film.cast}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Жанр</label>
-                                    <input type="text" class="form-control" name="genre" placeholder="Жанр" >
+                                    <input type="text" class="form-control" name="genre" placeholder="Жанр" value="{{film.genre}}">
                                 </div>
                                 <div class="form-group">
                                     <label >Возрастное ограничение</label>
-                                    <input type="number" class="form-control" name="ageRestriction" placeholder="Возрастное ограничение" >
+                                    <input type="number" class="form-control" name="ageRestriction" placeholder="Возрастное ограничение" value="{{film.ageRestriction}}">
                                 </div>
-                                <span>Картинка для постера</span>
-                                <input type='file' name='file' multiple accept="image/*,image/jpeg">
-
-                                <button type="submit" class="btn btn-success">Добавить</button>
+                                <button type="submit" class="btn btn-success">Изменить</button>
                 </form>
             </div>
             <div class="col-xs-6 col-md-4"></div>
