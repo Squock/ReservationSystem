@@ -292,6 +292,27 @@ def session_change():
     time = request.args.get('time')
     date = request.args.get('date')
 
+    if request.method == 'POST':
+        film_name = request.form['film_name']
+        time = request.form['time']
+        date = request.form['date']
+        hall = request.form['hall']
+        session_price = request.form['session_price']
+        vip_price = request.form['vip_price']
+        time1 = datetime.strptime(time, "%H:%M")
+        filmId = Film.query.filter_by(name=film_name).first()
+        ses3 = Session_cinema.query.filter_by(film_id=filmId.id).all()
+        for se in ses3:
+            print("123")
+            sesDate = Session_cinema.query.filter_by(date=ses3.date).all()
+            for se1 in sesDate:
+                ses123 = Session_cinema.query.filter_by(time=ses.time).first()
+                print("yes")
+                if ses123:
+                    ses = update(Session_cinema).values(time=time1, date=date, hall=hall, session_price=session_price, vip_price=vip_price)
+                    db.session.execute(ses)
+                    db.session.commit()
+                    return redirect(url_for('session_list'))
     if id is None:
         return '', 404
     ses1 = Session_cinema.query.filter_by(film_id=id).all()

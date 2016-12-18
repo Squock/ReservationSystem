@@ -9,7 +9,7 @@
                                {% endfor %}
                          {% endif %}
                     {% endwith %}
-    <form id="session" action="/session" method="post">
+    <form method="post">
         <h3>Список сеансов</h3>
         <div class="form-group">
             <label>Время</label>
@@ -31,6 +31,7 @@
             <label>Цена vip билетов</label>
             <input type="text" class="form-control" required name="vip_price" value="{{ses.vip_price}}">
         </div>
+            <input type="hidden" name="film_name" value="{{ses.film.name}}">
 
         <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
