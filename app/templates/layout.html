@@ -28,33 +28,27 @@
         </div>
         <div class="navbar-header navbar-right">
             <ul class="nav navbar-nav">
-
+                {% if 'username' in session: %}
+                    {% if session['role'] != 3 %}
                 <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Сеанс
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    {% if 'username' in session: %}
-                    {% if session['role'] != 3 %}
+
                    <li><a href={{url_for('session_cinema')}}>Добавление сеанса</a></li>
                     <li><a href={{url_for('add_film')}}>Добавление фильмов</a></li>
                     <li><a href={{url_for('upload_file')}}>Добавление картинки в слайдшоу</a></li>
-                    {% endif %}
-                    {% endif %}
+
                    <li><a href={{url_for('session_list')}}>Список фильмов</a></li>
                 </ul>
               </li>
+                {% endif %}
+                    {% endif %}
 
-                <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Бронирование
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
+
                    <li><a href={{url_for('reservation_check')}}>Проверка брони</a></li>
-                </ul>
-              </li>
                 {% if 'username' in session: %}
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

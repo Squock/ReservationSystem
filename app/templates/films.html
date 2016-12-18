@@ -7,6 +7,11 @@
     </div>
   <div class="col-md-8">
     <h1>{{film.name}}</h1>
+      {% if 'username' in session: %}
+                            {% if session['role'] != 3 %}
+      <button class="btn btn-info">Изменить</button> <button class="btn btn-danger">Удалить</button>
+      {% endif %}
+                            {% endif %}
       <h4>{{film.genre}}</h4>
       <span>{{film.description}}</span><p>
       <ul>
@@ -28,7 +33,7 @@
                         <div>
                             {% for r in ses %}
                         <tr>
-                            <td><a href="/room?id={{r.id}}">{{ r.time.strftime("%H:%M") }}</a></td>
+                            <td><a href="/room?id={{r.film_id}}&time={{r.time}}&date={{r.date}}">{{ r.time.strftime("%H:%M") }}</a></td>
                             <td>{{ r.hall }}</td>
                             <td>{{ r.session_price}}</td>
                             <td>{{ r.vip_price}}</td>
