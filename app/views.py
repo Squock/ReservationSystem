@@ -20,7 +20,6 @@ UPLOAD_FOLDER = app.root_path+'\static\img\kino\posters'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-
 @app.route("/")
 @app.route("/index")
 def index():
@@ -248,7 +247,6 @@ def del_film():
     db.session.delete(film)
     db.session.commit()
     return redirect(url_for('index'))
-
 
 
 @app.route('/page', methods=['POST', 'GET'])

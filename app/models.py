@@ -3,6 +3,7 @@ from app import app, db
 from sqlalchemy.orm import relationship
 app.config['SECRET_KEY'] = 'super-secret'
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -66,11 +67,6 @@ class Film(db.Model):
 
 class Session_cinema(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    #listfilm_id = db.Column(db.Integer, db.ForeignKey('list_film.id'))
-    #reservation_id = db.Column(db.Integer, db.ForeignKey('reservation.id'))
-    #tags = db.Table('tags', db.Column('film_id', db.Integer, db.ForeignKey('film.id')),
-    #db.Column('reservation_id', db.Integer, db.ForeignKey('reservation.id'))
-    #)
     film_id = db.Column(db.Integer, db.ForeignKey('film.id'))
     time = db.Column(db.DateTime)
     date = db.Column(db.DateTime)
