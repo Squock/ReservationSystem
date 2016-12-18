@@ -1,10 +1,3 @@
-header {
-          background-image: url(../img/bord_image.jpg); /* Путь к фоновому изображению */
-          background-size: 100%;
-		  padding: 0px;
-	      position: absolute;
-	      height: 586px;
-        }
 #register {
             background-image: url(../img/register_image.jpg);
             background-size: 100%;
