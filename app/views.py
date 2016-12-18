@@ -276,25 +276,30 @@ def session_cinema():
 def session_list():
     return render_template('session_list.html', items=Session_cinema.query.all())
 
-
 @app.route('/session/change', methods=['POST', 'GET'])
 def session_change():
+    #id = request.args.get('id')
+    #if id is None:
+    #    return '', 404
+    #id = session['id']
     id = request.args.get('id')
     if id is None:
         return '', 404
     ses = Session_cinema.query.filter_by(id=id).first()
-    return render_template('session_change.html', ses=ses, ses1=Film.query.all())
-    #if ses:
-
-    #data = {}
-    #if request.method == 'POST':
-    #    for i in request.form.keys():
-
-    #        if ses:
-    #            ses.value = request.form[id]
-    #            data[id] = request.form[id]
-    #db.session.commit()
-
+    if request.method == 'POST':
+        time = request.form['time']
+        date = request.form['date']
+        hall = request.form['hall']
+        session_price = request.form['session_price']
+        vip_price = request.form['vip_price']
+        time1 = datetime.strptime(time, "%H:%M")
+        date1 = datetime.strptime(date, "%Y-%m-%d")
+        ses = Session_cinema(time1, date1, hall, session_price, vip_price)
+        change = update(session_cinema).values(time=time1, date=date1, hall=hall, session_price=session_price, vip_price=vip_price)
+        db.session.execute(change)
+        db.session.commit()
+        return redirect(url_for('session_list'))
+    return render_template('session_change.html', ses=ses)
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
