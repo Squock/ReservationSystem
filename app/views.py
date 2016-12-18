@@ -151,21 +151,30 @@ def view_room():
         summa = request.form['sum']
         seatsMesto = request.form['selectedSeatsString']
         nameFilm = request.form['nameFilm']
+        filmTime = request.form['filmTime']
         filmQuery = Film.query.order_by(Film.id.desc()).filter_by(name=nameFilm).limit(1).first()
-        session_film = Session_cinema.query.filter_by(film_id=filmQuery.id).first()
-        if session_film:
-            s = ResSeats(session_film.id, seats, summa, seatsMesto)
+        session_film = Session_cinema.query.filter_by(film_id=filmQuery.id).all()
+        for se in session_film:
+            ses = Session_cinema.query.filter_by(time=filmTime).first()
+            s = ResSeats(ses.id, seats, summa, seatsMesto)
             db.session.add(s)
             db.session.commit()
-            url = '/reservation?session_id='+str(session_film.id)
+            url = '/reservation?session_id='+str(ses.film_id)
             return redirect(url)
     id = request.args.get('id')
     if id is None:
         return '', 404
-    ses = Session_cinema.query.filter_by(id=id).first()
-    film_name = ses.film.name
-    data = [x.seats for x in ResSeats.query.filter_by(res_id=id).all()]
-    return render_template('room.html', ses=ses, film_name=film_name, data=json.dumps(data))
+    time = request.args.get('time')
+    date = request.args.get('date')
+    ses1 = Session_cinema.query.filter_by(film_id=id).all()
+    for se in ses1:
+        sesDate = Session_cinema.query.filter_by(date=date).all()
+        for se1 in sesDate:
+            ses = Session_cinema.query.filter_by(time=time).first()
+            film_name = ses.film.name
+            print(ses.id)
+            data = [x.seats for x in ResSeats.query.filter_by(res_id=ses.id).all()]
+            return render_template('room.html', ses=ses, film_name=film_name, data=json.dumps(data))
 
 
 @app.route('/film', methods=['POST', 'GET'])
@@ -314,10 +323,8 @@ def reservation():
     resIDsave = Reservation(res1.res_id, res1.summa, randomNumber)
     db.session.add(resIDsave)
     db.session.commit()
-    print(randomNumber)
 
     res = ResSeats.query.order_by(ResSeats.id.desc()).filter_by(res_id=sessio.film_id).limit(1).first() #выбрал последнее
-    print(res.seats)
     return render_template('reservation.html', sessio=sessio, res=res, randomNumber=randomNumber)
 
 
