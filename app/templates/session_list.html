@@ -36,8 +36,8 @@
                             <td>{{ item.vip_price}}</td>
                             {% if 'username' in session: %}
                             {% if session['role'] != 3 %}
-                            <td><a href="/session/change?id={{item.film.id}}"><button type="button" class="btn btn-success">Изменить</button></a></td>
-                            <td><button type="submit" class="btn btn-success">Удалить</button></td>
+                            <td><a href="/session/change?id={{item.film.id}}&time={{item.time}}&date={{item.date}}"><button type="button" class="btn btn-success">Изменить</button></a></td>
+                            <td><a href="/session/delete?id={{item.film.id}}" ><button type="button" class="btn btn-success">Удалить</button></a></td>
                             {% endif %}
                             {% endif %}
                         </tr>

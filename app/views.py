@@ -255,7 +255,7 @@ def upload_file():
             flash('Такого фильма нет')
             return redirect(url_for('upload_file'))
 
-    return render_template('upload_slide_poster.html',items=Film.query.all())
+    return render_template('upload_slide_poster.html', items=Film.query.all())
 
 
 @app.route('/session', methods=['POST', 'GET'])
@@ -289,21 +289,27 @@ def session_list():
 @app.route('/session/change', methods=['POST', 'GET'])
 def session_change():
     id = request.args.get('id')
+    time = request.args.get('time')
+    date = request.args.get('date')
+
     if id is None:
         return '', 404
-    ses = Session_cinema.query.filter_by(id=id).first()
-    return render_template('session_change.html', ses=ses, ses1=Film.query.all())
-    #if ses:
+    ses1 = Session_cinema.query.filter_by(film_id=id).all()
+    for se in ses1:
+        sesDate = Session_cinema.query.filter_by(date=date).all()
+        for se1 in sesDate:
+            ses = Session_cinema.query.filter_by(time=time).first()
+            return render_template('session_change.html', ses=ses, ses1=Film.query.all())
 
-    #data = {}
-    #if request.method == 'POST':
-    #    for i in request.form.keys():
 
-    #        if ses:
-    #            ses.value = request.form[id]
-    #            data[id] = request.form[id]
-    #db.session.commit()
+@app.route('/session/delete', methods=['POST', 'GET'])
+def session_delete():
+    id = request.args.get('id')
+    if id is None:
+        return '', 404
+    ses = Session_cinema.query.filter_by(id=id).delete(synchronize_session=False)
 
+    return render_template('session_change.html')
 
 @app.route('/reservation', methods=['POST', 'GET'])
 def reservation():
